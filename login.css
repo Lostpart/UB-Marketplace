@@ -14,7 +14,7 @@ body {
 }
 
 .loginPanal form label {
-    font-size: 18px;
+    font-size: 15px;
 }
 
 .loginPanal form input[type="text"],
@@ -37,7 +37,7 @@ body {
     background-color: skyblue;
     color: white;
     outline: none;
-    font-size: 16px;
+    font-size: 10px;
     transition: all 0.2s;
     margin-top: 10px;
 }
@@ -49,6 +49,26 @@ body {
 .loginPanal form input[type="submit"]:active {
     background-color: rgb(4, 141, 196);
 }
+
+.loginPanal form input[type="button"] {
+    border-radius: 4px;
+    border-width: 0px;
+    background-color: skyblue;
+    color: white;
+    outline: none;
+    font-size: 10px;
+    transition: all 0.2s;
+    margin-top: 10px;
+}
+
+.loginPanal form input[type="button"]:hover {
+    background-color: rgb(73, 191, 238);
+}
+
+.loginPanal form input[type="button"]:active {
+    background-color: rgb(4, 141, 196);
+}
+
 
 .title {
     font-size: 30px;
