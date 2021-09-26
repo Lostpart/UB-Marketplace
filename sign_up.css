@@ -3,7 +3,7 @@ body {
     font-family: monospace;
 }
 
-.loginPanal {
+.signup {
     width: fit-content;
     height: fit-content;
     background-color: white;
@@ -13,12 +13,12 @@ body {
     margin: auto;
 }
 
-.loginPanal form label {
+.signup form label {
     font-size: 15px;
 }
 
-.loginPanal form input[type="text"],
-.loginPanal form input[type="password"] {
+.signup form input[type="text"],
+.signup form input[type="password"] {
     outline: none;
     border-radius: 4px;
     border-style: solid;
@@ -26,12 +26,12 @@ body {
     transition: all 0.2s;
 }
 
-.loginPanal form input[type="text"]:focus,
-.loginPanal form input[type="password"]:focus {
+.signup form input[type="text"]:focus,
+.signup form input[type="password"]:focus {
     border-color: deepskyblue;
 }
 
-.loginPanal form input[type="submit"] {
+.signup form input[type="submit"] {
     border-radius: 4px;
     border-width: 0px;
     background-color: skyblue;
@@ -42,15 +42,15 @@ body {
     margin-top: 10px;
 }
 
-.loginPanal form input[type="submit"]:hover {
+.signup form input[type="submit"]:hover {
     background-color: rgb(73, 191, 238);
 }
 
-.loginPanal form input[type="submit"]:active {
+.signup form input[type="submit"]:active {
     background-color: rgb(4, 141, 196);
 }
 
-.loginPanal form input[type="button"] {
+.signup form input[type="button"] {
     border-radius: 4px;
     border-width: 0px;
     background-color: skyblue;
@@ -61,11 +61,11 @@ body {
     margin-top: 10px;
 }
 
-.loginPanal form input[type="button"]:hover {
+.signup form input[type="button"]:hover {
     background-color: rgb(73, 191, 238);
 }
 
-.loginPanal form input[type="button"]:active {
+.signup form input[type="button"]:active {
     background-color: rgb(4, 141, 196);
 }
 

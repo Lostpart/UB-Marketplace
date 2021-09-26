@@ -1,0 +1,44 @@
+body {
+    background-color: #005BBB;
+    font-family: monospace;
+}
+
+.forgotPanal {
+    width: fit-content;
+    height: fit-content;
+    background-color: white;
+    padding: 20px;
+    border-radius: 12px;
+    position: relative;
+    margin: auto;
+}
+
+.forgotPanal form label {
+    font-size: 15px;
+}
+
+.forgotPanal form input[type="button"] {
+    border-radius: 4px;
+    border-width: 0px;
+    background-color: skyblue;
+    color: white;
+    outline: none;
+    font-size: 18px;
+    transition: all 0.2s;
+    margin-top: 10px;
+}
+
+.forgotPanal form input[type="button"]:hover {
+    background-color: rgb(73, 191, 238);
+}
+
+.forgotPanal form input[type="button"]:active {
+    background-color: rgb(4, 141, 196);
+}
+
+
+.title {
+    font-size: 30px;
+    color: white;
+    text-align: center;
+}
