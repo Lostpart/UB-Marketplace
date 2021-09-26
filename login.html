@@ -6,85 +6,8 @@
 
     <title>UB Market Place</title>
 
-    <style>
-        body {
-            background-color: #005BBB;
-            font-family: monospace;
-        }
-
-        .loginPanal {
-            width: fit-content;
-            height: fit-content;
-            background-color: white;
-            padding: 20px;
-            border-radius: 12px;
-            position: relative;
-            margin: auto;
-        }
-
-        .loginPanal form label {
-            font-size: 18px;
-        }
-
-        .loginPanal form input[type="text"],
-        .loginPanal form input[type="password"] {
-            outline: none;
-            border-radius: 4px;
-            border-style: solid;
-            border-width: 2px;
-            transition: all 0.2s;
-        }
-
-        .loginPanal form input[type="text"]:focus,
-        .loginPanal form input[type="password"]:focus {
-            border-color: deepskyblue;
-        }
-
-        .loginPanal form input[type="submit"] {
-            border-radius: 4px;
-            border-width: 0px;
-            background-color: skyblue;
-            color: white;
-            outline: none;
-            font-size: 16px;
-            transition: all 0.2s;
-            margin-top: 10px;
-        }
-
-        .loginPanal form input[type="submit"]:hover {
-            background-color: rgb(73, 191, 238);
-        }
-
-        .loginPanal form input[type="submit"]:active {
-            background-color: rgb(4, 141, 196);
-        }
-
-        .title {
-            font-size: 30px;
-            color: white;
-            text-align: center;
-        }
-    </style>
-
-    <script>
-        function submitCheck() {
-            // password/username check goes here
-            // return false to cancel submit
-
-            var username = document.getElementById("username").value;
-            var password = document.getElementById("password").value;
-
-            console.log(username);
-            console.log(password);
-
-            if(password.length < 8){
-                alert("password must at least 8 characters");
-                return false;
-            }else{
-                return true;
-            }
-        }
-    </script>
+    <link href="login.css" rel="stylesheet">
+    <script src="./login.js"></script>
 </head>
 
 <body>
