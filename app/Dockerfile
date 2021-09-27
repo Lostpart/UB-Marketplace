@@ -10,7 +10,7 @@ FROM openjdk:11
 COPY --from=build /app/target/UBMarketplace.jar ./UBMarketplace.jar
 
 #For local test only
-#ENV PORT:8080
+ENV PORT=8080
 EXPOSE $PORT
 
-CMD ["java","-jar","UBMarketplace.jar", "--server.port=$PORT"]
+CMD java -jar UBMarketplace.jar --server.port=$PORT
