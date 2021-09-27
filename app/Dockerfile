@@ -8,4 +8,6 @@ WORKDIR /app
 
 EXPOSE $PORT
 
-CMD mvn clean spring-boot:run -Dspring-boot.run.arguments=--server.port=$PORT
+RUN mvn clean install
+
+CMD java -jar .\target\UBMarketplace.jar --server.port=$PORT

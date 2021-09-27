@@ -1,16 +1,17 @@
 version: '3'
 services:
-  mongodb:
-    container_name: mongodb
-    image: mongo:3.6
+  postgres:
+    container_name: postgres
+    image: postgres:latest
     restart: always
     environment:
-      - MONGO_DATA_DIR=/data/db
-      - MONGO_LOG_DIR=/dev/null
+      - POSTGRES_USER=Dev_UBMarketplace
+      - POSTGRES_PASSWORD=Dev_Password123
+      - POSTGRES_DB=Dev_UBMarketplace
     ports:
-      - "27017:27017"
-    command: mongod --smallfiles --logpath=/dev/null # --quiet
-
+      - "5432:5432"
+    volumes:
+      - ./postgresql-data/:/var/lib/postgresql/data/
   web:
     build: ./app
     working_dir: /app
@@ -20,4 +21,5 @@ services:
       - "8080:8080"
     command: mvn clean spring-boot:run -Dspring-boot.run.arguments=--server.port=8080
     depends_on:
-      - mongodb
+      - postgres
+
