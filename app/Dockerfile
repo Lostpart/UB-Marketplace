@@ -1,13 +1,16 @@
-FROM maven:3.8-jdk-11
+FROM maven:3.8-jdk-11 AS build
 
 ADD . ./app
 WORKDIR /app
 
-#For local test only
-#ENV PORT:8080
-
-EXPOSE $PORT
-
 RUN mvn clean install
 
-CMD java -jar .\target\UBMarketplace.jar --server.port=$PORT
+
+FROM openjdk:11
+COPY --from=build /app/target/UBMarketplace.jar ./UBMarketplace.jar
+
+#For local test only
+#ENV PORT:8080
+EXPOSE $PORT
+
+CMD ["java","-jar","UBMarketplace.jar", "--server.port=$PORT"]
