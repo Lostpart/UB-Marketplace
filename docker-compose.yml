@@ -7,8 +7,8 @@ services:
     environment:
       - MONGO_INITDB_ROOT_USERNAME=localRoot
       - MONGO_INITDB_ROOT_PASSWORD=localDBPassword
-#    volumes:
-#      - ./mongodb-data/:/data/db/
+    volumes:
+      - ./mongodb-data/:/data/db/
     ports:
       - "27017:27017"
   mongo-express:
