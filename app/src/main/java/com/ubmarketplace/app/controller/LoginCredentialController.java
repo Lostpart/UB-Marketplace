@@ -1,12 +1,8 @@
 package com.ubmarketplace.app.controller;
-import org.springframework.boot.*;
-import org.springframework.boot.autoconfigure.*;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.web.servlet.ModelAndView;
-import java.util.*;
 
-import java.util.*;
 
 @Controller
 public class LoginCredentialController {
