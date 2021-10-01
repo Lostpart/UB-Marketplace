@@ -11,17 +11,18 @@ public class LoginCredentialController {
             @RequestParam(name = "username") String username,
             @RequestParam(name = "password") String password
     ) {
-        System.out.println(username);
-        System.out.println(password);
+        System.out.println(username);       //only for test
+        System.out.println(password);       //only for test
 
         boolean valid = false;
+
+        //TODO: determine user input credential vaild or not, if vaild, change @vaild to true
+
         ModelAndView modelAndView = new ModelAndView();
         if (valid) {
-
-            modelAndView.setViewName("login.html");
+            modelAndView.setViewName("login.html");     //Waiting for the landing screen
         }
         else {
-
             modelAndView.setViewName("login_error.html");
         }
         return modelAndView;
