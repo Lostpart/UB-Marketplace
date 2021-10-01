@@ -6,26 +6,26 @@
 
     <title>UB Marketplace</title>
 
-    <link href="login.css" rel="stylesheet">
+    <link href="account_page.css" rel="stylesheet">
     <script src="./login.js"></script>
 </head>
 
 <body>
     <p class="title">UB Marketplace</p>
-    <div class="loginPanal">
+    <div class="panel login">
         <h1>Login</h1>
         <form action="" onsubmit="return submitCheck()">
-            <label>Username</label><br>
+            <label for="username">Username</label><br>
             <input type="text" id="username" name="username" required><br>
-            <label>Password</label><br>
+            <label for="password">Password</label><br>
             <input type="password" id="password" name="password" required><br>
             <input type="submit" value="Submit">
 
-            <a style="text-decoration:none" href="sign_up.html">
+            <a href="sign_up.html">
             <input type="button" value="Sign Up">
             </a>
 
-            <a style="text-decoration:none" href="forgot.html">
+            <a href="forgot.html">
             <input type="button" value="Forgot ID/PW">
             </a>
         </form>
