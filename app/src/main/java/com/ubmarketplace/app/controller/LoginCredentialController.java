@@ -6,19 +6,25 @@ import org.springframework.web.servlet.ModelAndView;
 
 @Controller
 public class LoginCredentialController {
+
+    public String username, password;
+
     @RequestMapping("/login")
-    public ModelAndView received(
+    private ModelAndView received(
             @RequestParam(name = "username") String username,
             @RequestParam(name = "password") String password
     ) {
+        this.username = username;
+        this.password = password;
+
+
         System.out.println(username);       //only for test
         System.out.println(password);       //only for test
 
-        boolean valid = false;
-
-        //TODO: determine user input credential vaild or not, if vaild, change @vaild to true
+        boolean valid = CredentialValidate(username, password);
 
         ModelAndView modelAndView = new ModelAndView();
+
         if (valid) {
             modelAndView.setViewName("login.html");     //Waiting for the landing screen
         }
@@ -30,5 +36,17 @@ public class LoginCredentialController {
 
 
 
+    private boolean CredentialValidate(String username, String password)
+    {
+        this.username = username;
+        this.password = password;
+
+        boolean validate = false;
+
+        //TODO: determine user input credential vaild or not, return true if matched, false if not matched
+
+
+        return validate;
+    }
 
 }
