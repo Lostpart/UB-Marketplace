@@ -2,6 +2,7 @@ package com.ubmarketplace.app.controller;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.web.servlet.ModelAndView;
+import com.ubmarketplace.app.manager.*;
 
 
 @Controller
@@ -21,7 +22,8 @@ public class LoginCredentialController {
         System.out.println(username);       //only for test
         System.out.println(password);       //only for test
 
-        boolean valid = CredentialValidate(username, password);
+        UserManager usermanager = new UserManager();
+        boolean valid = usermanager.loginVerification(username, password);
 
         ModelAndView modelAndView = new ModelAndView();
 
@@ -32,21 +34,6 @@ public class LoginCredentialController {
             modelAndView.setViewName("login_error.html");
         }
         return modelAndView;
-    }
-
-
-
-    private boolean CredentialValidate(String username, String password)
-    {
-        this.username = username;
-        this.password = password;
-
-        boolean validate = false;
-
-        //TODO: determine user input credential vaild or not, return true if matched, false if not matched
-
-
-        return validate;
     }
 
 }
