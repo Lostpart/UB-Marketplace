@@ -1,6 +1,6 @@
 FROM maven:3.8-jdk-11 AS build
 
-ADD . ./app
+ADD ./app ./app
 WORKDIR /app
 
 RUN mvn clean install
