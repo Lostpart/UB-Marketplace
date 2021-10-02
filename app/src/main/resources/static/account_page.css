@@ -13,6 +13,11 @@ body {
     margin: auto;
 }
 
+.panel h2 {
+    font-size: 24px;
+    font-weight: normal;
+}
+
 .panel form {
     display: flex;
     flex-direction: column;
@@ -40,6 +45,7 @@ body {
     font-size: 24px;
     text-align: center;
     height: 2rem;
+    margin-bottom: 2.5rem;
 }
 
 .panel form input[type="text"]:focus,
@@ -47,6 +53,8 @@ body {
     border-color: deepskyblue;
 }
 
+.panel form input[type="button"],
+.panel form input[type="submit"],
 .panel button {
     border-radius: 4px;
     border-width: 0px;
@@ -58,53 +66,22 @@ body {
     margin-top: 10px;
     width: 25rem;
     height: 2rem;
-    margin-top: 2.5rem;
 }
 
+.panel form input[type="button"]:hover,
+.panel form input[type="submit"]:hover,
 .panel button:hover {
     background-color: rgb(73, 191, 238);
 }
 
+.panel form input[type="button"]:active,
+.panel form input[type="submit"]:active,
 .panel button:active {
     background-color: rgb(4, 141, 196);
 }
 
-.panel form input[type="button"] {
-    border-radius: 4px;
-    border-width: 0px;
-    background-color: #005BBB;
-    color: white;
-    outline: none;
-    font-size: 10px;
-    transition: all 0.2s;
-    margin-top: 10px;
-}
-
-.panel form input[type="button"]:hover {
-    background-color: rgb(73, 191, 238);
-}
-
-.panel form input[type="button"]:active {
-    background-color: rgb(4, 141, 196);
-}
-
-.panel form input[type="submit"] {
-    border-radius: 4px;
-    border-width: 0px;
-    background-color: #005BBB;
-    color: white;
-    outline: none;
-    font-size: 10px;
-    transition: all 0.2s;
-    margin-top: 10px;
-}
-
-.panel form input[type="submit"]:hover {
-    background-color: rgb(73, 191, 238);
-}
-
-.panel form input[type="submit"]:active {
-    background-color: rgb(4, 141, 196);
+.panel .options {
+    width: 25rem;
 }
 
 h1 {
