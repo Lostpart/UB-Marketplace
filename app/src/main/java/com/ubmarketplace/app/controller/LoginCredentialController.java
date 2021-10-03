@@ -13,14 +13,14 @@ public class LoginCredentialController {
             @RequestParam("username") String username,
             @RequestParam("password") String password
     ) {
-        System.out.println(username);   //for testing
-        System.out.println(password);   //for testing
+        System.out.println(username);   //for testing only
+        System.out.println(password);   //for testing only
 
         UserManager usermanager = new UserManager();
         boolean valid = usermanager.loginVerification(username, password);
 
         if (valid) {
-            return "redirect:login.html";     //Waiting for the landing screen
+            return "redirect:home.html";
         }
         else {
             return "redirect:login_error.html";
