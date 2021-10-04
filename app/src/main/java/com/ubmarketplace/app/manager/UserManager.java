@@ -1,16 +1,11 @@
 package com.ubmarketplace.app.manager;
 
-import java.security.InvalidParameterException;
-import java.util.Map;
-import java.util.logging.Logger;
-
 import com.google.inject.Singleton;
 import com.ubmarketplace.app.model.User;
 import lombok.NonNull;
-import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.data.mongodb.core.MongoTemplate;
-import org.springframework.data.mongodb.core.query.Criteria;
-import org.springframework.data.mongodb.core.query.Query;
+
+import java.security.InvalidParameterException;
+import java.util.logging.Logger;
 
 @Singleton
 public class UserManager {

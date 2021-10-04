@@ -1,4 +1,4 @@
-package com.ubmarketplace.app.database;
+package com.ubmarketplace.app.controller;
 
 import com.mongodb.Block;
 import com.mongodb.client.MongoClient;
@@ -16,7 +16,7 @@ import javax.print.Doc;
 import java.util.logging.Logger;
 
 @Controller
-public class Add_User_Credential {
+public class AddUserCredential {
 
     @Autowired
     private MongoClient mongoClient;
