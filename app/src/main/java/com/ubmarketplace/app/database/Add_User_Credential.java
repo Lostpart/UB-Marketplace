@@ -21,14 +21,6 @@ public class Add_User_Credential {
     @Autowired
     private MongoClient mongoClient;
 
-    //print the results of the find Operation
-    /*Block<Document> printBlock = new Block<Document>() {
-        @Override
-        public void apply(final Document document) {
-            System.out.println(document.toJson());
-        }
-    };*/
-
     //username - new user's username
     //email - new user's email
     //password - new user's password
@@ -38,12 +30,6 @@ public class Add_User_Credential {
 
         return newUser;
     }
-
-    //find user with email address
-    /*public Document findUser(String email){
-        MongoDatabase database = mongoClient.getDatabase("class_activity");
-        MongoCollection<Document> collection = database.getCollection("class_activity");
-    }*/
 
     @RequestMapping("/addnewuser")
     @ResponseBody
