@@ -16,7 +16,7 @@ import javax.print.Doc;
 import java.util.logging.Logger;
 
 @Controller
-public class AddUserCredential {
+public class AddUserCredentialController {
 
     @Autowired
     private MongoClient mongoClient;
@@ -26,9 +26,7 @@ public class AddUserCredential {
     //password - new user's password
     public Document userCredential(String username, String email, String password) {
 
-        Document newUser = new Document("username", username).append("email", email).append("password", password);
-
-        return newUser;
+        return new Document("username", username).append("email", email).append("password", password);
     }
 
     @RequestMapping("/addnewuser")

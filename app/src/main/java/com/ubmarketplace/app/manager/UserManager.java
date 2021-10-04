@@ -19,8 +19,6 @@ public class UserManager {
 
         logger.info(String.format("Verify login information for %s", username));
 
-
-
         User user = query(username);
 
         return password.equals(user.getPassword());
