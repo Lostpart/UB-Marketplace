@@ -1,19 +1,11 @@
 package com.ubmarketplace.app.database;
 
-import com.mongodb.Block;
-import com.mongodb.client.MongoClient;
-import com.mongodb.client.MongoCollection;
-import com.mongodb.client.MongoDatabase;
-import com.mongodb.client.MongoIterable;
+import com.mongodb.client.*;
 import org.bson.Document;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.ResponseBody;
-
-import javax.annotation.PreDestroy;
-import javax.print.Doc;
-import java.util.logging.Logger;
 
 @Controller
 public class Add_User_Credential {
@@ -37,10 +29,25 @@ public class Add_User_Credential {
         String enteredUsername = "Kyle Sung";
         String enteredEmail = "asdsad@buffalo.edu";
         String enteredPassword = "123456789";
+        StringBuilder dataNameBuilder = new StringBuilder();
 
+        MongoDatabase ourDB = mongoClient.getDatabase("class_activity");
+        MongoCollection collectionDB = ourDB.getCollection("class_activity");
         Document newUser = userCredential(enteredUsername, enteredEmail, enteredPassword);
-        mongoClient.getDatabase("class_activity").getCollection("class_activity").insertOne(newUser);
 
-        return("added new user = " + newUser);
+        //Delete previous data
+        collectionDB.deleteMany(newUser);
+
+        //Add new data
+        collectionDB.insertOne(newUser);
+
+        //To check the inserted data into collection
+        FindIterable<Document> dataincollection = mongoClient.getDatabase("class_activity").getCollection("class_activity").find(new Document());
+
+        for(Document a : dataincollection){
+            dataNameBuilder.append(" | ").append(a);
+        }
+
+        return String.format("Data in selected collection is %s", dataNameBuilder);
     }
 }
