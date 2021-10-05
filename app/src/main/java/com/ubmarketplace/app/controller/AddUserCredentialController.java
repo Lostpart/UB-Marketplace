@@ -1,4 +1,4 @@
-package com.ubmarketplace.app.database;
+package com.ubmarketplace.app.controller;
 
 import com.mongodb.client.*;
 import org.bson.Document;
@@ -8,7 +8,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.ResponseBody;
 
 @Controller
-public class Add_User_Credential {
+public class AddUserCredentialController {
 
     @Autowired
     private MongoClient mongoClient;
@@ -18,9 +18,7 @@ public class Add_User_Credential {
     //password - new user's password
     public Document userCredential(String username, String email, String password) {
 
-        Document newUser = new Document("username", username).append("email", email).append("password", password);
-
-        return newUser;
+        return new Document("username", username).append("email", email).append("password", password);
     }
 
     @RequestMapping("/addnewuser")
