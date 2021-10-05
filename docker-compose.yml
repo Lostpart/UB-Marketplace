@@ -3,7 +3,6 @@ services:
   mongodb:
     container_name: UBMarketplace_mongodb
     image: mongo:5
-    restart: always
     environment:
       - MONGO_INITDB_ROOT_USERNAME=localRoot
       - MONGO_INITDB_ROOT_PASSWORD=localDBPassword
@@ -14,7 +13,6 @@ services:
   mongo-express:
     container_name: UBMarketplace_mongo-express
     image: mongo-express
-    restart: always
     ports:
       - "8081:8081"
     environment:
@@ -36,7 +34,7 @@ services:
       - ./app:/app
     ports:
       - "8080:8080"
-    command: mvn clean spring-boot:run -Dspring-boot.run.arguments=--server.port=8080
+    command: mvn clean spring-boot:run -Dspring-boot.run.arguments="--server.port=8080 --spring.data.mongodb.username=localRoot --spring.data.mongodb.password=localDBPassword"
     depends_on:
       - mongodb
 
