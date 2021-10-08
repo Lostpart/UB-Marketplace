@@ -13,10 +13,12 @@ import org.springframework.web.servlet.ModelAndView;
 public class LoginCredentialController {
 
     final UserRepository userRepository;
+    final UserManager userManager;
 
     @Autowired
     public LoginCredentialController(UserRepository userRepository) {
         this.userRepository = userRepository;
+        this.userManager = new UserManager(userRepository);
     }
 
     @RequestMapping("/login")
@@ -28,8 +30,7 @@ public class LoginCredentialController {
         System.out.println(username);       //only for test
         System.out.println(password);       //only for test
 
-        UserManager usermanager = new UserManager(userRepository);
-        boolean valid = usermanager.loginVerification(username, password);
+        boolean valid = userManager.loginVerification(username, password);
 
         ModelAndView modelAndView = new ModelAndView();
 

@@ -13,10 +13,7 @@ import java.util.logging.Logger;
 @Singleton
 @Component
 public class UserManager {
-
-
     final UserRepository userRepository;
-
     private final Logger logger = Logger.getLogger(this.getClass().getName());
 
     @Autowired
