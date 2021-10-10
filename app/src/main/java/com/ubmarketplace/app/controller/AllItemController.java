@@ -1,5 +1,6 @@
 package com.ubmarketplace.app.controller;
 
+import com.ubmarketplace.app.manager.ItemManager;
 import com.ubmarketplace.app.model.Item;
 import com.ubmarketplace.app.model.User;
 import org.springframework.http.MediaType;
@@ -15,12 +16,13 @@ import com.ubmarketplace.app.manager.JsonManager;
 @RestController
 public class AllItemController {
     @RequestMapping(value = "/allitem", method = RequestMethod.GET,produces = MediaType.APPLICATION_JSON_VALUE)
-    public String response(){
+    public List<Item>  response(){
 
-        ItemRepository itermre = new ItemRepository();
+//        ItemRepository itermre = new ItemRepository();
         JsonManager jsonManager = new JsonManager();
+        ItemManager im = new ItemManager();
 
-        String content = "";
+//        String content = "";
 
 
         List<Item> items = new ArrayList<>();
@@ -56,9 +58,9 @@ public class AllItemController {
         items.add(item1);
 
 
-        content = jsonManager.itemListToJsonString(items);
+//        content = jsonManager.itemListToJsonString(items);
 
-        return content;
+        return items;
     }
 
 
