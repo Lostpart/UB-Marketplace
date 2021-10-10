@@ -18,7 +18,7 @@ public class DatabaseTestController {
     public String index() {
         StringBuilder databaseNameBuilder = new StringBuilder();
         MongoIterable<String> listDatabaseNames = mongoClient.listDatabaseNames();
-        MongoIterable<String> listCollectionNames = mongoClient.getDatabase("class_activity").listCollectionNames();
+        MongoIterable<String> listCollectionNames = mongoClient.getDatabase("UB_Marketplace_Database").listCollectionNames();
 
         for (String database : listDatabaseNames) {
             databaseNameBuilder.append(" | ").append(database);
