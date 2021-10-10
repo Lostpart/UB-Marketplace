@@ -2,6 +2,7 @@ package com.ubmarketplace.app.model;
 
 import lombok.AllArgsConstructor;
 import lombok.Builder;
+import lombok.EqualsAndHashCode;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
@@ -15,6 +16,7 @@ import java.util.UUID;
 @Builder
 @NoArgsConstructor
 @AllArgsConstructor
+@EqualsAndHashCode
 public class Item {
     @Id
     private String itemId = UUID.randomUUID().toString().replace("-", "").toLowerCase();
@@ -24,5 +26,7 @@ public class Item {
     private Double price;
     private String imageFilePath;
     private String meetingPlace;
+
+    @EqualsAndHashCode.Exclude
     private Long createdTime = Instant.now().toEpochMilli();
 }
