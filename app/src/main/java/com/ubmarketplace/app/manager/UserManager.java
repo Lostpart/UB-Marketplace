@@ -38,4 +38,16 @@ public class UserManager {
 
         return password.equals(user.getPassword());
     }
+
+    public User addNewUser(@NonNull String username, @NonNull String password){
+        if(username.isEmpty() || password.isEmpty()){
+            logger.info(String.format("Empty username or password when creating new account for %s", username));
+            throw new InvalidParameterException("Empty username or password");
+        }
+
+        logger.info(String.format("Creat new account for %s", username));
+        User user = User.builder().username(username).password(password).build();
+        userRepository.insert(user);
+        return user;
+    }
 }

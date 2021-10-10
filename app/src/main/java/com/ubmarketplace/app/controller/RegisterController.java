@@ -1,27 +1,25 @@
 package com.ubmarketplace.app.controller;
 
-import com.ubmarketplace.app.manager.UserDatabaseManager;
-import com.ubmarketplace.app.repository.UserRepository;
+import com.ubmarketplace.app.manager.UserManager;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.servlet.ModelAndView;
 
 @Controller
-public class AddUserCredentialController {
+public class RegisterController {
 
-    final UserRepository userRepository;
-    final UserDatabaseManager userDatabaseManagerManager;
+    final UserManager userManager;
 
     @Autowired
-    public AddUserCredentialController(UserRepository userRepository){
-        this.userRepository = userRepository;
-        this.userDatabaseManagerManager = new UserDatabaseManager(userRepository);
+    public RegisterController(UserManager userManager){
+        this.userManager = userManager;
     }
 
-    @RequestMapping("/register")
+    @RequestMapping(value = "/register", method = RequestMethod.POST)
     @ResponseBody
     private ModelAndView received(
             @RequestParam(name = "username") String username,
@@ -30,7 +28,7 @@ public class AddUserCredentialController {
         System.out.println(username);
         System.out.println(password);
 
-        String newUser = userDatabaseManagerManager.AddNewUser(username, password);
+        String newUser = "Added user is " + userManager.addNewUser(username, password);
 
         System.out.println(newUser);
 
