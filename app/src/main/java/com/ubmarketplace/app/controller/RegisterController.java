@@ -1,17 +1,15 @@
 package com.ubmarketplace.app.controller;
 
 import com.ubmarketplace.app.manager.UserManager;
+import com.ubmarketplace.app.repository.UserRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
-import org.springframework.web.bind.annotation.ResponseBody;
-import org.springframework.web.servlet.ModelAndView;
 
 @Controller
 public class RegisterController {
-
     final UserManager userManager;
 
     @Autowired
@@ -20,8 +18,7 @@ public class RegisterController {
     }
 
     @RequestMapping(value = "/register", method = RequestMethod.POST)
-    @ResponseBody
-    private ModelAndView received(
+    private String received(
             @RequestParam(name = "username") String username,
             @RequestParam(name = "password") String password
     ){
@@ -32,10 +29,6 @@ public class RegisterController {
 
         System.out.println(newUser);
 
-        ModelAndView modelAndView = new ModelAndView();
-
-        modelAndView.setViewName("home.html");
-
-        return modelAndView;
+        return "redirect:login.html";
     }
 }
