@@ -33,7 +33,7 @@ public class UserManager {
 
         if (user == null) {
             logger.info(String.format("Verify login information for %s, cannot find such user", username));
-        	return false;
+            return false;
         }
 
         return password.equals(user.getPassword());
