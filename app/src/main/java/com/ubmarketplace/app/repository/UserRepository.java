@@ -1,5 +1,6 @@
 package com.ubmarketplace.app.repository;
 
+import com.mongodb.client.result.DeleteResult;
 import com.ubmarketplace.app.dal.UserDAL;
 import com.ubmarketplace.app.model.User;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -11,8 +12,12 @@ import java.util.List;
 @Repository
 public class UserRepository implements UserDAL {
 
+    private final MongoTemplate mongoTemplate;
+
     @Autowired
-    private MongoTemplate mongoTemplate;
+    public UserRepository(MongoTemplate mongoTemplate) {
+        this.mongoTemplate = mongoTemplate;
+    }
 
     @Override
     public void insert(User user) {
@@ -20,8 +25,8 @@ public class UserRepository implements UserDAL {
     }
 
     @Override
-    public void remove(User user) {
-        mongoTemplate.remove(user);
+    public DeleteResult remove(User user) {
+        return mongoTemplate.remove(user);
     }
 
     @Override
