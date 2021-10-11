@@ -3,7 +3,6 @@ services:
   mongodb:
     container_name: UBMarketplace_mongodb
     image: mongo:5
-    restart: always
     environment:
       - MONGO_INITDB_ROOT_USERNAME=localRoot
       - MONGO_INITDB_ROOT_PASSWORD=localDBPassword
@@ -14,13 +13,11 @@ services:
   mongo-express:
     container_name: UBMarketplace_mongo-express
     image: mongo-express
-    restart: always
     ports:
       - "8081:8081"
     environment:
       ME_CONFIG_BASICAUTH_USERNAME: MEAdmin
       ME_CONFIG_BASICAUTH_PASSWORD: MEPassword!
-      ME_CONFIG_MONGODB_ENABLE_ADMIN: true
       ME_CONFIG_MONGODB_ADMINUSERNAME: localRoot
       ME_CONFIG_MONGODB_ADMINPASSWORD: localDBPassword
       ME_CONFIG_MONGODB_PORT: 27017
@@ -30,13 +27,10 @@ services:
       - mongodb
   web:
     container_name: UBMarketplace_web
-    build: ./app
-    working_dir: /app
-    volumes:
-      - ./app:/app
+    build: .
     ports:
       - "8080:8080"
-    command: mvn clean spring-boot:run -Dspring-boot.run.arguments=--server.port=8080
+    command: java -jar UBMarketplace.jar --server.port=8080 --spring.data.mongodb.host=mongodb --spring.data.mongodb.username=localRoot --spring.data.mongodb.password=localDBPassword
     depends_on:
       - mongodb
 
