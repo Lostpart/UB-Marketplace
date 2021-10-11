@@ -11,7 +11,7 @@ function home() {
                 <div className="dropdown">
                     <button className="dropbtn">Profile</button>
                     <div className="dropdown-content">
-                        <a href="https://ubmarketplace-develop.herokuapp.com/login.html">Login/Register</a>
+                        <a href="/login">Login/Register</a>
                         <Link to="/profile">View Profile</Link>
                     </div>
                 </div>
