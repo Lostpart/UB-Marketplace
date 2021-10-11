@@ -6,26 +6,30 @@ import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.web.bind.annotation.ResponseBody;
+import org.springframework.web.bind.annotation.RestController;
 import org.springframework.web.servlet.ModelAndView;
 
+import java.util.logging.Logger;
 
-@Controller
+
+@RestController
 public class LoginController {
 
     final UserManager userManager;
+    private final Logger logger = Logger.getLogger(this.getClass().getName());
 
     @Autowired
     public LoginController(UserManager userManager) {
         this.userManager = userManager;
     }
 
-    @RequestMapping(value = "/login", method = RequestMethod.POST)
+    @RequestMapping(value = "/login", method = RequestMethod.POST, produces="application/json;charset=UTF-8")
     public String recoverPass(
-            @RequestParam("username") String username,
-            @RequestParam("password") String password
+            @RequestParam(value="username") String username,
+            @RequestParam(value="password") String password
     ) {
-        System.out.println("username: " + username);   //for testing only
-        System.out.println("Password: " + password);   //for testing only
+        logger.info(String.format("Recovering login request from %s", username));
 
         boolean valid = userManager.loginVerification(username, password);
 
