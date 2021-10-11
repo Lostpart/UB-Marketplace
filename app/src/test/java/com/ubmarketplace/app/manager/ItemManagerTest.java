@@ -37,7 +37,7 @@ public class ItemManagerTest {
             add(TEST_ITEM_ID_2);
         }};
 
-        List<Item> result = itemmanager.getALlitem();
+        List<Item> result = itemmanager.getAllItem();
         for(Item item : result){
             Assertions.assertTrue(validItemId.contains(item.getItemId()));
         }

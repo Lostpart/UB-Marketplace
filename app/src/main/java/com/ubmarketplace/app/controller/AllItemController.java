@@ -34,8 +34,8 @@ public class AllItemController {
 //        JsonManager jsonManager = new JsonManager();
 //        ItemManager im = new ItemManager();
 
-//        String content = "";
 
+//        String content = "";
 
 //        List<Item> items = new ArrayList<>();
 //
@@ -72,10 +72,11 @@ public class AllItemController {
 //        items.add(item1);
 
 
+
 //        content = jsonManager.itemListToJsonString(items);
 
 
-        return itemManager.getALlitem();
+        return itemManager.getAllItem();
     }
 
 
