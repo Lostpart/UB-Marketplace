@@ -4,6 +4,7 @@ import com.ubmarketplace.app.manager.UserManager;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.servlet.ModelAndView;
 
@@ -18,25 +19,22 @@ public class LoginController {
         this.userManager = userManager;
     }
 
-    @RequestMapping("/login")
-    private ModelAndView received(
-            @RequestParam(name = "username") String username,
-            @RequestParam(name = "password") String password
+    @RequestMapping(value = "/login", method = RequestMethod.POST)
+    public String recoverPass(
+            @RequestParam("username") String username,
+            @RequestParam("password") String password
     ) {
-
-        System.out.println(username);       //only for test
-        System.out.println(password);       //only for test
+        System.out.println("username: " + username);   //for testing only
+        System.out.println("Password: " + password);   //for testing only
 
         boolean valid = userManager.loginVerification(username, password);
 
-        ModelAndView modelAndView = new ModelAndView();
-
         if (valid) {
-            modelAndView.setViewName("login.html");     //Waiting for the landing screen
-        } else {
-            modelAndView.setViewName("login_error.html");
+            return "redirect:home.html";
         }
-        return modelAndView;
+        else {
+            return "redirect:login_error.html";
+        }
     }
 
 }
