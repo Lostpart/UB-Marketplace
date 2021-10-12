@@ -2,14 +2,14 @@ import './App.css';
 import './account_page.css';
 import React from 'react';
 
-class Login extends React.Component {
+class Register extends React.Component {
     constructor(props) {
         super(props);
         this.state = {username: '', password: ''};
         this.changeUsername = this.changeUsername.bind(this);
         this.changePassword = this.changePassword.bind(this);
+        this.changeConfirm = this.changeConfirm.bind(this);
         this.handleSubmit = this.handleSubmit.bind(this);
-        this.goToRegistration = this.goToRegistration.bind(this);
     }
     
     changeUsername(event) {
@@ -20,25 +20,28 @@ class Login extends React.Component {
         this.setState({password: event.target.value})
     }
 
+    changeConfirm(event) {
+        this.setState({confirm: event.target.value})
+    }
+
     handleSubmit(event) {
+        /*
         const requestOptions = {
             method: 'POST',
             headers: { 'Content-Type': 'application/json' },
             body: JSON.stringify({ username: this.state.username, password: this.state.password })
         };
-        /*
-        fetch('/api/login', requestOptions)
+        fetch('/api/register', requestOptions)
             .then(response => response.json())
             .then(data => console.log(data));
         */
-       this.props.history.push('/')
+        if (this.state.password === this.state.confirm) {
+           this.props.history.push('/');
+        } else {
+            alert("The provided passwords do not match!");
+        }
         event.preventDefault();
         
-    }
-
-    goToRegistration(event) {
-        localStorage.setItem('hello', 'world')
-        this.props.history.push('/register')
     }
     
     render() {
@@ -47,22 +50,14 @@ class Login extends React.Component {
                 <h1>UB Marketplace</h1>
                 <div className='panel login'>
                     <form onSubmit={this.handleSubmit}>
-                        <label htmlFor="username">Email</label>
+                        <label for="username">Username</label>
                         <input type="text" name="username" value={this.state.username} onChange={this.changeUsername} />
-                        <label htmlFor="password">Password</label>
+                        <label for="password">Password</label>
                         <input type="password" name="password" value={this.state.password} onChange={this.changePassword} />
+                        <label for="confirm">Confirm Password</label>
+                        <input type="password" name="confirm" value={this.state.confirm} onChange={this.changeConfirm} />
 
-                        <div class="options">
-                            <input type="submit" value="Submit" />
-
-                            <button onClick={this.goToRegistration}> 
-                                Register
-                            </button>
-
-                            <a href="forgot.html">
-                                <input type="button" value="Forgot Username/Password" />
-                            </a>
-                        </div>
+                        <input type="submit" value="Submit" />
                     </form>
                 </div>
             </div>
@@ -70,4 +65,4 @@ class Login extends React.Component {
     }
 }
 
-export default Login;
+export default Register;
