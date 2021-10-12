@@ -1,19 +1,15 @@
 package com.ubmarketplace.app.controller;
 
 import com.ubmarketplace.app.manager.ItemManager;
-import com.ubmarketplace.app.manager.UserManager;
 import com.ubmarketplace.app.model.Item;
-import com.ubmarketplace.app.model.User;
+import com.ubmarketplace.app.repository.ItemRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.MediaType;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RestController;
-import com.ubmarketplace.app.repository.ItemRepository;
 
-import java.util.ArrayList;
 import java.util.List;
-import com.ubmarketplace.app.manager.JsonManager;
 
 @RestController
 public class AllItemController {

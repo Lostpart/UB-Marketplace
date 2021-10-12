@@ -4,14 +4,16 @@ import com.google.inject.Singleton;
 import com.ubmarketplace.app.model.Item;
 import com.ubmarketplace.app.model.User;
 import com.ubmarketplace.app.repository.ItemRepository;
+import lombok.NonNull;
+import lombok.extern.java.Log;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
 
-import javax.annotation.Nonnull;
 import java.util.List;
 
 @Singleton
 @Component
+@Log
 public class ItemManager {
     final ItemRepository itemRepository;
     @Autowired
@@ -19,10 +21,7 @@ public class ItemManager {
         this.itemRepository = itemRepository;
     }
 
-//    ItemRepository ip = new ItemRepository();
-
-
-    public Item addNewItem(@Nonnull String itemId, @Nonnull String name, @Nonnull User owner, @Nonnull String description, @Nonnull Double price, @Nonnull String imageFilepath, @Nonnull String meetingPlace, @Nonnull Long createdTime){
+    public Item addNewItem(@NonNull String itemId, @NonNull String name, @NonNull User owner, @NonNull String description, @NonNull Double price, @NonNull String imageFilepath, @NonNull String meetingPlace, @NonNull Long createdTime){
         Item item = Item.builder().itemId(itemId).name(name).owner(owner).description(description).price(price).imageFilePath(imageFilepath).meetingPlace(meetingPlace).createdTime(createdTime).build();
         itemRepository.insert(item);
         return item;

@@ -1,7 +1,7 @@
 package com.ubmarketplace.app.repository;
 
 import com.mongodb.client.result.DeleteResult;
-import com.ubmarketplace.app.dal.UserDAL;
+import com.ubmarketplace.app.dao.UserDao;
 import com.ubmarketplace.app.model.User;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.mongodb.core.MongoTemplate;
@@ -10,7 +10,7 @@ import org.springframework.stereotype.Repository;
 import java.util.List;
 
 @Repository
-public class UserRepository implements UserDAL {
+public class UserRepository implements UserDao {
 
     private final MongoTemplate mongoTemplate;
 
