@@ -15,10 +15,10 @@ import javax.validation.constraints.Size;
 @AllArgsConstructor
 public class RegisterRequest {
     @NotNull(message = "Username cannot be empty")
-    @Email(message = "Email format incorrect")
+    @Email(message = "Format incorrect: Username should be an email")
     private String username;
 
     @NotNull(message = "Password cannot be empty")
-    @Size(min = 8, max = 32, message = "Password must between 8 - 32 characters")
+    @Size(min = 64, max = 64, message = "Password must hash with SHA-256 and should be 64 characters long")
     private String password;
 }
