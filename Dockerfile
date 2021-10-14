@@ -23,4 +23,4 @@ COPY --from=springBootBuild /app/target/UBMarketplace.jar ./UBMarketplace.jar
 
 EXPOSE $PORT
 
-CMD java -jar UBMarketplace.jar --server.port=$PORT --spring.data.mongodb.uri=$MONGODB_URL
+CMD java -Xmx512M -Xms400M -XX:+UseG1GC -XX:+AggressiveOpts -XX:+UseCompressedOops -jar UBMarketplace.jar --server.port=$PORT --spring.data.mongodb.uri=$MONGODB_URL

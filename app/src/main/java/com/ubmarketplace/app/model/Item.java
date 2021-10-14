@@ -18,7 +18,7 @@ import java.util.UUID;
 @AllArgsConstructor
 @EqualsAndHashCode
 public class Item {
-    @Id
+    @Id @Builder.Default
     private String itemId = UUID.randomUUID().toString().replace("-", "").toLowerCase();
     private String name;
     private User owner;
@@ -27,6 +27,6 @@ public class Item {
     private String imageFilePath;
     private String meetingPlace;
 
-    @EqualsAndHashCode.Exclude
+    @EqualsAndHashCode.Exclude @Builder.Default
     private Long createdTime = Instant.now().toEpochMilli();
 }

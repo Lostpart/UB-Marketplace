@@ -1,14 +1,18 @@
 package com.ubmarketplace.app.controller;
 
+import com.ubmarketplace.app.dto.RegisterRequest;
+import com.ubmarketplace.app.dto.RegisterResponse;
 import com.ubmarketplace.app.manager.UserManager;
-import com.ubmarketplace.app.repository.UserRepository;
+import com.ubmarketplace.app.model.User;
+import lombok.extern.java.Log;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.stereotype.Controller;
+import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
-import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.web.bind.annotation.RestController;
 
-@Controller
+@RestController
+@Log
 public class RegisterController {
     final UserManager userManager;
 
@@ -17,18 +21,12 @@ public class RegisterController {
         this.userManager = userManager;
     }
 
-    @RequestMapping(value = "/register", method = RequestMethod.POST)
-    private String received(
-            @RequestParam(name = "username") String username,
-            @RequestParam(name = "password") String password
-    ){
-        System.out.println(username);
-        System.out.println(password);
+    @RequestMapping(value = "/api/register", method = RequestMethod.POST)
+    private RegisterResponse received(@RequestBody RegisterRequest registerRequest){
+        log.info(String.format("Recovering register request from %s", registerRequest.getUsername()));
 
-        String newUser = "Added user is " + userManager.addNewUser(username, password);
+        User user = userManager.addNewUser(registerRequest.getUsername(), registerRequest.getPassword());
 
-        System.out.println(newUser);
-
-        return "redirect:login.html";
+        return RegisterResponse.builder().user(user).build();
     }
 }

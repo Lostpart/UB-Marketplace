@@ -1,17 +1,23 @@
 package com.ubmarketplace.app.controller;
 
+import com.ubmarketplace.app.dto.LoginRequest;
+import com.ubmarketplace.app.dto.LoginResponse;
 import com.ubmarketplace.app.manager.UserManager;
+import com.ubmarketplace.app.model.User;
+import lombok.extern.java.Log;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.stereotype.Controller;
+import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
-import org.springframework.web.bind.annotation.RequestParam;
-import org.springframework.web.servlet.ModelAndView;
+import org.springframework.web.bind.annotation.RestController;
+
+import javax.validation.Valid;
+import java.security.InvalidParameterException;
 
 
-@Controller
+@RestController
+@Log
 public class LoginController {
-
     final UserManager userManager;
 
     @Autowired
@@ -19,22 +25,22 @@ public class LoginController {
         this.userManager = userManager;
     }
 
-    @RequestMapping(value = "/login", method = RequestMethod.POST)
-    public String recoverPass(
-            @RequestParam("username") String username,
-            @RequestParam("password") String password
-    ) {
-        System.out.println("username: " + username);   //for testing only
-        System.out.println("Password: " + password);   //for testing only
+    @RequestMapping(value = "/api/login", method = RequestMethod.POST, produces="application/json;charset=UTF-8")
+    public LoginResponse recoverPass(@RequestBody @Valid LoginRequest loginRequest) {
 
-        boolean valid = userManager.loginVerification(username, password);
+        log.info(String.format("Recovering login request from %s", loginRequest.getUsername()));
 
-        if (valid) {
-            return "redirect:home.html";
+        boolean validPassword = userManager.loginVerification(loginRequest.getUsername(), loginRequest.getPassword());
+
+        if (!validPassword) {
+            throw new InvalidParameterException("Username and password doesn't match");
         }
-        else {
-            return "redirect:login_error.html";
-        }
+
+        return LoginResponse.builder()
+                .user(User.builder()
+                        .username(loginRequest.getUsername())
+                        .build())
+                .build();
     }
 
 }

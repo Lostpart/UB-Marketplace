@@ -1,7 +1,7 @@
 package com.ubmarketplace.app.repository;
 
 import com.mongodb.client.result.DeleteResult;
-import com.ubmarketplace.app.dal.ItemDAL;
+import com.ubmarketplace.app.dao.ItemDao;
 import com.ubmarketplace.app.model.Item;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.mongodb.core.MongoTemplate;
@@ -10,7 +10,7 @@ import org.springframework.stereotype.Repository;
 import java.util.List;
 
 @Repository
-public class ItemRepository implements ItemDAL {
+public class ItemRepository implements ItemDao {
 
     private final MongoTemplate mongoTemplate;
 
