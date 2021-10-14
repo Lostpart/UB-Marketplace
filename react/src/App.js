@@ -3,17 +3,19 @@
   import Profile from './profile';
   import Home from './home';
   import Login from './login';
-  import {Route, Link} from "react-router-dom"
+  import {Route, Link, BrowserRouter, Switch} from "react-router-dom"
 import Register from './register';
 function App() {
 
   return (
-      <div className="App">
+      <BrowserRouter>
+        <Switch>
           <Route exact path="/" component={Home} />
-          <Route exact path="/profile" component={Profile} />
-          <Route exact path="/login" component={Login} />
-          <Route exact path="/register" component={Register} />
-      </div>
+          <Route path="/profile" component={Profile} />
+          <Route path="/login" component={Login} />
+          <Route path="/register" component={Register} />
+        </Switch>
+      </BrowserRouter>
   );
 }
 
