@@ -1,5 +1,6 @@
 import './App.css';
 import './account_page.css';
+import sha256 from 'js-sha256'
 import React from 'react';
 
 class Login extends React.Component {
@@ -24,20 +25,24 @@ class Login extends React.Component {
         const requestOptions = {
             method: 'POST',
             headers: { 'Content-Type': 'application/json' },
-            body: JSON.stringify({ username: this.state.username, password: this.state.password })
+            body: JSON.stringify({ username: this.state.username, password: sha256(this.state.password) })
         };
-        /*
+        
         fetch('/api/login', requestOptions)
-            .then(response => response.json())
-            .then(data => console.log(data));
-        */
-       this.props.history.push('/')
-        event.preventDefault();
+            .then(response => {
+                if (response.status !== 200) {
+                    alert(response.body);
+                } else {
+                    localStorage.setItem("email", this.state.username);
+                    this.props.history.push('/')
+                }
+            });
+        
+            event.preventDefault();
         
     }
 
     goToRegistration(event) {
-        localStorage.setItem('hello', 'world')
         this.props.history.push('/register')
     }
     

@@ -5,7 +5,6 @@
   import {Route, Switch, HashRouter} from "react-router-dom"
 import Register from './register';
 function App() {
-
   return (
       <HashRouter>
         <Switch>
