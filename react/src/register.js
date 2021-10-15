@@ -1,5 +1,6 @@
 import './App.css';
 import './account_page.css';
+import sha256 from 'js-sha256'
 import React from 'react';
 
 class Register extends React.Component {
@@ -25,23 +26,28 @@ class Register extends React.Component {
     }
 
     handleSubmit(event) {
-        /*
+        event.preventDefault();
+        if (this.state.password !== this.state.confirm) {
+             alert("The provided passwords do not match!");
+             return;
+        }
+        if (this.state.password.length < 8) {
+            alert("Password provided is too small!")
+            return;
+        }
         const requestOptions = {
             method: 'POST',
             headers: { 'Content-Type': 'application/json' },
-            body: JSON.stringify({ username: this.state.username, password: this.state.password })
+            body: JSON.stringify({ username: this.state.username, password: sha256(this.state.password) })
         };
         fetch('/api/register', requestOptions)
-            .then(response => response.json())
-            .then(data => console.log(data));
-        */
-        if (this.state.password === this.state.confirm) {
-           this.props.history.push('/');
-        } else {
-            alert("The provided passwords do not match!");
-        }
-        event.preventDefault();
-        
+            .then(response => {
+                if (response.status !== 200) {
+                    alert(response.body);
+                } else {
+                    this.props.history.push('/login');
+                }
+            });
     }
     
     render() {
@@ -50,7 +56,7 @@ class Register extends React.Component {
                 <h1>UB Marketplace</h1>
                 <div className='panel login'>
                     <form onSubmit={this.handleSubmit}>
-                        <label for="username">Username</label>
+                        <label for="username">Email</label>
                         <input type="text" name="username" value={this.state.username} onChange={this.changeUsername} />
                         <label for="password">Password</label>
                         <input type="password" name="password" value={this.state.password} onChange={this.changePassword} />
