@@ -2,6 +2,7 @@ import './App.css';
 import './account_page.css';
 import sha256 from 'js-sha256'
 import React from 'react';
+import { handleAPIError } from './errors';
 
 class Login extends React.Component {
     constructor(props) {
@@ -31,7 +32,7 @@ class Login extends React.Component {
         fetch('/api/login', requestOptions)
             .then(response => {
                 if (response.status !== 200) {
-                    alert(response.body);
+                    handleAPIError(response)
                 } else {
                     localStorage.setItem("email", this.state.username);
                     this.props.history.push('/')

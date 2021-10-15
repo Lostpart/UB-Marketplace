@@ -1,5 +1,6 @@
 import './App.css';
 import './account_page.css';
+import { handleAPIError } from './errors';
 import sha256 from 'js-sha256'
 import React from 'react';
 
@@ -43,7 +44,7 @@ class Register extends React.Component {
         fetch('/api/register', requestOptions)
             .then(response => {
                 if (response.status !== 200) {
-                    alert(response.body);
+                    handleAPIError(response);
                 } else {
                     this.props.history.push('/login');
                 }
