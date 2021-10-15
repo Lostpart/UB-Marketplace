@@ -26,7 +26,7 @@ public class LoginController {
     }
 
     @RequestMapping(value = "/api/login", method = RequestMethod.POST, produces="application/json;charset=UTF-8")
-    public LoginResponse recoverPass(@RequestBody @Valid LoginRequest loginRequest) {
+    public LoginResponse login(@RequestBody @Valid LoginRequest loginRequest) {
 
         log.info(String.format("Recovering login request from %s", loginRequest.getUsername()));
 
