@@ -12,7 +12,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 
 @Controller
-public class newItemController {
+public class NewItemController {
 
     final UserRepository userRepository;
     final UserManager userManager;
@@ -20,7 +20,7 @@ public class newItemController {
     final ItemManager itemManager;
 
     @Autowired
-    public newItemController(UserRepository userRepository, UserManager userManager, ItemRepository itemRepository, ItemManager itemManager){
+    public NewItemController(UserRepository userRepository, UserManager userManager, ItemRepository itemRepository, ItemManager itemManager){
         this.userRepository = userRepository;
         this.userManager = userManager;
         this.itemRepository = itemRepository;
