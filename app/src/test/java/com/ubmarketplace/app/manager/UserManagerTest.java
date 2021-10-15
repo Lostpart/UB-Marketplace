@@ -14,8 +14,8 @@ import java.security.InvalidParameterException;
 import static com.ubmarketplace.app.Static.TEST_ALWAYS_WRONG_PASSWORD;
 import static com.ubmarketplace.app.Static.TEST_PASSWORD_1;
 import static com.ubmarketplace.app.Static.TEST_PASSWORD_2;
-import static com.ubmarketplace.app.Static.TEST_USER_1;
-import static com.ubmarketplace.app.Static.TEST_USER_2;
+import static com.ubmarketplace.app.Static.TEST_USER_NAME_1;
+import static com.ubmarketplace.app.Static.TEST_USER_NAME_2;
 
 @SpringBootTest
 @DirtiesContext(classMode = DirtiesContext.ClassMode.BEFORE_CLASS)
@@ -25,18 +25,18 @@ public class UserManagerTest {
 
     @BeforeAll
     static void setup(@Autowired UserRepository userRepository) {
-        userRepository.insert(User.builder().username(TEST_USER_1).password(TEST_PASSWORD_1).build());
-        userRepository.insert(User.builder().username(TEST_USER_2).password(TEST_PASSWORD_2).build());
+        userRepository.insert(User.builder().username(TEST_USER_NAME_1).password(TEST_PASSWORD_1).build());
+        userRepository.insert(User.builder().username(TEST_USER_NAME_2).password(TEST_PASSWORD_2).build());
     }
 
     @Test
     public void GIVEN_goodInput_WHEN_loginVerification_THEN_returnTrue() {
-        Assertions.assertTrue(usermanager.loginVerification(TEST_USER_1, TEST_PASSWORD_1));
+        Assertions.assertTrue(usermanager.loginVerification(TEST_USER_NAME_1, TEST_PASSWORD_1));
     }
 
     @Test
     public void GIVEN_goodInputWrongPassword_WHEN_loginVerification_THEN_returnFalse() {
-        Assertions.assertFalse(usermanager.loginVerification(TEST_USER_2, TEST_ALWAYS_WRONG_PASSWORD));
+        Assertions.assertFalse(usermanager.loginVerification(TEST_USER_NAME_2, TEST_ALWAYS_WRONG_PASSWORD));
     }
 
     @Test
@@ -46,6 +46,6 @@ public class UserManagerTest {
 
     @Test
     public void GIVEN_emptyPassword_WHEN_loginVerification_THEN_returnFalse() {
-        Assertions.assertThrows(InvalidParameterException.class, () -> usermanager.loginVerification(TEST_USER_1, ""));
+        Assertions.assertThrows(InvalidParameterException.class, () -> usermanager.loginVerification(TEST_USER_NAME_1, ""));
     }
 }
