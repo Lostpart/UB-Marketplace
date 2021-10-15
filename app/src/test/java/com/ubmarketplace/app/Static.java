@@ -1,9 +1,9 @@
 package com.ubmarketplace.app;
 
 public class Static {
-    final static public String TEST_USER_1 = "UnitTest_TestUser1";
+    final static public String TEST_USER_NAME_1 = "UnitTest_TestUser1@test.com";
     final static public String TEST_PASSWORD_1 = "GoodPassword";
-    final static public String TEST_USER_2 = "UnitTest_TestUser2";
+    final static public String TEST_USER_NAME_2 = "UnitTest_TestUser2@test.com";
     final static public String TEST_PASSWORD_2 = "GoodPassword2";
     final static public String TEST_ALWAYS_WRONG_PASSWORD = "BadPassword";
 
