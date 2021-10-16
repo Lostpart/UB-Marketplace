@@ -13,7 +13,8 @@ import javax.validation.constraints.Size;
 @Setter
 @Builder
 @AllArgsConstructor
-public class RegisterRequest {
+public class ProfileUpdateRequest {
+
     @NotNull(message = "Username cannot be empty")
     @Pattern(regexp="^[a-zA-Z0-9_]+@(buffalo.edu|test.com)$", message = "Format incorrect: Username should be a buffalo.edu email")
     private String username;
@@ -23,5 +24,7 @@ public class RegisterRequest {
     private String password;
 
     @NotNull(message = "Display name cannot be empty")
+    @Size(min = 1, max = 25, message = "Displayname should between 1 to 25 characters")
     private String displayname;
+
 }

@@ -23,7 +23,7 @@ public class AllItemController {
         this.itemRepository = itemRepository;
     }
 
-    @RequestMapping(value = "/allitem", method = RequestMethod.GET,produces = MediaType.APPLICATION_JSON_VALUE)
+    @RequestMapping(value = "/api/allitem", method = RequestMethod.GET,produces="application/json;charset=UTF-8")
     public List<Item>  response(){
 
 //        ItemRepository itermre = new ItemRepository();
