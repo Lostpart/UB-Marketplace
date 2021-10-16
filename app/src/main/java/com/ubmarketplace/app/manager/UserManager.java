@@ -61,9 +61,9 @@ public class UserManager {
     }
 
     public User updateUser(@NonNull String username, @NonNull String password, @NonNull String displayName) {
-        if(username.isEmpty() || password.isEmpty() || displayName.isEmpty()){
-            log.info(String.format("Empty original username or empty new username or password when creating new account for %s", username));
-            throw new InvalidParameterException("Empty username or display name or password");
+        if(username.isEmpty()){
+            log.info(String.format("Empty username"));
+            throw new InvalidParameterException("Empty username");
         }
         log.info(String.format("Updating account for %s", username));
 
@@ -75,8 +75,22 @@ public class UserManager {
             throw new InvalidParameterException("Fail to delete");
         }
 
+        User updated_user;
 
-        User updated_user = User.builder().username(username).password(password).displayName(displayName).build();
+        if (password.isEmpty() && !displayName.isEmpty()){
+            updated_user = User.builder().username(username).password(old_user.getPassword()).displayName(displayName).build();
+        }
+        else if (displayName.isEmpty() && !password.isEmpty()){
+            updated_user = User.builder().username(username).password(password).displayName(old_user.getDisplayName()).build();
+        }
+        else if (displayName.isEmpty() && password.isEmpty()){
+            updated_user = User.builder().username(username).password(old_user.getPassword()).displayName(old_user.getDisplayName()).build();
+        }
+        else {
+            updated_user = User.builder().username(username).password(password).displayName(displayName).build();
+        }
+
+
 
         try {
             userRepository.insert(updated_user);

@@ -32,32 +32,26 @@ public class ProfileUpdateTest {
 
     @Test
     public void GIVEN_newpassword_When_updateUser_Then_match() {
-        User updated = usermanager.updateUser(TEST_USER_NAME_1, "abc", "123");
+        User updated = usermanager.updateUser(TEST_USER_NAME_1, "abc", "");
         Assertions.assertTrue(updated.getPassword().equals("abc"));
+        Assertions.assertTrue(updated.getDisplayName().equals("123"));
+    }
+
+
+
+    @Test
+    public void GIVEN_empty_password_and_display_When_updateUser_Then_keep_the_same() {
+        User updated = usermanager.updateUser(TEST_USER_NAME_1, "", "");
+        System.out.println(updated.getDisplayName());
+        Assertions.assertTrue(updated.getDisplayName().equals("123"));
+        Assertions.assertTrue(updated.getPassword().equals(TEST_PASSWORD_1));
     }
 
     @Test
-    public void GIVEN_newDisplayname_When_updateUser_Then_match() {
-        User updated = usermanager.updateUser(TEST_USER_NAME_1, TEST_USER_NAME_1, "12345678");
-        Assertions.assertTrue(updated.getDisplayName().equals("12345678"));
+    public void GIVEN_emptyUsername_WHEN_profileupdate_THEN_returnFalse() {
+        Assertions.assertThrows(InvalidParameterException.class, () -> usermanager.updateUser("", "", ""));
     }
 
-    @Test
-    public void GIVEN_newpassword_And_displayname_When_updateUser_Then_match() {
-        User updated = usermanager.updateUser(TEST_USER_NAME_1, "12345678", "abc");
-        Assertions.assertTrue(updated.getDisplayName().equals("abc"));
-        Assertions.assertTrue(updated.getPassword().equals("12345678"));
-    }
-
-    @Test
-    public void GIVEN_emptyPassword_WHEN_updateUser_THEN_returnFalse() {
-        Assertions.assertThrows(InvalidParameterException.class, () -> usermanager.updateUser(TEST_USER_NAME_1, "", "123"));
-    }
-
-    @Test
-    public void GIVEN_emptydisplayname_WHEN_updateUser_THEN_returnFalse() {
-        Assertions.assertThrows(InvalidParameterException.class, () -> usermanager.updateUser(TEST_USER_NAME_1, TEST_PASSWORD_1, ""));
-    }
 
 }
 

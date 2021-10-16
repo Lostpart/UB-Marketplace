@@ -28,8 +28,8 @@ public class ProfileUpdateController {
         log.info(String.format("Recovering profile update request from %s", profileupdateRequest.getUsername()));
 
 
-        User update_user = userManager.updateUser(profileupdateRequest.getUsername(), profileupdateRequest.getPassword(), profileupdateRequest.getDisplayname());
+        User updatedUser = userManager.updateUser(profileupdateRequest.getUsername(), profileupdateRequest.getPassword(), profileupdateRequest.getDisplayName());
 
-        return ProfileUpdateResponse.builder().user(update_user).build();
+        return ProfileUpdateResponse.builder().user(updatedUser).build();
     }
 }
