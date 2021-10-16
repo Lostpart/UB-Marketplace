@@ -1,9 +1,7 @@
 package com.ubmarketplace.app.controller;
 
-import com.ubmarketplace.app.dto.ProfileUpdateResponse;
-import com.ubmarketplace.app.dto.RegisterRequest;
 import com.ubmarketplace.app.dto.ProfileUpdateRequest;
-import com.ubmarketplace.app.dto.RegisterResponse;
+import com.ubmarketplace.app.dto.ProfileUpdateResponse;
 import com.ubmarketplace.app.manager.UserManager;
 import com.ubmarketplace.app.model.User;
 import lombok.extern.java.Log;
@@ -23,8 +21,8 @@ public class ProfileUpdateController {
         this.userManager = userManager;
     }
 
-    @RequestMapping(value = "/api/profileupdate", method = RequestMethod.POST)
-    private ProfileUpdateResponse received(@RequestBody ProfileUpdateRequest profileupdateRequest){
+    @RequestMapping(value = "/api/profileUpdate", method = RequestMethod.POST)
+    private ProfileUpdateResponse profileUpdate(@RequestBody ProfileUpdateRequest profileupdateRequest){
         log.info(String.format("Recovering profile update request from %s", profileupdateRequest.getUsername()));
 
 

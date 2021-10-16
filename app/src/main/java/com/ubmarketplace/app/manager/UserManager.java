@@ -62,7 +62,7 @@ public class UserManager {
 
     public User updateUser(@NonNull String username, @NonNull String password, @NonNull String displayName) {
         if(username.isEmpty()){
-            log.info(String.format("Empty username"));
+            log.info("Empty username");
             throw new InvalidParameterException("Empty username");
         }
         log.info(String.format("Updating account for %s", username));
@@ -83,7 +83,7 @@ public class UserManager {
         else if (displayName.isEmpty() && !password.isEmpty()){
             updated_user = User.builder().username(username).password(password).displayName(old_user.getDisplayName()).build();
         }
-        else if (displayName.isEmpty() && password.isEmpty()){
+        else if (displayName.isEmpty()){
             updated_user = User.builder().username(username).password(old_user.getPassword()).displayName(old_user.getDisplayName()).build();
         }
         else {
