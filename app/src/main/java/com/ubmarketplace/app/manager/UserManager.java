@@ -60,8 +60,8 @@ public class UserManager {
         return user;
     }
 
-    public User updateUser(@NonNull String username, @NonNull String password, @NonNull String displayname) {
-        if(username.isEmpty() || password.isEmpty() || displayname.isEmpty()){
+    public User updateUser(@NonNull String username, @NonNull String password, @NonNull String displayName) {
+        if(username.isEmpty() || password.isEmpty() || displayName.isEmpty()){
             log.info(String.format("Empty original username or empty new username or password when creating new account for %s", username));
             throw new InvalidParameterException("Empty username or display name or password");
         }
@@ -76,7 +76,7 @@ public class UserManager {
         }
 
 
-        User updated_user = User.builder().username(username).password(password).displayname(displayname).build();
+        User updated_user = User.builder().username(username).password(password).displayName(displayName).build();
 
         try {
             userRepository.insert(updated_user);

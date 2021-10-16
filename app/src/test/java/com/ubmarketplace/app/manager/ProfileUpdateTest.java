@@ -25,8 +25,8 @@ public class ProfileUpdateTest {
 
     @BeforeAll
     static void setup(@Autowired UserRepository userRepository) {
-        userRepository.insert(User.builder().username(TEST_USER_NAME_1).password(TEST_PASSWORD_1).displayname("123").build());
-        userRepository.insert(User.builder().username(TEST_USER_NAME_2).password(TEST_PASSWORD_2).displayname("456").build());
+        userRepository.insert(User.builder().username(TEST_USER_NAME_1).password(TEST_PASSWORD_1).displayName("123").build());
+        userRepository.insert(User.builder().username(TEST_USER_NAME_2).password(TEST_PASSWORD_2).displayName("456").build());
     }
 
 
@@ -39,13 +39,13 @@ public class ProfileUpdateTest {
     @Test
     public void GIVEN_newDisplayname_When_updateUser_Then_match() {
         User updated = usermanager.updateUser(TEST_USER_NAME_1, TEST_USER_NAME_1, "12345678");
-        Assertions.assertTrue(updated.getDisplayname().equals("12345678"));
+        Assertions.assertTrue(updated.getDisplayName().equals("12345678"));
     }
 
     @Test
     public void GIVEN_newpassword_And_displayname_When_updateUser_Then_match() {
         User updated = usermanager.updateUser(TEST_USER_NAME_1, "12345678", "abc");
-        Assertions.assertTrue(updated.getDisplayname().equals("abc"));
+        Assertions.assertTrue(updated.getDisplayName().equals("abc"));
         Assertions.assertTrue(updated.getPassword().equals("12345678"));
     }
 

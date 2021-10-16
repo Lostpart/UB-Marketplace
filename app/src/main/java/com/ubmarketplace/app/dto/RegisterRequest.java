@@ -23,5 +23,6 @@ public class RegisterRequest {
     private String password;
 
     @NotNull(message = "Display name cannot be empty")
-    private String displayname;
+    @Size(min = 1, max = 16, message = "Displayname should between 1 to 25 characters")
+    private String displayName;
 }

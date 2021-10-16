@@ -24,7 +24,7 @@ public class ProfileUpdateRequest {
     private String password;
 
     @NotNull(message = "Display name cannot be empty")
-    @Size(min = 1, max = 25, message = "Displayname should between 1 to 25 characters")
+    @Size(min = 1, max = 16, message = "Displayname should between 1 to 25 characters")
     private String displayname;
 
 }
