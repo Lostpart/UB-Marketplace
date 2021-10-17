@@ -4,7 +4,6 @@ import com.ubmarketplace.app.manager.ItemManager;
 import com.ubmarketplace.app.model.Item;
 import com.ubmarketplace.app.repository.ItemRepository;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.http.MediaType;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RestController;
@@ -23,7 +22,7 @@ public class AllItemController {
         this.itemRepository = itemRepository;
     }
 
-    @RequestMapping(value = "/allitem", method = RequestMethod.GET,produces = MediaType.APPLICATION_JSON_VALUE)
+    @RequestMapping(value = "/api/allitem", method = RequestMethod.GET,produces = "application/json;charset=UTF-8")
     public List<Item>  response(){
 
 //        ItemRepository itermre = new ItemRepository();
