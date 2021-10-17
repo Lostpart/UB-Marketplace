@@ -2,6 +2,7 @@ package com.ubmarketplace.app.manager;
 
 import com.ubmarketplace.app.model.User;
 import com.ubmarketplace.app.repository.UserRepository;
+import org.junit.jupiter.api.AfterAll;
 import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.BeforeAll;
 import org.junit.jupiter.api.Test;
@@ -56,13 +57,14 @@ public class UserManagerTest {
         User updated = usermanager.updateUser(TEST_USER_NAME_1, "abc", "");
         Assertions.assertEquals("abc", updated.getPassword());
         Assertions.assertEquals(TEST_USER_DISPLAY_NAME_1, updated.getDisplayName());
+        usermanager.updateUser(TEST_USER_NAME_1, TEST_PASSWORD_1, "");
     }
 
     @Test
     public void GIVEN_empty_password_and_display_When_updateUser_Then_keep_the_same() {
         User updated = usermanager.updateUser(TEST_USER_NAME_1, "", "");
         System.out.println(updated.getDisplayName());
-        Assertions.assertEquals("123", updated.getDisplayName());
+        Assertions.assertEquals( TEST_USER_DISPLAY_NAME_1, updated.getDisplayName());
         Assertions.assertEquals(TEST_PASSWORD_1, updated.getPassword());
     }
 
