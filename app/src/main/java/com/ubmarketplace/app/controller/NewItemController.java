@@ -16,33 +16,28 @@ public class NewItemController {
 
     final UserManager userManager;
     final ItemManager itemManager;
+    final UserRepository userRepository;
 
     @Autowired
-    public NewItemController(UserManager userManager, ItemManager itemManager){
+    public NewItemController(UserManager userManager, ItemManager itemManager, UserRepository userRepository){
         this.userManager = userManager;
-        this.itemManager = itemManager;}
+        this.itemManager = itemManager;
+        this.userRepository = userRepository;
+    }
 
     @RequestMapping(value = "/api/newitem", method = RequestMethod.POST)
+
+    //waiting for FE stuff of listing new Item
     private NewItemResponse newItem(@RequestBody NewItemRequest newItemRequest){
-        Item item = itemManager.addNewItem(newItemRequest.getItemID)
-        return NewItemResponse.builder().item(item).build();
-    }
-            /*@RequestParam(name = "itemId") String itemId,
-            @RequestParam(name = "name") String name,
-            @RequestParam(name = "owner") User owner,
-            @RequestParam(name = "description") String description,
-            @RequestParam(name = "price") Double price,
-            @RequestParam(name = "imageFilePath") String imageFilePath,
-            @RequestParam(name = "meetingPlace") String meetingPlace,
-            @RequestParam(name = "createdTime") Long createdTime*/
+        Item item = itemManager.addNewItem(
+                newItemRequest.getName(),
+                newItemRequest.getOwner(),
+                newItemRequest.getDescription(),
+                newItemReqeust.getPrice(),
+                newItemRequest.getImageFilePath(),
+                newItemRequest.getMeetingPlace())
 
-            ){
-
-        // newItem = "Added item is " + itemManager.addNewItem(itemId, name, owner, description, price, imageFilePath, meetingPlace, createdTime);
-        //System.out.println(newItem);
-
-        User user1 =
-
+        /*User user1 = userRepository.findByUsername("kyle");
         Item item1 = new Item();
         item1.setItemId("3");
         item1.setDescription("This is a book");
@@ -52,9 +47,8 @@ public class NewItemController {
         item1.setOwner(user1);
         item1.setImageFilePath("http://");
         item1.setPrice(25.0);
-        itemRepository.insert(item1);
+        itemRepository.insert(item1);*/
 
-
-        return "redirect:/allitem";
+        return NewItemResponse.builder().item(item).build();
     }
 }

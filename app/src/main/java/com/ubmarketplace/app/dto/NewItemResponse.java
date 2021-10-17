@@ -11,5 +11,5 @@ import lombok.Setter;
 @Builder
 @AllArgsConstructor
 public class NewItemResponse{
-    privat Item item;
+    private Item item;
 }
