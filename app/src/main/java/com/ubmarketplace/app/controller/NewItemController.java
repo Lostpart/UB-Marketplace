@@ -14,20 +14,19 @@ import org.springframework.web.bind.annotation.RequestMethod;
 @Controller
 public class NewItemController {
 
-    final UserRepository userRepository;
     final UserManager userManager;
-    final ItemRepository itemRepository;
     final ItemManager itemManager;
 
     @Autowired
-    public NewItemController(UserRepository userRepository, UserManager userManager, ItemRepository itemRepository, ItemManager itemManager){
-        this.userRepository = userRepository;
+    public NewItemController(UserManager userManager, ItemManager itemManager){
         this.userManager = userManager;
-        this.itemRepository = itemRepository;
         this.itemManager = itemManager;}
 
-    @RequestMapping(value = "/newItem", method = RequestMethod.GET)
-    private String received(
+    @RequestMapping(value = "/api/newitem", method = RequestMethod.POST)
+    private NewItemResponse newItem(@RequestBody NewItemRequest newItemRequest){
+        Item item = itemManager.addNewItem(newItemRequest.getItemID)
+        return NewItemResponse.builder().item(item).build();
+    }
             /*@RequestParam(name = "itemId") String itemId,
             @RequestParam(name = "name") String name,
             @RequestParam(name = "owner") User owner,
@@ -36,12 +35,13 @@ public class NewItemController {
             @RequestParam(name = "imageFilePath") String imageFilePath,
             @RequestParam(name = "meetingPlace") String meetingPlace,
             @RequestParam(name = "createdTime") Long createdTime*/
+
             ){
 
         // newItem = "Added item is " + itemManager.addNewItem(itemId, name, owner, description, price, imageFilePath, meetingPlace, createdTime);
         //System.out.println(newItem);
 
-        User user1 = userRepository.findByUsername("kyle");
+        User user1 =
 
         Item item1 = new Item();
         item1.setItemId("3");
