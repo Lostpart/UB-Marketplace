@@ -32,21 +32,22 @@ function profile() {
                 <div className="body-Right">
 
                     <div className="profile_info">
-                        <p>First Name:</p>
-                        <p>Last Name:</p>
-                        <p>Email:</p>
+                        <form>
+                            <label>First Name: </label>
+                            <input type="text" name="firsName" value="First Name" /><br/>
+                            <label>Last Name: </label>
+                            <input type="text" name="lastName" value="Last Name"/><br/>
+                            <label>Email: </label>
+                            <input type="text" name="email" value="Email Address"/><br/>
+                            <label>Username: </label>
+                            <input type="text" name="userName" value="Username"/><br/>
+                            <label>Password: </label>
+                            <input type="text" name="password" value="Password"/><br/>
+                            <input className="subBtn" type="submit" value="Edit" /><br/>
+                        </form>
                     </div>
-                    <div className="profile_info2">
-                        <p>Jay</p>
-                        <p>Kwon</p>
-                        <p>hyukjook@buffalo.edu</p>
-                    </div>
-                    <div className="editBtn">
-                        <button>Edit</button>
-                    </div>
+
                 </div>
-
-
             </div>
         </div>
 
