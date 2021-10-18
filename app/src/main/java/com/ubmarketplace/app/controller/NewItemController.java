@@ -17,18 +17,20 @@ public class NewItemController {
     final UserManager userManager;
     final ItemManager itemManager;
     final UserRepository userRepository;
+    final ItemRepository itemRepository;
 
     @Autowired
-    public NewItemController(UserManager userManager, ItemManager itemManager, UserRepository userRepository){
+    public NewItemController(UserManager userManager, ItemManager itemManager, UserRepository userRepository, ItemRepository itemRepository){
         this.userManager = userManager;
         this.itemManager = itemManager;
         this.userRepository = userRepository;
+        this.itemRepository = itemRepository;
     }
 
     @RequestMapping(value = "/api/newitem", method = RequestMethod.POST)
 
     //waiting for FE stuff of listing new Item
-    private NewItemResponse newItem(@RequestBody NewItemRequest newItemRequest){
+    /*private NewItemResponse newItem(@RequestBody NewItemRequest newItemRequest){
         Item item = itemManager.addNewItem(
                 newItemRequest.getName(),
                 newItemRequest.getOwner(),
@@ -37,18 +39,22 @@ public class NewItemController {
                 newItemRequest.getImageFilePath(),
                 newItemRequest.getMeetingPlace())
 
-        /*User user1 = userRepository.findByUsername("kyle");
-        Item item1 = new Item();
-        item1.setItemId("3");
-        item1.setDescription("This is a book");
-        item1.setCreatedTime((long) 12345);
-        item1.setName("Book");
-        item1.setMeetingPlace("North");
-        item1.setOwner(user1);
-        item1.setImageFilePath("http://");
-        item1.setPrice(25.0);
-        itemRepository.insert(item1);*/
-
         return NewItemResponse.builder().item(item).build();
+    }*/
+
+    private String received(){
+        User user1 = User.builder().username("kyle").password("asdasd").build();
+        userRepository.insert(user1);
+
+        Item item1 = new Item();
+        item1.setDescription("This is a Laptop");
+        item1.setName("Laptop");
+        item1.setMeetingPlace("Student Union");
+        item1.setOwner(user1);
+        item1.setImageFilePath("https://cdn.pixabay.com/photo/2014/05/02/21/49/laptop-336373_1280.jpg");
+        item1.setPrice(150.0);
+        itemRepository.insert(item1);
+
+        return "redirect:/allitem";
     }
 }
