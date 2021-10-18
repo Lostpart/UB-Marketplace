@@ -11,6 +11,8 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RestController;
 
+import javax.validation.Valid;
+
 @RestController
 @Log
 public class RegisterController {
@@ -22,7 +24,7 @@ public class RegisterController {
     }
 
     @RequestMapping(value = "/api/register", method = RequestMethod.POST)
-    private RegisterResponse register(@RequestBody RegisterRequest registerRequest){
+    public RegisterResponse register(@RequestBody @Valid RegisterRequest registerRequest){
         log.info(String.format("Recovering register request from %s", registerRequest.getUsername()));
 
         User user = userManager.addNewUser(registerRequest.getUsername(), registerRequest.getPassword());
