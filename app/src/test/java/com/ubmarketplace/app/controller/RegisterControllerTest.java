@@ -45,13 +45,4 @@ public class RegisterControllerTest {
                 .build());
         Assertions.assertEquals(response.getUser().getUsername(), TEST_USER_NAME_1);
     }
-
-    @Test
-    public void GIVEN_badInput_WHEN_register_THEN_returnCorrectRegisterResponse() {
-        RegisterResponse response = registerController.register(RegisterRequest.builder()
-                .username("Bad")
-                .password(TEST_PASSWORD_1)
-                .build());
-        Assertions.assertEquals(response.getUser().getUsername(), TEST_USER_NAME_1);
-    }
 }
