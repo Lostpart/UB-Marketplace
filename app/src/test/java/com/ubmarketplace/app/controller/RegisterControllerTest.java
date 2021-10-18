@@ -13,12 +13,14 @@ import org.mockito.Mockito;
 import org.mockito.stubbing.Answer;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.context.SpringBootTest;
+import org.springframework.test.annotation.DirtiesContext;
 
 import static com.ubmarketplace.app.Static.TEST_PASSWORD_1;
 import static com.ubmarketplace.app.Static.TEST_USER_NAME_1;
 import static org.mockito.ArgumentMatchers.anyString;
 
 @SpringBootTest
+@DirtiesContext(classMode = DirtiesContext.ClassMode.BEFORE_CLASS)
 @TestInstance(TestInstance.Lifecycle.PER_CLASS)
 public class RegisterControllerTest {
     @Autowired
