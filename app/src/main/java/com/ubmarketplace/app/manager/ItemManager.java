@@ -21,8 +21,8 @@ public class ItemManager {
         this.itemRepository = itemRepository;
     }
 
-    public Item addNewItem(@NonNull String itemId, @NonNull String name, @NonNull User owner, @NonNull String description, @NonNull Double price, @NonNull String imageFilepath, @NonNull String meetingPlace, @NonNull Long createdTime){
-        Item item = Item.builder().itemId(itemId).name(name).owner(owner).description(description).price(price).imageFilePath(imageFilepath).meetingPlace(meetingPlace).createdTime(createdTime).build();
+    public Item addNewItem(@NonNull String itemId, @NonNull String name, @NonNull User owner, @NonNull String description, @NonNull Double price, @NonNull String imageFilepath, @NonNull String meetingPlace){
+        Item item = Item.builder().itemId(itemId).name(name).owner(owner).description(description).price(price).imageFilePath(imageFilepath).meetingPlace(meetingPlace).build();
         itemRepository.insert(item);
         return item;
     }
