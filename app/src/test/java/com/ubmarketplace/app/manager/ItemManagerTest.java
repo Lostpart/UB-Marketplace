@@ -53,6 +53,7 @@ public class ItemManagerTest {
         List<String> validItemId = new ArrayList<String>(){{
             add(TEST_ITEM_ID_1);
             add(TEST_ITEM_ID_2);
+            add(TEST_ITEM_ID_3);
         }};
 
         List<Item> result = itemmanager.getAllItem();
