@@ -25,11 +25,29 @@ public class ItemManagerTest {
     ItemManager itemmanager;
 
     @BeforeAll
-    static void setup(@Autowired ItemRepository itemRepository) {
+    static void setup(@Autowired ItemRepository itemRepository, @Autowired UserRepository userRepository) {
+        userRepository.insert(User.builder().username(TEST_USER_NAME_3).password(TEST_PASSWORD_3).build());
         itemRepository.insert(Item.builder().itemId(TEST_ITEM_ID_1).name(TEST_ITEM_NAME_1).build());
         itemRepository.insert(Item.builder().itemId(TEST_ITEM_ID_2).name(TEST_ITEM_NAME_2).build());
     }
 
+    @Test
+    public void GIVEN_goodInput_When_addNewItem_Then_returnTrue(@Autowired ItemRepository itemRepository, @Autowired UserRepository userRepository){
+        User TEST_ITEM_OWNER_3 = userRepository.findByUsername(TEST_USER_NAME_3);
+        Item item = Item.builder().itemId(TEST_ITEM_ID_3).name(TEST_ITEM_NAME_3).owner(TEST_ITEM_OWNER_3).description(TEST_ITEM_DESCRIPTION_3).price(TEST_ITEM_PRICE_3).imageFilePath(TEST_ITEM_IMAGE_3).meetingPlace(TEST_ITEM_MEETINGPLACE_3).build();
+
+        itemmanager.addNewItem(
+                TEST_ITEM_ID_3,
+                TEST_ITEM_NAME_3,
+                TEST_ITEM_OWNER_3,
+                TEST_ITEM_DESCRIPTION_3,
+                TEST_ITEM_PRICE_3,
+                TEST_ITEM_IMAGE_3,
+                TEST_ITEM_MEETINGPLACE_3
+        );
+        Assertions.assertEquals(itemRepository.findByItemID(TEST_ITEM_ID_3), item);
+    }
+    
     @Test
     public void GIVEN_goodInput_WHEN_loginVerification_THEN_returnTrue() {
         List<String> validItemId = new ArrayList<String>(){{
