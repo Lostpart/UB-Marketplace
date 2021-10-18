@@ -5,7 +5,7 @@ public class Static {
     final static public String TEST_PASSWORD_1 = "GoodPassword";
     final static public String TEST_USER_NAME_2 = "UnitTest_TestUser2@test.com";
     final static public String TEST_PASSWORD_2 = "GoodPassword2";
-    final static public string TEST_USER_NAME_3 = "UnitTest_TestUser3@test.com";
+    final static public String TEST_USER_NAME_3 = "UnitTest_TestUser3@test.com";
     final static public String TEST_PASSWORD_3 = "GoodPassword3";
     final static public String TEST_ALWAYS_WRONG_PASSWORD = "BadPassword";
 
