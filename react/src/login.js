@@ -24,7 +24,6 @@ class Login extends React.Component {
 
     handleSubmit(event) {
         const requestOptions = {
-            mode: 'no-cors',
             method: 'POST',
             headers: { 'Content-Type': 'application/json' },
             body: JSON.stringify({ username: this.state.username, password: sha256(this.state.password) })
