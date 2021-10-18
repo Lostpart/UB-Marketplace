@@ -18,7 +18,7 @@ class home extends Component{
     componentDidMount() {
         const requestOptions = {
             /*remove 'no-cors' once item insertion function gets finished*/
-            mode: 'no-cors',
+            // mode: 'no-cors',
             method: "get",
             headers: {
                 "Content-Type": "application/json"
