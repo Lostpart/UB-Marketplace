@@ -14,6 +14,7 @@ class home extends Component{
 
         }
     }
+
     componentDidMount() {
         const requestOptions = {
             /*remove 'no-cors' once item insertion function gets finished*/
@@ -22,7 +23,9 @@ class home extends Component{
             headers: {
                 "Content-Type": "application/json"
             }
+
         };
+
 
         /*actual api fetch function once insert item gets finished*/
         // fetch('/api/allitem',requestOptions)
@@ -32,6 +35,8 @@ class home extends Component{
         //             isLoaded: true,
         //             items: data})
         //     })
+
+
 
 
         fetch('http://ubmarketplace-develop.herokuapp.com/api/allitem',requestOptions)
@@ -54,11 +59,8 @@ class home extends Component{
 
     render() {
         var{isLoaded, items} = this.state;
-
-        if(!isLoaded){
-            return<div>Loading...</div>
-        }
-        else{
+        const {name} = (this.props.location && this.props.location.state) || {};
+        if(name==null){
             return (
                 <div className="home">
                     <div className="header">
@@ -68,6 +70,68 @@ class home extends Component{
                             <div className="dropdown-content">
                                 <Link to="/login">Login/Register</Link>
                                 <Link to="/profile">View Profile</Link>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div className="itemList">
+                        <Carousel  show={5} infiniteLoop>
+                            {items.map(item=>(
+                                <div className="itemImg">
+                                    <img src={item.imageFilePath}/>
+                                    <p>{item.name}</p>
+                                    <p>${item.price}</p>
+                                </div>
+                            ))}
+                        </Carousel>
+                    </div>
+
+                    <div className="categoryList">
+                        <h2>Category List</h2>
+                        <ul>
+                            <li>Electronics</li>
+                            <li>Textbooks</li>
+                            <li>Clothings</li>
+                            <li>Furnitures</li>
+                        </ul>
+                        <ul>
+                            <li>Electronics</li>
+                            <li>Textbooks</li>
+                            <li>Clothings</li>
+                            <li>Furnitures</li>
+                        </ul>
+                        <ul>
+                            <li>Electronics</li>
+                            <li>Textbooks</li>
+                            <li>Clothings</li>
+                            <li>Furnitures</li>
+                        </ul>
+                        <ul>
+                            <li>Electronics</li>
+                            <li>Textbooks</li>
+                            <li>Clothings</li>
+                            <li>Furnitures</li>
+                        </ul>
+                        <ul>
+                            <li>See All Items</li>
+                            <li>Sell My Items</li>
+                        </ul>
+                    </div>
+                </div>
+
+            );
+        }
+        else{
+            return (
+                <div className="home">
+                    <div className="header">
+                        <p className="title">UB Marketplace</p>
+                        <div className="dropdown">
+                            <button className="dropbtn">{name}</button>
+                            <div className="dropdown-content">
+                                <Link to="/login">Login/Register</Link>
+                                <Link to="/profile">View Profile</Link>
+                                <Link to="/">Logout</Link>
                             </div>
                         </div>
                     </div>
