@@ -25,7 +25,8 @@ public class ItemManagerTest {
     ItemManager itemmanager;
 
     @BeforeAll
-    static void setup(@Autowired ItemRepository itemRepository) {
+    static void setup(@Autowired ItemRepository itemRepository, @Autowired UserRepository userRepository) {
+        userRepository.insert(User.builder().username(TEST_USER_NAME_3).password(TEST_PASSWORD_3).build());
         itemRepository.insert(Item.builder().itemId(TEST_ITEM_ID_1).name(TEST_ITEM_NAME_1).build());
         itemRepository.insert(Item.builder().itemId(TEST_ITEM_ID_2).name(TEST_ITEM_NAME_2).build());
     }
