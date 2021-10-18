@@ -24,18 +24,19 @@ class Login extends React.Component {
 
     handleSubmit(event) {
         const requestOptions = {
+            mode: 'no-cors',
             method: 'POST',
             headers: { 'Content-Type': 'application/json' },
             body: JSON.stringify({ username: this.state.username, password: sha256(this.state.password) })
         };
         
-        fetch('/api/login', requestOptions)
+        fetch('https://ubmarketplace-develop.herokuapp.com/api/login', requestOptions)
             .then(response => {
                 if (response.status !== 200) {
                     handleAPIError(response)
                 } else {
                     localStorage.setItem("email", this.state.username);
-                    this.props.history.push('/')
+                    this.props.history.push({pathname:"/",state: {name: this.state.username}})
                 }
             });
         
