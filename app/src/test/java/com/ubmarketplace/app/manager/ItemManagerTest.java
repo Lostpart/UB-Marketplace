@@ -34,7 +34,7 @@ public class ItemManagerTest {
     @Test
     public void GIVEN_goodInput_When_addNewItem_Then_returnTrue(@Autowired ItemRepository itemRepository, @Autowired UserRepository userRepository){
         User TEST_ITEM_OWNER_3 = userRepository.findByUsername(TEST_USER_NAME_3);
-        Item item = Item.builder().itemId(TEST_ITEM_ID_3).name(TEST_ITEM_NAME_3).owner(TEST_ITEM_OWNER_3).description(TEST_ITEM_DESCRIPTION_3).price(TEST_ITEM_PRICE_3).imageFilePath(TEST_ITEM_IMAGE_3).meetingPlace(TEST_ITEM_MEETINGPLACE_3).build();
+        Item item = Item.builder().itemId(TEST_ITEM_ID_3).name(TEST_ITEM_NAME_3).owner(TEST_ITEM_OWNER_3).description(TEST_ITEM_DESCRIPTION_3).price(TEST_ITEM_PRICE_3).imageFilePath(TEST_ITEM_IMAGE_3).meetingPlace(TEST_ITEM_MEETING_PLACE_3).build();
 
         itemmanager.addNewItem(
                 TEST_ITEM_ID_3,
@@ -43,7 +43,7 @@ public class ItemManagerTest {
                 TEST_ITEM_DESCRIPTION_3,
                 TEST_ITEM_PRICE_3,
                 TEST_ITEM_IMAGE_3,
-                TEST_ITEM_MEETINGPLACE_3
+                TEST_ITEM_MEETING_PLACE_3
         );
         Assertions.assertEquals(itemRepository.findByItemID(TEST_ITEM_ID_3), item);
     }
