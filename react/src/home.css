@@ -17,6 +17,10 @@ a{
     text-decoration: none;
 }
 
+li a {
+    color: black;
+}
+
 .header{
     display: inline-block;
     width: 100%;

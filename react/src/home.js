@@ -106,7 +106,7 @@ class home extends Component{
                         </ul>
                         <ul>
                             <li>See All Items</li>
-                            <li>Sell My Items</li>
+                            <li><Link to="/sell">Sell My Items</Link></li>
                         </ul>
                     </div>
                 </div>
