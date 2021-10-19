@@ -10,10 +10,14 @@ class Sell extends React.Component {
         super(props);
         this.state = {
             name: '',
-            price: ''
+            price: '',
+            category: 'none',
+            description: ''
         };
         this.changeName = this.changeName.bind(this);
         this.changePrice = this.changePrice.bind(this);
+        this.changeCategory = this.changeCategory.bind(this);
+        this.changeDescription = this.changeDescription.bind(this);
     }
     
     changeName(event) {
@@ -45,6 +49,15 @@ class Sell extends React.Component {
         this.setState({price: price})
     }
 
+    changeCategory(event) {
+        if (event.target.value === 'none') return;
+        this.setState({category: event.target.value});
+    }
+
+    changeDescription(event) {
+        this.setState({description: event.target.value});
+    }
+
     handleSubmit(event) {
         event.preventDefault();
         /*
@@ -70,10 +83,23 @@ class Sell extends React.Component {
                 <Header />
                 <form onSubmit={this.handleSubmit}>
                     <label for="name">Item Name</label>
-                    <input type="text" name="name" value={this.state.name} onChange={this.changeName} />
+                    <input type="text" name="name" value={this.state.name} onChange={this.changeName} required />
 
                     <label for="price">Item Price</label>
-                    <input type="text" name="price" placeholder='$$$' value={this.state.price} onChange={this.changePrice} />
+                    <input type="text" name="price" placeholder='$$$' value={this.state.price} onChange={this.changePrice} required />
+
+                    <label for="category">Item Category</label>
+                    <select name="category" value={this.state.category} onChange={this.changeCategory} required>
+                        <option value='none' disabled>Select</option>
+                        <option value="electronics">Electronics</option>
+                        <option value="textbooks">Textbooks</option>
+                        <option value="clothes">Clothes</option>
+                        <option value="furniture">Furniture</option>
+                    </select>
+
+                    <label for="description">Item Description</label>
+                    <textarea name="description" onChange={this.changeDescription} />
+
                     <input type="submit" value="Submit" />
                 </form>
             </div>
