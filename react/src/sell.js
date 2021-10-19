@@ -12,12 +12,14 @@ class Sell extends React.Component {
             name: '',
             price: '',
             category: 'none',
-            description: ''
+            description: '',
+            images: []
         };
         this.changeName = this.changeName.bind(this);
         this.changePrice = this.changePrice.bind(this);
         this.changeCategory = this.changeCategory.bind(this);
         this.changeDescription = this.changeDescription.bind(this);
+        this.uploadImage = this.uploadImage.bind(this);
     }
     
     changeName(event) {
@@ -58,6 +60,13 @@ class Sell extends React.Component {
         this.setState({description: event.target.value});
     }
 
+    uploadImage(event) {
+        const file = event.target.files[0];
+        const objectURL = URL.createObjectURL(file);
+        const newImageList = this.state.images.concat(objectURL);
+        this.setState({ images: newImageList })
+    }
+
     handleSubmit(event) {
         event.preventDefault();
         /*
@@ -78,17 +87,20 @@ class Sell extends React.Component {
     }
     
     render() {
+
+        let images = this.state.images.map((src, idx) => <img key={idx} alt={`${this.state.name}`} src={src}/>)
+
         return (
             <div className="sell">
                 <Header />
                 <form onSubmit={this.handleSubmit}>
-                    <label for="name">Item Name</label>
+                    <label htmlFor="name">Item Name</label>
                     <input type="text" name="name" value={this.state.name} onChange={this.changeName} required />
 
-                    <label for="price">Item Price</label>
+                    <label htmlFor="price">Item Price</label>
                     <input type="text" name="price" placeholder='$$$' value={this.state.price} onChange={this.changePrice} required />
 
-                    <label for="category">Item Category</label>
+                    <label htmlFor="category">Item Category</label>
                     <select name="category" value={this.state.category} onChange={this.changeCategory} required>
                         <option value='none' disabled>Select</option>
                         <option value="electronics">Electronics</option>
@@ -97,8 +109,12 @@ class Sell extends React.Component {
                         <option value="furniture">Furniture</option>
                     </select>
 
-                    <label for="description">Item Description</label>
+                    <label htmlFor="description">Item Description</label>
                     <textarea name="description" onChange={this.changeDescription} />
+
+                    <label htmlFor="image">Upload Photo</label>
+                    <input type="file" name="image" onChange={this.uploadImage} />
+                    {images}
 
                     <input type="submit" value="Submit" />
                 </form>
