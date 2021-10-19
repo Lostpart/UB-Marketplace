@@ -3,6 +3,7 @@ import React, {Component} from 'react';
 import "./Carousel.css";
 import './home.css';
 import Carousel from "./Carousel"
+import Header from "./header";
 
 
 class home extends Component{
@@ -63,16 +64,7 @@ class home extends Component{
         if(name==null){
             return (
                 <div className="home">
-                    <div className="header">
-                        <p className="title">UB Marketplace</p>
-                        <div className="dropdown">
-                            <button className="dropbtn">Profile</button>
-                            <div className="dropdown-content">
-                                <Link to="/login">Login/Register</Link>
-                                <Link to="/profile">View Profile</Link>
-                            </div>
-                        </div>
-                    </div>
+                    <Header />
 
                     <div className="itemList">
                         <Carousel  show={5} infiniteLoop>
