@@ -13,13 +13,15 @@ class Sell extends React.Component {
             price: '',
             category: 'none',
             description: '',
-            images: []
+            images: [],
+            locations: []
         };
         this.changeName = this.changeName.bind(this);
         this.changePrice = this.changePrice.bind(this);
         this.changeCategory = this.changeCategory.bind(this);
         this.changeDescription = this.changeDescription.bind(this);
         this.uploadImage = this.uploadImage.bind(this);
+        this.changeLocations = this.changeLocations.bind(this);
     }
     
     changeName(event) {
@@ -65,6 +67,16 @@ class Sell extends React.Component {
         const objectURL = URL.createObjectURL(file);
         const newImageList = this.state.images.concat(objectURL);
         this.setState({ images: newImageList })
+    }
+
+    changeLocations(event) {
+        let meetups = Array.from(
+            event.target.selectedOptions,
+            (option) => option.value
+        );
+        this.setState({
+            locations: meetups,
+        });
     }
 
     handleSubmit(event) {
@@ -115,6 +127,15 @@ class Sell extends React.Component {
                     <label htmlFor="image">Upload Photo</label>
                     <input type="file" name="image" onChange={this.uploadImage} />
                     {images}
+
+                    <label>
+                        Meetup Locations
+                        <select name="locations" multiple value={this.state.locations} onChange={this.changeLocations}>
+                            <option value='Natural Science Complex'>Natural Science Complex</option>
+                            <option value='Capen'>Capen</option>
+                            <option value='Norton'>Norton</option>
+                        </select>
+                    </label>
 
                     <input type="submit" value="Submit" />
                 </form>
