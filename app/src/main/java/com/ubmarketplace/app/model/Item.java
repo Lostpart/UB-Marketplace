@@ -7,9 +7,9 @@ import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
 import org.springframework.data.annotation.Id;
+import org.apache.commons.lang3.RandomStringUtils;
 
 import java.time.Instant;
-import java.util.UUID;
 
 @Getter
 @Setter
@@ -19,7 +19,7 @@ import java.util.UUID;
 @EqualsAndHashCode
 public class Item {
     @Id @Builder.Default
-    private String itemId = UUID.randomUUID().toString().replace("-", "").toLowerCase();
+    private String itemId = RandomStringUtils.randomAlphanumeric(8).toLowerCase();
     private String name;
     private User owner;
     private String description;
