@@ -106,27 +106,40 @@ class Sell extends React.Component {
             <div className="sell">
                 <Header />
                 <form onSubmit={this.handleSubmit}>
-                    <label htmlFor="name">Item Name</label>
-                    <input type="text" name="name" value={this.state.name} onChange={this.changeName} required />
+                    <label>
+                        Item Name
+                        <input type="text" name="name" value={this.state.name} onChange={this.changeName} required />
+                    </label>
 
-                    <label htmlFor="price">Item Price</label>
-                    <input type="text" name="price" placeholder='$$$' value={this.state.price} onChange={this.changePrice} required />
+                    <label>
+                        Item Price
+                        <input type="text" name="price" placeholder='$$$' value={this.state.price} onChange={this.changePrice} required />
+                    </label>
 
-                    <label htmlFor="category">Item Category</label>
-                    <select name="category" value={this.state.category} onChange={this.changeCategory} required>
-                        <option value='none' disabled>Select</option>
-                        <option value="electronics">Electronics</option>
-                        <option value="textbooks">Textbooks</option>
-                        <option value="clothes">Clothes</option>
-                        <option value="furniture">Furniture</option>
-                    </select>
+                    <label>
+                        Item Category
+                        <select name="category" value={this.state.category} onChange={this.changeCategory} required>
+                            <option value='none' disabled>Select</option>
+                            <option value="electronics">Electronics</option>
+                            <option value="textbooks">Textbooks</option>
+                            <option value="clothes">Clothes</option>
+                            <option value="furniture">Furniture</option>
+                        </select>
+                    </label>
 
-                    <label htmlFor="description">Item Description</label>
-                    <textarea name="description" onChange={this.changeDescription} />
+                    <label>
+                        Item Description
+                        <textarea name="description" onChange={this.changeDescription} />
+                    </label>
 
-                    <label htmlFor="image">Upload Photo</label>
-                    <input type="file" name="image" onChange={this.uploadImage} />
-                    {images}
+                    <label>
+                        Upload Photo
+                        <input type="file" name="image" onChange={this.uploadImage} />
+                    </label>
+
+                    <div className="images">
+                        {images}
+                    </div>
 
                     <label>
                         Meetup Locations
