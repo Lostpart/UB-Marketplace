@@ -34,6 +34,7 @@ form label select,
 form label textarea {
     height: 40px;
     width: 50rem;
+    font-size: 24px;
 }
 
 form label select {
@@ -48,4 +49,9 @@ form input {
     width: 5rem;
     height: 30px;
     align-self: end;
+}
+
+form label img {
+    width: 10rem;
+    height: 80px;
 }
