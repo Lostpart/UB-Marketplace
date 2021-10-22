@@ -34,6 +34,11 @@ class Sell extends React.Component {
         // Reject input if it makes the price not a number
         if (isNaN(price)) return;
 
+        if (price === '') {
+            this.setState({ price: price })
+            return;
+        }
+
         // Get the specific dollars/cents
         let [dollars, cents] = price.split('.');
         // Remove leading 0's
