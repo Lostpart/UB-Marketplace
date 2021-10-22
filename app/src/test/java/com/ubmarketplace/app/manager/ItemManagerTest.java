@@ -33,10 +33,7 @@ public class ItemManagerTest {
     @Test
     public void GIVEN_goodInput_When_addNewItem_Then_returnTrue(@Autowired ItemRepository itemRepository, @Autowired UserRepository userRepository){
         User TEST_ITEM_OWNER_3 = userRepository.findByUsername(TEST_USER_NAME_3);
-        Item item = Item.builder().itemId(TEST_ITEM_ID_3).name(TEST_ITEM_NAME_3).owner(TEST_ITEM_OWNER_3).description(TEST_ITEM_DESCRIPTION_3).price(TEST_ITEM_PRICE_3).imageFilePath(TEST_ITEM_IMAGE_3).meetingPlace(TEST_ITEM_MEETINGPLACE_3).build();
-
-        itemmanager.addNewItem(
-                TEST_ITEM_ID_3,
+        Item item = itemmanager.addNewItem(
                 TEST_ITEM_NAME_3,
                 TEST_ITEM_OWNER_3,
                 TEST_ITEM_DESCRIPTION_3,
@@ -44,7 +41,10 @@ public class ItemManagerTest {
                 TEST_ITEM_IMAGE_3,
                 TEST_ITEM_MEETINGPLACE_3
         );
-        Assertions.assertEquals(itemRepository.findByItemID(TEST_ITEM_ID_3), item);
+        Assertions.assertEquals(itemRepository.findByItemID(item.getItemId()), item);
+
+        //Remove added item in order to avoid of interrupting other test.
+        itemRepository.remove(itemRepository.findByItemID(item.getItemId()));
     }
 
     @Test
@@ -55,6 +55,7 @@ public class ItemManagerTest {
         }};
 
         List<Item> result = itemmanager.getAllItem();
+        System.out.println(result);
         for(Item item : result){
             Assertions.assertTrue(validItemId.contains(item.getItemId()));
         }
