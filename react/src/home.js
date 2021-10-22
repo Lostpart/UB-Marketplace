@@ -78,9 +78,12 @@ class home extends Component{
                         <Carousel  show={5} infiniteLoop>
                             {items.map(item=>(
                                 <div className="itemImg">
-                                    <img src={item.imageFilePath}/>
+                                    {/*link needs to be uuid ex) item.uuid */}
+                                    <Link to="/item">
+                                    <img src={item.imageFilePath}/></Link>
                                     <p>{item.name}</p>
                                     <p>${item.price}</p>
+
                                 </div>
                             ))}
                         </Carousel>

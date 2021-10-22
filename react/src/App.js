@@ -2,6 +2,7 @@
   import Profile from './profile';
   import Home from './home';
   import Login from './login';
+  import Item_Detail from './item_detail';
   import {Route, Switch, HashRouter} from "react-router-dom"
 import Register from './register';
 function App() {
@@ -12,6 +13,7 @@ function App() {
           <Route path="/profile" component={Profile} />
           <Route path="/login" component={Login} />
           <Route path="/register" component={Register} />
+          <Route path="/item" component={Item_Detail} />
         </Switch>
       </HashRouter>
   );
