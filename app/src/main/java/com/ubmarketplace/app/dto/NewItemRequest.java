@@ -8,6 +8,7 @@ import lombok.Setter;
 import javax.validation.constraints.NotNull;
 import javax.validation.constraints.Pattern;
 import javax.validation.constraints.Size;
+import java.util.ArrayList;
 
 @Getter
 @Setter
@@ -26,7 +27,7 @@ public class NewItemRequest {
     private Double price;
 
     @NotNull(message = "Please attach the item image")
-    private String imageFilePath;
+    private ArrayList<String> imageFilePath;
 
     @NotNull(message = "Meeting place cannot be empty")
     private String meetingPlace;

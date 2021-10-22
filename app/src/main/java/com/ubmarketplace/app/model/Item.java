@@ -10,6 +10,7 @@ import org.springframework.data.annotation.Id;
 import org.apache.commons.lang3.RandomStringUtils;
 
 import java.time.Instant;
+import java.util.ArrayList;
 
 @Getter
 @Setter
@@ -24,7 +25,7 @@ public class Item {
     private User owner;
     private String description;
     private Double price;
-    private String imageFilePath;
+    private ArrayList<String> imageFilePath;
     private String meetingPlace;
 
     @EqualsAndHashCode.Exclude @Builder.Default
