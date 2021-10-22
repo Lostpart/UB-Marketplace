@@ -107,17 +107,17 @@ class Sell extends React.Component {
                 <Header />
                 <form onSubmit={this.handleSubmit}>
                     <label>
-                        Item Name
+                        <div>Item Name</div>
                         <input type="text" name="name" value={this.state.name} onChange={this.changeName} required />
                     </label>
 
                     <label>
-                        Item Price
+                        <div>Item Price</div>
                         <input type="text" name="price" placeholder='$$$' value={this.state.price} onChange={this.changePrice} required />
                     </label>
 
                     <label>
-                        Item Category
+                        <div>Item Category</div>
                         <select name="category" value={this.state.category} onChange={this.changeCategory} required>
                             <option value='none' disabled>Select</option>
                             <option value="electronics">Electronics</option>
@@ -128,21 +128,20 @@ class Sell extends React.Component {
                     </label>
 
                     <label>
-                        Item Description
+                        <div>Item Description</div>
                         <textarea name="description" onChange={this.changeDescription} />
                     </label>
 
                     <label>
-                        Upload Photo
+                        <div>Upload Photo</div>
                         <input type="file" name="image" onChange={this.uploadImage} />
+                        <div className="images">
+                            {images}
+                        </div>
                     </label>
 
-                    <div className="images">
-                        {images}
-                    </div>
-
                     <label>
-                        Meetup Locations
+                        <div>Meetup Locations</div>
                         <select name="locations" multiple value={this.state.locations} onChange={this.changeLocations}>
                             <option value='Natural Science Complex'>Natural Science Complex</option>
                             <option value='Capen'>Capen</option>
