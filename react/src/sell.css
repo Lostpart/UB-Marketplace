@@ -22,7 +22,7 @@ form label {
     margin-bottom: 2rem;
 }
 
-form label div:not(.images) {
+form label div:not(.images):not(.add) {
     margin-left: 3rem;
     margin-right: 3rem;
     text-align: center;
@@ -54,4 +54,30 @@ form input {
 form label img {
     width: 10rem;
     height: 80px;
+}
+
+form > input[type="file"] {
+    display: none;
+}
+
+form label div.add {
+    width: 80px;
+    height: 80px;
+    border: gray;
+    border-style: solid;
+    border-width: 1px;
+    border-radius: 1px;
+    align-self: center;
+    font-size: 64px;
+    color: gray;
+    text-align: center;
+    margin-right: 2rem;
+}
+
+form label div.images {
+    display: flex;
+}
+
+form label div.images img {
+    padding-right: 1rem;
 }

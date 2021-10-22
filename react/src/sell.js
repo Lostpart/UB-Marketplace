@@ -64,6 +64,10 @@ class Sell extends React.Component {
 
     uploadImage(event) {
         const file = event.target.files[0];
+        if (file.type.split('/')[0] !== 'image') {
+            alert("Invalid file type!");
+            return;
+        }
         const objectURL = URL.createObjectURL(file);
         const newImageList = this.state.images.concat(objectURL);
         this.setState({ images: newImageList })
@@ -132,13 +136,14 @@ class Sell extends React.Component {
                         <textarea name="description" onChange={this.changeDescription} />
                     </label>
 
-                    <label>
+                    <label htmlFor="image">
                         <div>Upload Photo</div>
-                        <input type="file" name="image" onChange={this.uploadImage} />
                         <div className="images">
+                            <div className="add">+</div>
                             {images}
                         </div>
                     </label>
+                    <input type="file" name="image" id="image" onChange={this.uploadImage} />
 
                     <label>
                         <div>Meetup Locations</div>
