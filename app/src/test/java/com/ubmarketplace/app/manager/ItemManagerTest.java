@@ -62,4 +62,17 @@ public class ItemManagerTest {
         }
     }
 
+    @Test
+    public void Remove_Item_THEN_returnTrue(@Autowired ItemRepository itemRepository){
+        Assertions.assertEquals(itemmanager.deleteItem(TEST_ITEM_ID_1), true);
+        itemRepository.insert(Item.builder().itemId(TEST_ITEM_ID_1).name(TEST_ITEM_NAME_1).build());
+
+    }
+
+    @Test
+    public void Remove_ItemTwice_THEN_returnTrue(@Autowired ItemRepository itemRepository){
+        Assertions.assertEquals(itemmanager.deleteItem(TEST_ITEM_ID_1), true);
+        Assertions.assertThrows(InvalidParameterException.class, () -> itemmanager.deleteItem(TEST_ITEM_ID_1));
+    }
+
 }

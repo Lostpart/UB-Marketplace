@@ -1,6 +1,7 @@
 package com.ubmarketplace.app.manager;
 
 import com.google.inject.Singleton;
+import com.mongodb.client.result.DeleteResult;
 import com.ubmarketplace.app.model.User;
 import com.ubmarketplace.app.repository.UserRepository;
 import lombok.NonNull;
@@ -9,6 +10,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.dao.DuplicateKeyException;
 import org.springframework.stereotype.Component;
 
+import javax.validation.constraints.NotNull;
 import java.security.InvalidParameterException;
 
 @Singleton
@@ -40,14 +42,14 @@ public class UserManager {
         return password.equals(user.getPassword());
     }
 
-    public User addNewUser(@NonNull String username, @NonNull String password){
-        if(username.isEmpty() || password.isEmpty()){
-            log.info(String.format("Empty username or password when creating new account for %s", username));
+    public User addNewUser(@NonNull String username, @NonNull String password, @NonNull String displayName){
+        if(username.isEmpty() || password.isEmpty() || displayName.isEmpty()){
+            log.info(String.format("Empty username or password or displayName when creating new account for %s", username));
             throw new InvalidParameterException("Empty username or password");
         }
         log.info(String.format("Creating new account for %s", username));
 
-        User user = User.builder().username(username).password(password).build();
+        User user = User.builder().username(username).password(password).displayName(displayName).build();
 
         try {
             userRepository.insert(user);
@@ -57,5 +59,57 @@ public class UserManager {
         }
 
         return user;
+    }
+
+    public String getDiisplayName(@NotNull String username){
+        if (username.isEmpty()){
+            throw new InvalidParameterException("Empty username");
+        }
+
+        return userRepository.findByUsername(username).getDisplayName();
+
+    }
+
+
+    public User updateUser(@NonNull String username, @NonNull String password, @NonNull String displayName) {
+        if(username.isEmpty()){
+            log.info("Empty username");
+            throw new InvalidParameterException("Empty username");
+        }
+        log.info(String.format("Updating account for %s", username));
+
+        User old_user = userRepository.findByUsername(username);
+
+        DeleteResult delete = userRepository.remove(old_user);
+        if (!delete.wasAcknowledged()){
+            log.info(String.format("Fail to delete account for %s", old_user.getUsername()));
+            throw new InvalidParameterException("Fail to delete");
+        }
+
+        User updated_user;
+
+        if (password.isEmpty() && !displayName.isEmpty()){
+            updated_user = User.builder().username(username).password(old_user.getPassword()).displayName(displayName).build();
+        }
+        else if (displayName.isEmpty() && !password.isEmpty()){
+            updated_user = User.builder().username(username).password(password).displayName(old_user.getDisplayName()).build();
+        }
+        else if (displayName.isEmpty()){
+            updated_user = User.builder().username(username).password(old_user.getPassword()).displayName(old_user.getDisplayName()).build();
+        }
+        else {
+            updated_user = User.builder().username(username).password(password).displayName(displayName).build();
+        }
+
+
+
+        try {
+            userRepository.insert(updated_user);
+        } catch (DuplicateKeyException e) {
+            log.warning(String.format("Failed to create new account for %s, an account with same username already exist", username));
+            throw new InvalidParameterException("Failed to update account, an account with same username already exist");
+        }
+
+        return userRepository.findByUsername(username);
     }
 }

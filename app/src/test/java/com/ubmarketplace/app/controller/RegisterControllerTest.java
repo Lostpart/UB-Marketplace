@@ -15,8 +15,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.context.SpringBootTest;
 import org.springframework.test.annotation.DirtiesContext;
 
-import static com.ubmarketplace.app.Static.TEST_PASSWORD_1;
-import static com.ubmarketplace.app.Static.TEST_USER_NAME_1;
+import static com.ubmarketplace.app.Static.*;
 import static org.mockito.ArgumentMatchers.anyString;
 
 @SpringBootTest
@@ -31,10 +30,11 @@ public class RegisterControllerTest {
 
     @BeforeAll
     public void setup() {
-        Mockito.when(userManager.addNewUser(anyString(), anyString())).thenAnswer(
+        Mockito.when(userManager.addNewUser(anyString(), anyString(), anyString())).thenAnswer(
                 (Answer<User>) invocation -> User.builder()
                         .username(invocation.getArgument(0))
                         .password(invocation.getArgument(1))
+                        .displayName(invocation.getArgument(2))
                         .build()
         );
     }
@@ -44,6 +44,7 @@ public class RegisterControllerTest {
         RegisterResponse response = registerController.register(RegisterRequest.builder()
                 .username(TEST_USER_NAME_1)
                 .password(TEST_PASSWORD_1)
+                .displayName(TEST_DISPLAY_NAME_1)
                 .build());
         Assertions.assertEquals(response.getUser().getUsername(), TEST_USER_NAME_1);
     }

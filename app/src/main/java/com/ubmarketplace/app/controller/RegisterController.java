@@ -27,7 +27,7 @@ public class RegisterController {
     public RegisterResponse register(@RequestBody @Valid RegisterRequest registerRequest){
         log.info(String.format("Recovering register request from %s", registerRequest.getUsername()));
 
-        User user = userManager.addNewUser(registerRequest.getUsername(), registerRequest.getPassword());
+        User user = userManager.addNewUser(registerRequest.getUsername(), registerRequest.getPassword(), registerRequest.getDisplayName());
 
         return RegisterResponse.builder().user(user).build();
     }
