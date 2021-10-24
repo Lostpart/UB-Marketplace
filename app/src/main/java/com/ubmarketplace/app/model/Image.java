@@ -10,7 +10,7 @@ import lombok.Setter;
 import org.apache.commons.lang3.RandomStringUtils;
 import org.springframework.data.annotation.Id;
 
-import java.time.Instant;
+import static com.ubmarketplace.app.Utils.getCurrentEpochMilli;
 
 @Getter
 @Setter
@@ -28,5 +28,5 @@ public class Image {
     @JsonIgnore
     private String uploadBy; // UserId
     @EqualsAndHashCode.Exclude @Builder.Default @JsonIgnore
-    private Long uploadTime = Instant.now().toEpochMilli();
+    private Long uploadTime = getCurrentEpochMilli();
 }

@@ -9,7 +9,7 @@ import lombok.Setter;
 import org.apache.commons.lang3.RandomStringUtils;
 import org.springframework.data.annotation.Id;
 
-import java.time.Instant;
+import static com.ubmarketplace.app.Utils.getCurrentEpochMilli;
 
 @Getter
 @Setter
@@ -28,5 +28,5 @@ public class Item {
     private String meetingPlace;
 
     @EqualsAndHashCode.Exclude @Builder.Default
-    private Long createdTime = Instant.now().toEpochMilli();
+    private Long createdTime = getCurrentEpochMilli();
 }
