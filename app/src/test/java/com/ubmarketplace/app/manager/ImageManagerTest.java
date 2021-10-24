@@ -47,7 +47,7 @@ public class ImageManagerTest {
     @Test
     public void GIVEN_ValidImage_WHEN_uploadAndInsertImage_THEN_returnImage(){
         Assertions.assertDoesNotThrow(() -> {
-            Image image = imageManager.uploadAndInsertImage(TEST_IMAGE_BASE64, TEST_USER_NAME_1);
+            Image image = imageManager.uploadAndInsertImage(TEST_IMAGE_BASE64, TEST_USER_NAME_1, true);
             System.out.printf("Image link for human verify (expired after 10 min): %s", image.getLarge());
         });
         // When testing locally, this could fail when you didn't set up environment variable ImgBBApiKey
