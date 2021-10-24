@@ -28,7 +28,7 @@ public class LoginController {
     @RequestMapping(value = "/api/login", method = RequestMethod.POST, produces="application/json;charset=UTF-8")
     public LoginResponse login(@RequestBody @Valid LoginRequest loginRequest) {
 
-        log.info(String.format("Recovering login request from %s", loginRequest.getUsername()));
+        log.info(String.format("Receiving login request from %s", loginRequest.getUsername()));
 
         boolean validPassword = userManager.loginVerification(loginRequest.getUsername(), loginRequest.getPassword());
 

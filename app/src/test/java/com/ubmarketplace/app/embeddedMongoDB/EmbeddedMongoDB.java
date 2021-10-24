@@ -13,8 +13,8 @@ import org.springframework.data.mongodb.core.MongoTemplate;
 
 import java.util.Random;
 
-import static com.ubmarketplace.app.Static.TEST_MONGO_DATABASE_NAME;
-import static com.ubmarketplace.app.Static.TEST_MONGO_URL;
+import static com.ubmarketplace.app.TestStatic.TEST_MONGO_DATABASE_NAME;
+import static com.ubmarketplace.app.TestStatic.TEST_MONGO_URL;
 
 public class EmbeddedMongoDB {
     // Just in case you need a backup plan, you can use this class to get an EmbeddedMongoDB

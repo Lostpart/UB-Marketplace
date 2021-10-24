@@ -11,13 +11,13 @@ import org.springframework.test.annotation.DirtiesContext;
 
 import java.security.InvalidParameterException;
 
-import static com.ubmarketplace.app.Static.TEST_ALWAYS_WRONG_PASSWORD;
-import static com.ubmarketplace.app.Static.TEST_PASSWORD_1;
-import static com.ubmarketplace.app.Static.TEST_PASSWORD_2;
-import static com.ubmarketplace.app.Static.TEST_PASSWORD_3;
-import static com.ubmarketplace.app.Static.TEST_USER_NAME_1;
-import static com.ubmarketplace.app.Static.TEST_USER_NAME_2;
-import static com.ubmarketplace.app.Static.TEST_USER_NAME_3;
+import static com.ubmarketplace.app.TestStatic.TEST_ALWAYS_WRONG_PASSWORD;
+import static com.ubmarketplace.app.TestStatic.TEST_PASSWORD_1;
+import static com.ubmarketplace.app.TestStatic.TEST_PASSWORD_2;
+import static com.ubmarketplace.app.TestStatic.TEST_PASSWORD_3;
+import static com.ubmarketplace.app.TestStatic.TEST_USER_NAME_1;
+import static com.ubmarketplace.app.TestStatic.TEST_USER_NAME_2;
+import static com.ubmarketplace.app.TestStatic.TEST_USER_NAME_3;
 @SpringBootTest
 @DirtiesContext(classMode = DirtiesContext.ClassMode.BEFORE_CLASS)
 public class UserManagerTest {
@@ -34,7 +34,7 @@ public class UserManagerTest {
     public void GIVEN_goodInput_WHEN_addNewUser_THEN_returnTrue(@Autowired UserRepository userRepository){
         User user = User.builder().username(TEST_USER_NAME_3).password(TEST_PASSWORD_3).build();
         usermanager.addNewUser(TEST_USER_NAME_3, TEST_PASSWORD_3);
-        Assertions.assertEquals(userRepository.findByUsername(TEST_USER_NAME_3), user);
+        Assertions.assertEquals(userRepository.findById(TEST_USER_NAME_3), user);
     }
 
     @Test

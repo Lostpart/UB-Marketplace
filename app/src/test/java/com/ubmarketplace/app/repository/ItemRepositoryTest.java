@@ -10,10 +10,10 @@ import org.springframework.test.annotation.DirtiesContext;
 import java.util.ArrayList;
 import java.util.List;
 
-import static com.ubmarketplace.app.Static.TEST_ITEM_ID_1;
-import static com.ubmarketplace.app.Static.TEST_ITEM_ID_2;
-import static com.ubmarketplace.app.Static.TEST_ITEM_NAME_1;
-import static com.ubmarketplace.app.Static.TEST_ITEM_NAME_2;
+import static com.ubmarketplace.app.TestStatic.TEST_ITEM_ID_1;
+import static com.ubmarketplace.app.TestStatic.TEST_ITEM_ID_2;
+import static com.ubmarketplace.app.TestStatic.TEST_ITEM_NAME_1;
+import static com.ubmarketplace.app.TestStatic.TEST_ITEM_NAME_2;
 
 @SpringBootTest
 @DirtiesContext(classMode = DirtiesContext.ClassMode.BEFORE_EACH_TEST_METHOD)
@@ -30,6 +30,8 @@ public class ItemRepositoryTest {
 
     @Test
     void GIVEN_validItem_WHEN_remove_THEN_removeFromDatabase() {
+        Assertions.assertDoesNotThrow(() -> itemRepository.insert(Item.builder().itemId(TEST_ITEM_ID_1)
+                .name(TEST_ITEM_NAME_1).build()));
         // If it doesn't fail, see as a success
         Assertions.assertDoesNotThrow(() -> itemRepository.remove(Item.builder().itemId(TEST_ITEM_ID_1).build()));
     }
@@ -51,11 +53,11 @@ public class ItemRepositoryTest {
     }
 
     @Test
-    void GIVEN_itemsInDatabase_WHEN_findByItemID_THEN_returnTheItem() {
+    void GIVEN_itemsInDatabase_WHEN_findById_THEN_returnTheItem() {
         Item item1 = Item.builder().itemId(TEST_ITEM_ID_1).name(TEST_ITEM_NAME_1).build();
         itemRepository.insert(item1);
         itemRepository.insert(Item.builder().itemId(TEST_ITEM_ID_2).name(TEST_ITEM_NAME_2).build());
 
-        Assertions.assertEquals(item1, itemRepository.findByItemID(TEST_ITEM_ID_1));
+        Assertions.assertEquals(item1, itemRepository.findById(TEST_ITEM_ID_1));
     }
 }

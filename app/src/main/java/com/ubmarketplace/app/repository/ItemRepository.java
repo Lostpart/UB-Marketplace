@@ -35,7 +35,7 @@ public class ItemRepository implements ItemDao {
     }
 
     @Override
-    public Item findByItemID(String itemId) {
+    public Item findById(String itemId) {
         return mongoTemplate.findById(itemId, Item.class);
     }
 }

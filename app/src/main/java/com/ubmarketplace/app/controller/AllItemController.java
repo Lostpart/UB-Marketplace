@@ -14,17 +14,16 @@ import java.util.List;
 public class AllItemController {
 
     final ItemManager itemManager;
-    final ItemRepository itemRepository;
 
     @Autowired
     public AllItemController(ItemManager itemManager, ItemRepository itemRepository) {
         this.itemManager = itemManager;
-        this.itemRepository = itemRepository;
     }
 
     @RequestMapping(value = "/api/allitem", method = RequestMethod.GET,produces = "application/json;charset=UTF-8")
     public List<Item>  response(){
 
+        // TODO: Remove no longer needed code
 //        ItemRepository itermre = new ItemRepository();
 //        JsonManager jsonManager = new JsonManager();
 //        ItemManager im = new ItemManager();
@@ -71,6 +70,10 @@ public class AllItemController {
 //        content = jsonManager.itemListToJsonString(items);
 
 
+        //TODO: After Item remove User object, consider include user information separately.
+        // For example: return a List of item, also a list of user information
+        // The list of user information should contain User object of those name is in List of item
+        // (Don't return the entire User table!)
         return itemManager.getAllItem();
     }
 

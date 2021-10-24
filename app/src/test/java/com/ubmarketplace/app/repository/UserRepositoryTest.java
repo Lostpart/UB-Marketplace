@@ -10,10 +10,10 @@ import org.springframework.test.annotation.DirtiesContext;
 import java.util.ArrayList;
 import java.util.List;
 
-import static com.ubmarketplace.app.Static.TEST_PASSWORD_1;
-import static com.ubmarketplace.app.Static.TEST_PASSWORD_2;
-import static com.ubmarketplace.app.Static.TEST_USER_NAME_1;
-import static com.ubmarketplace.app.Static.TEST_USER_NAME_2;
+import static com.ubmarketplace.app.TestStatic.TEST_PASSWORD_1;
+import static com.ubmarketplace.app.TestStatic.TEST_PASSWORD_2;
+import static com.ubmarketplace.app.TestStatic.TEST_USER_NAME_1;
+import static com.ubmarketplace.app.TestStatic.TEST_USER_NAME_2;
 
 @SpringBootTest
 @DirtiesContext(classMode = DirtiesContext.ClassMode.BEFORE_EACH_TEST_METHOD)
@@ -32,8 +32,12 @@ public class UserRepositoryTest {
 
     @Test
     void GIVEN_validUser_WHEN_remove_THEN_removeFromDatabase() {
+        userRepository.insert(User.builder()
+                .username(TEST_USER_NAME_1)
+                .password(TEST_PASSWORD_1)
+                .build());
         // If it doesn't fail, see as a success
-        Assertions.assertDoesNotThrow(() -> userRepository.insert(User.builder()
+        Assertions.assertDoesNotThrow(() -> userRepository.remove(User.builder()
                 .username(TEST_USER_NAME_1)
                 .build()));
     }
@@ -61,7 +65,7 @@ public class UserRepositoryTest {
     }
 
     @Test
-    void GIVEN_usersInDatabase_WHEN_findByItemID_THEN_returnTheItem() {
+    void GIVEN_usersInDatabase_WHEN_findById_THEN_returnTheItem() {
         User user1 = User.builder()
                 .username(TEST_USER_NAME_1)
                 .password(TEST_PASSWORD_1)
@@ -72,6 +76,6 @@ public class UserRepositoryTest {
                 .password(TEST_PASSWORD_2)
                 .build());
 
-        Assertions.assertEquals(user1, userRepository.findByUsername(TEST_USER_NAME_1));
+        Assertions.assertEquals(user1, userRepository.findById(TEST_USER_NAME_1));
     }
 }
