@@ -4,6 +4,10 @@ body {
     padding: 0;
 }
 
+.profile {
+    display: grid;
+}
+
 .content{
     margin:0;
     padding:0;
