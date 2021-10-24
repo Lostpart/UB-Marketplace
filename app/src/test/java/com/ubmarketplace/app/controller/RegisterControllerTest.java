@@ -11,7 +11,6 @@ import org.junit.jupiter.api.TestInstance;
 import org.mockito.Mock;
 import org.mockito.Mockito;
 import org.mockito.stubbing.Answer;
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.context.SpringBootTest;
 import org.springframework.test.annotation.DirtiesContext;
 
@@ -23,7 +22,6 @@ import static org.mockito.ArgumentMatchers.anyString;
 @DirtiesContext(classMode = DirtiesContext.ClassMode.BEFORE_CLASS)
 @TestInstance(TestInstance.Lifecycle.PER_CLASS)
 public class RegisterControllerTest {
-    @Autowired
     RegisterController registerController;
 
     @Mock
@@ -37,6 +35,7 @@ public class RegisterControllerTest {
                         .password(invocation.getArgument(1))
                         .build()
         );
+        registerController = new RegisterController(userManager);
     }
 
     @Test
@@ -45,6 +44,6 @@ public class RegisterControllerTest {
                 .username(TEST_USER_NAME_1)
                 .password(TEST_PASSWORD_1)
                 .build());
-        Assertions.assertEquals(response.getUser().getUsername(), TEST_USER_NAME_1);
+        Assertions.assertEquals(TEST_USER_NAME_1, response.getUser().getUsername());
     }
 }

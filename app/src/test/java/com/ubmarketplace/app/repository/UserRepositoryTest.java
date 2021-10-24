@@ -32,8 +32,12 @@ public class UserRepositoryTest {
 
     @Test
     void GIVEN_validUser_WHEN_remove_THEN_removeFromDatabase() {
+        userRepository.insert(User.builder()
+                .username(TEST_USER_NAME_1)
+                .password(TEST_PASSWORD_1)
+                .build());
         // If it doesn't fail, see as a success
-        Assertions.assertDoesNotThrow(() -> userRepository.insert(User.builder()
+        Assertions.assertDoesNotThrow(() -> userRepository.remove(User.builder()
                 .username(TEST_USER_NAME_1)
                 .build()));
     }
@@ -61,7 +65,7 @@ public class UserRepositoryTest {
     }
 
     @Test
-    void GIVEN_usersInDatabase_WHEN_findByItemID_THEN_returnTheItem() {
+    void GIVEN_usersInDatabase_WHEN_findById_THEN_returnTheItem() {
         User user1 = User.builder()
                 .username(TEST_USER_NAME_1)
                 .password(TEST_PASSWORD_1)
