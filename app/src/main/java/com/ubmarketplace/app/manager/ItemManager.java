@@ -9,7 +9,6 @@ import lombok.extern.java.Log;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
 
-import java.util.ArrayList;
 import java.util.List;
 
 @Singleton
@@ -22,8 +21,22 @@ public class ItemManager {
         this.itemRepository = itemRepository;
     }
 
-    public Item addNewItem(@NonNull String name, @NonNull User owner, @NonNull String description, @NonNull Double price, @NonNull ArrayList<String> imageFilepath, @NonNull String meetingPlace){
-        Item item = Item.builder().name(name).owner(owner).description(description).price(price).imageFilePath(imageFilepath).meetingPlace(meetingPlace).build();
+    public Item addNewItem(@NonNull String name,
+                           @NonNull User owner, //TODO: change this to `String userId`
+                           @NonNull String description,
+                           @NonNull Double price,
+                           @NonNull List<String> imageIds,
+                           @NonNull String meetingPlace){
+
+        Item item = Item.builder()
+                .name(name)
+                .owner(owner)
+                .description(description)
+                .price(price)
+                .images(imageIds)
+                .meetingPlace(meetingPlace)
+                .build();
+
         itemRepository.insert(item);
         return item;
     }

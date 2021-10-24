@@ -1,6 +1,9 @@
 package com.ubmarketplace.app;
 
+import com.google.common.collect.Lists;
 import com.ubmarketplace.app.model.Image;
+
+import java.util.ArrayList;
 
 public class TestStatic {
     final static public Long TEST_CURRENT_TIME = 1635051672000L;
@@ -21,7 +24,7 @@ public class TestStatic {
     final static public String TEST_ITEM_NAME_3 = "UnitTest_TestItem3";
     final static public String TEST_ITEM_DESCRIPTION_3 = "Laptop";
     final static public Double TEST_ITEM_PRICE_3 = 150.0;
-    final static public String TEST_ITEM_IMAGE_3 = "https://cdn.pixabay.com/photo/2014/05/02/21/49/laptop-336373_1280.jpg";
+    final static public ArrayList<String> TEST_ITEM_IMAGE_3 = Lists.newArrayList("https://images.unsplash.com/photo-1496181133206-80ce9b88a853?ixid=MnwxMjA3fDB8MHxzZWFyY2h8Mnx8bGFwdG9wfGVufDB8fDB8fA%3D%3D&ixlib=rb-1.2.1&auto=format&fit=crop&w=600&q=60", "https://images.unsplash.com/photo-1554415707-6e8cfc93fe23?ixid=MnwxMjA3fDB8MHxzZWFyY2h8M3x8bGFwdG9wfGVufDB8fDB8fA%3D%3D&ixlib=rb-1.2.1&auto=format&fit=crop&w=600&q=60");
     final static public String TEST_ITEM_MEETING_PLACE_3 = "Student Union";
 
     final static public String TEST_IMAGE_IMAGE_ID_1 = "IMGTestId01";

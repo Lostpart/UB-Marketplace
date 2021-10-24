@@ -70,6 +70,10 @@ public class AllItemController {
 //        content = jsonManager.itemListToJsonString(items);
 
 
+        //TODO: After Item remove User object, consider include user information separately.
+        // For example: return a List of item, also a list of user information
+        // The list of user information should contain User object of those name is in List of item
+        // (Don't return the entire User table!)
         return itemManager.getAllItem();
     }
 

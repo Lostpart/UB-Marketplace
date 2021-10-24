@@ -25,15 +25,16 @@ public class NewItemController {
      private NewItemResponse newItem(@RequestBody NewItemRequest newItemRequest){
         Item item = itemManager.addNewItem(
                 newItemRequest.getName(),
-                newItemRequest.getOwner(),
+                newItemRequest.getOwner(), //TODO: change this to `userId`
                 newItemRequest.getDescription(),
                 newItemRequest.getPrice(),
-                newItemRequest.getImageFilePath(),
+                newItemRequest.getImages(),
                 newItemRequest.getMeetingPlace());
 
         return NewItemResponse.builder().item(item).build();
     }
 
+    // TODO: Remove no longer needed code, use unit test for local test
     //For local test
     /*private NewItemResponse newItem(){
         List<String> images = new ArrayList<String>();
