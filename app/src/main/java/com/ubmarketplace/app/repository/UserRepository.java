@@ -35,8 +35,8 @@ public class UserRepository implements UserDao {
     }
 
     @Override
-    public User findByUsername(String username) {
-        return mongoTemplate.findById(username, User.class);
+    public User findById(String id) {
+        return mongoTemplate.findById(id, User.class);
     }
 
 }

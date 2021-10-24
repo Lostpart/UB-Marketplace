@@ -11,12 +11,21 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.context.SpringBootTest;
 import org.springframework.test.annotation.DirtiesContext;
 
-import java.security.InvalidParameterException;
 import java.util.ArrayList;
 import java.util.List;
 
-import static com.ubmarketplace.app.Static.*;
-import static com.ubmarketplace.app.Static.TEST_ITEM_NAME_1;
+import static com.ubmarketplace.app.TestStatic.TEST_ITEM_DESCRIPTION_3;
+import static com.ubmarketplace.app.TestStatic.TEST_ITEM_ID_1;
+import static com.ubmarketplace.app.TestStatic.TEST_ITEM_ID_2;
+import static com.ubmarketplace.app.TestStatic.TEST_ITEM_ID_3;
+import static com.ubmarketplace.app.TestStatic.TEST_ITEM_IMAGE_3;
+import static com.ubmarketplace.app.TestStatic.TEST_ITEM_MEETING_PLACE_3;
+import static com.ubmarketplace.app.TestStatic.TEST_ITEM_NAME_1;
+import static com.ubmarketplace.app.TestStatic.TEST_ITEM_NAME_2;
+import static com.ubmarketplace.app.TestStatic.TEST_ITEM_NAME_3;
+import static com.ubmarketplace.app.TestStatic.TEST_ITEM_PRICE_3;
+import static com.ubmarketplace.app.TestStatic.TEST_PASSWORD_3;
+import static com.ubmarketplace.app.TestStatic.TEST_USER_NAME_3;
 
 @SpringBootTest
 @DirtiesContext(classMode = DirtiesContext.ClassMode.BEFORE_CLASS)
@@ -33,7 +42,7 @@ public class ItemManagerTest {
 
     @Test
     public void GIVEN_goodInput_When_addNewItem_Then_returnTrue(@Autowired ItemRepository itemRepository, @Autowired UserRepository userRepository){
-        User TEST_ITEM_OWNER_3 = userRepository.findByUsername(TEST_USER_NAME_3);
+        User TEST_ITEM_OWNER_3 = userRepository.findById(TEST_USER_NAME_3);
         Item item = Item.builder().itemId(TEST_ITEM_ID_3).name(TEST_ITEM_NAME_3).owner(TEST_ITEM_OWNER_3).description(TEST_ITEM_DESCRIPTION_3).price(TEST_ITEM_PRICE_3).imageFilePath(TEST_ITEM_IMAGE_3).meetingPlace(TEST_ITEM_MEETING_PLACE_3).build();
 
         itemmanager.addNewItem(
@@ -45,7 +54,7 @@ public class ItemManagerTest {
                 TEST_ITEM_IMAGE_3,
                 TEST_ITEM_MEETING_PLACE_3
         );
-        Assertions.assertEquals(itemRepository.findByItemID(TEST_ITEM_ID_3), item);
+        Assertions.assertEquals(itemRepository.findById(TEST_ITEM_ID_3), item);
     }
     
     @Test

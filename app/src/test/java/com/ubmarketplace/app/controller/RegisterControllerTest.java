@@ -15,8 +15,8 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.context.SpringBootTest;
 import org.springframework.test.annotation.DirtiesContext;
 
-import static com.ubmarketplace.app.Static.TEST_PASSWORD_1;
-import static com.ubmarketplace.app.Static.TEST_USER_NAME_1;
+import static com.ubmarketplace.app.TestStatic.TEST_PASSWORD_1;
+import static com.ubmarketplace.app.TestStatic.TEST_USER_NAME_1;
 import static org.mockito.ArgumentMatchers.anyString;
 
 @SpringBootTest

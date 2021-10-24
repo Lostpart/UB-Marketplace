@@ -1,6 +1,6 @@
 package com.ubmarketplace.app;
 
-public class Static {
+public class TestStatic {
     final static public String TEST_USER_NAME_1 = "UnitTest_TestUser1@test.com";
     final static public String TEST_PASSWORD_1 = "0a446a38175032f569a8c63dfb7ca4a1a82a7a072cb22b8e5ae58d77447cec44"; //Before hash: GoodPassword
     final static public String TEST_USER_NAME_2 = "UnitTest_TestUser2@test.com";

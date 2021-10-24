@@ -30,7 +30,7 @@ public class UserManager {
 
         log.info(String.format("Verify login information for %s", username));
 
-        User user = userRepository.findByUsername(username);
+        User user = userRepository.findById(username);
 
         if (user == null) {
             log.info(String.format("Verify login information for %s, cannot find such user", username));

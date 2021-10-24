@@ -41,7 +41,7 @@ public class NewItemController {
         // newItem = "Added item is " + itemManager.addNewItem(itemId, name, owner, description, price, imageFilePath, meetingPlace, createdTime);
         //System.out.println(newItem);
 
-        User user1 = userRepository.findByUsername("kyle");
+        User user1 = userRepository.findById("kyle");
 
         Item item1 = new Item();
         item1.setItemId("3");

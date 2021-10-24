@@ -10,10 +10,10 @@ import org.springframework.test.annotation.DirtiesContext;
 import java.util.ArrayList;
 import java.util.List;
 
-import static com.ubmarketplace.app.Static.TEST_PASSWORD_1;
-import static com.ubmarketplace.app.Static.TEST_PASSWORD_2;
-import static com.ubmarketplace.app.Static.TEST_USER_NAME_1;
-import static com.ubmarketplace.app.Static.TEST_USER_NAME_2;
+import static com.ubmarketplace.app.TestStatic.TEST_PASSWORD_1;
+import static com.ubmarketplace.app.TestStatic.TEST_PASSWORD_2;
+import static com.ubmarketplace.app.TestStatic.TEST_USER_NAME_1;
+import static com.ubmarketplace.app.TestStatic.TEST_USER_NAME_2;
 
 @SpringBootTest
 @DirtiesContext(classMode = DirtiesContext.ClassMode.BEFORE_EACH_TEST_METHOD)
@@ -72,6 +72,6 @@ public class UserRepositoryTest {
                 .password(TEST_PASSWORD_2)
                 .build());
 
-        Assertions.assertEquals(user1, userRepository.findByUsername(TEST_USER_NAME_1));
+        Assertions.assertEquals(user1, userRepository.findById(TEST_USER_NAME_1));
     }
 }
