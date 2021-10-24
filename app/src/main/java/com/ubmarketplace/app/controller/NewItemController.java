@@ -1,60 +1,58 @@
 package com.ubmarketplace.app.controller;
 
+import com.ubmarketplace.app.dto.NewItemRequest;
+import com.ubmarketplace.app.dto.NewItemResponse;
 import com.ubmarketplace.app.manager.ItemManager;
-import com.ubmarketplace.app.manager.UserManager;
 import com.ubmarketplace.app.model.Item;
-import com.ubmarketplace.app.model.User;
-import com.ubmarketplace.app.repository.ItemRepository;
-import com.ubmarketplace.app.repository.UserRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
+import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
+
 
 @Controller
 public class NewItemController {
 
-    final UserRepository userRepository;
-    final UserManager userManager;
-    final ItemRepository itemRepository;
     final ItemManager itemManager;
 
     @Autowired
-    public NewItemController(UserRepository userRepository, UserManager userManager, ItemRepository itemRepository, ItemManager itemManager){
-        this.userRepository = userRepository;
-        this.userManager = userManager;
-        this.itemRepository = itemRepository;
-        this.itemManager = itemManager;}
-
-    @RequestMapping(value = "/newItem", method = RequestMethod.GET)
-    private String received(
-            /*@RequestParam(name = "itemId") String itemId,
-            @RequestParam(name = "name") String name,
-            @RequestParam(name = "owner") User owner,
-            @RequestParam(name = "description") String description,
-            @RequestParam(name = "price") Double price,
-            @RequestParam(name = "imageFilePath") String imageFilePath,
-            @RequestParam(name = "meetingPlace") String meetingPlace,
-            @RequestParam(name = "createdTime") Long createdTime*/
-            ){
-
-        // newItem = "Added item is " + itemManager.addNewItem(itemId, name, owner, description, price, imageFilePath, meetingPlace, createdTime);
-        //System.out.println(newItem);
-
-        User user1 = userRepository.findById("kyle");
-
-        Item item1 = new Item();
-        item1.setItemId("3");
-        item1.setDescription("This is a book");
-        item1.setCreatedTime((long) 12345);
-        item1.setName("Book");
-        item1.setMeetingPlace("North");
-        item1.setOwner(user1);
-        item1.setImageFilePath("http://");
-        item1.setPrice(25.0);
-        itemRepository.insert(item1);
-
-
-        return "redirect:/allitem";
+    public NewItemController(ItemManager itemManager){
+        this.itemManager = itemManager;
     }
+
+    @RequestMapping(value = "/api/newItem", method = RequestMethod.POST)
+     private NewItemResponse newItem(@RequestBody NewItemRequest newItemRequest){
+        Item item = itemManager.addNewItem(
+                newItemRequest.getName(),
+                newItemRequest.getOwner(),
+                newItemRequest.getDescription(),
+                newItemRequest.getPrice(),
+                newItemRequest.getImageFilePath(),
+                newItemRequest.getMeetingPlace());
+
+        return NewItemResponse.builder().item(item).build();
+    }
+
+    //For local test
+    /*private NewItemResponse newItem(){
+        List<String> images = new ArrayList<String>();
+        images.add("https://book1");
+        images.add("https://book2");
+        User owner = User.builder().username("kyle").build();
+
+        newItemRequest => it assumes that it receives new item data information from FE
+        NewItemRequest newItemRequest = new NewItemRequest("book", owner, "This is book", 10.0, images, "SU");
+
+
+        Item item = itemManager.addNewItem(
+                newItemRequest.getName(),
+                newItemRequest.getOwner(),
+                newItemRequest.getDescription(),
+                newItemRequest.getPrice(),
+                newItemRequest.getImageFilePath(),
+                newItemRequest.getMeetingPlace());
+
+        return NewItemResponse.builder().item(item).build();
+    }*/
 }
