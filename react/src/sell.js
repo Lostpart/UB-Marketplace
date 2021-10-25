@@ -14,14 +14,14 @@ class Sell extends React.Component {
             category: 'none',
             description: '',
             images: [],
-            locations: []
+            location: 'none'
         };
         this.changeName = this.changeName.bind(this);
         this.changePrice = this.changePrice.bind(this);
         this.changeCategory = this.changeCategory.bind(this);
         this.changeDescription = this.changeDescription.bind(this);
         this.uploadImage = this.uploadImage.bind(this);
-        this.changeLocations = this.changeLocations.bind(this);
+        this.changeLocation = this.changeLocation.bind(this);
     }
     
     changeName(event) {
@@ -78,14 +78,9 @@ class Sell extends React.Component {
         this.setState({ images: newImageList })
     }
 
-    changeLocations(event) {
-        let meetups = Array.from(
-            event.target.selectedOptions,
-            (option) => option.value
-        );
-        this.setState({
-            locations: meetups,
-        });
+    changeLocation(event) {
+        if (event.target.value === 'none') return;
+        this.setState({location: event.target.value});
     }
 
     handleSubmit(event) {
@@ -128,7 +123,7 @@ class Sell extends React.Component {
                     <label>
                         <div>Item Category</div>
                         <select name="category" value={this.state.category} onChange={this.changeCategory} required>
-                            <option value='none' disabled>Select</option>
+                            <option value='none' disabled>Select a Category...</option>
                             <option value="electronics">Electronics</option>
                             <option value="textbooks">Textbooks</option>
                             <option value="clothes">Clothes</option>
@@ -152,7 +147,8 @@ class Sell extends React.Component {
 
                     <label>
                         <div>Meetup Locations</div>
-                        <select name="locations" multiple value={this.state.locations} onChange={this.changeLocations}>
+                        <select name="locations" value={this.state.location} onChange={this.changeLocation} required>
+                            <option value='none' disabled>Select a Location...</option>
                             <option value='Natural Science Complex'>Natural Science Complex</option>
                             <option value='Capen'>Capen</option>
                             <option value='Norton'>Norton</option>
