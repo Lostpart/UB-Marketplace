@@ -22,7 +22,7 @@ public class ItemManager {
     }
 
     public Item addNewItem(@NonNull String name,
-                           @NonNull User owner, //TODO: change this to `String userId`
+                           @NonNull String userId, //TODO: change this to `String userId`
                            @NonNull String description,
                            @NonNull Double price,
                            @NonNull List<String> imageIds,
@@ -30,7 +30,7 @@ public class ItemManager {
 
         Item item = Item.builder()
                 .name(name)
-                .owner(owner)
+                .userId(userId)
                 .description(description)
                 .price(price)
                 .images(imageIds)

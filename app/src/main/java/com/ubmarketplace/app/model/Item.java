@@ -23,7 +23,7 @@ public class Item {
     @Id @Builder.Default
     private String itemId = RandomStringUtils.randomAlphanumeric(8).toLowerCase();
     private String name;
-    private User owner; //TODO: change this to String,that represent userId (a.k.a. username, email), so we don't keep two copy of User in database
+    private String userId; //TODO: change this to String,that represent userId (a.k.a. username, email), so we don't keep two copy of User in database
     private String description;
     private Double price;
     private List<String> images;
