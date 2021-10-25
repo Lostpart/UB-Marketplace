@@ -22,7 +22,7 @@ public class ItemManager {
     }
 
     public Item addNewItem(@NonNull String name,
-                           @NonNull String userId, //TODO: change this to `String userId`
+                           @NonNull String userId,
                            @NonNull String description,
                            @NonNull Double price,
                            @NonNull List<String> imageIds,
