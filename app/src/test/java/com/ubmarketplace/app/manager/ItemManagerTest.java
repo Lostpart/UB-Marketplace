@@ -42,10 +42,9 @@ public class ItemManagerTest {
 
     @Test
     public void GIVEN_goodInput_When_addNewItem_Then_returnTrue(@Autowired ItemRepository itemRepository, @Autowired UserRepository userRepository){
-        User TEST_ITEM_OWNER_3 = userRepository.findById(TEST_USER_NAME_3);
         Item item = itemmanager.addNewItem(
                 TEST_ITEM_NAME_3,
-                TEST_ITEM_OWNER_3,
+                TEST_USER_NAME_3,
                 TEST_ITEM_DESCRIPTION_3,
                 TEST_ITEM_PRICE_3,
                 TEST_ITEM_IMAGE_3,

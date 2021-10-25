@@ -19,7 +19,7 @@ public class NewItemRequest {
     @NotNull(message = "Itemname cannot be empty")
     private String name;
 
-    private User Owner; //TODO: change this to `String userId`, so FE only need to provide a userId (a.k.a username, email)
+    private String userId;
 
     @NotNull(message = "Description cannot be empty")
     private String description;
