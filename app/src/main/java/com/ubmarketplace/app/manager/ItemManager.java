@@ -2,14 +2,12 @@ package com.ubmarketplace.app.manager;
 
 import com.google.inject.Singleton;
 import com.ubmarketplace.app.model.Item;
-import com.ubmarketplace.app.model.User;
 import com.ubmarketplace.app.repository.ItemRepository;
 import lombok.NonNull;
 import lombok.extern.java.Log;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
 
-import javax.validation.constraints.NotNull;
 import java.util.List;
 
 @Singleton
@@ -24,7 +22,7 @@ public class ItemManager {
 
     public Item addNewItem(@NonNull String name,
                            @NonNull String userId,
-                           @NotNull String category,
+                           @NonNull String category,
                            @NonNull String description,
                            @NonNull Double price,
                            @NonNull List<String> imageIds,
