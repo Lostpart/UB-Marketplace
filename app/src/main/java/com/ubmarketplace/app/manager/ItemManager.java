@@ -9,6 +9,7 @@ import lombok.extern.java.Log;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
 
+import javax.validation.constraints.NotNull;
 import java.util.List;
 
 @Singleton
@@ -23,6 +24,7 @@ public class ItemManager {
 
     public Item addNewItem(@NonNull String name,
                            @NonNull String userId,
+                           @NotNull String category,
                            @NonNull String description,
                            @NonNull Double price,
                            @NonNull List<String> imageIds,
@@ -31,6 +33,7 @@ public class ItemManager {
         Item item = Item.builder()
                 .name(name)
                 .userId(userId)
+                .category(category)
                 .description(description)
                 .price(price)
                 .images(imageIds)

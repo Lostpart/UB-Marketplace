@@ -16,10 +16,13 @@ import java.util.ArrayList;
 @Builder
 @AllArgsConstructor
 public class NewItemRequest {
-    @NotNull(message = "Itemname cannot be empty")
+    @NotNull(message = "Item name cannot be empty")
     private String name;
 
     private String userId;
+
+    @NotNull(message = "Category cannot be empty")
+    private String category;
 
     @NotNull(message = "Description cannot be empty")
     private String description;

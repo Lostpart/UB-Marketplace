@@ -32,6 +32,7 @@ public class NewItemControllerTest {
         Item item = Item.builder().
                 name(TEST_ITEM_NAME_3).
                 userId(TEST_USER_NAME_3).
+                category(TEST_ITEM_CATEGORY_3).
                 description(TEST_ITEM_DESCRIPTION_3).
                 price(TEST_ITEM_PRICE_3).
                 images(TEST_ITEM_IMAGE_3).
@@ -41,6 +42,7 @@ public class NewItemControllerTest {
                 new NewItemRequest(
                         TEST_ITEM_NAME_3,
                         TEST_USER_NAME_3,
+                        TEST_ITEM_CATEGORY_3,
                         TEST_ITEM_DESCRIPTION_3,
                         TEST_ITEM_PRICE_3,
                         TEST_ITEM_IMAGE_3,

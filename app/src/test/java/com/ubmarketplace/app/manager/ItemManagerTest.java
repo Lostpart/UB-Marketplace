@@ -14,18 +14,7 @@ import org.springframework.test.annotation.DirtiesContext;
 import java.util.ArrayList;
 import java.util.List;
 
-import static com.ubmarketplace.app.TestStatic.TEST_ITEM_DESCRIPTION_3;
-import static com.ubmarketplace.app.TestStatic.TEST_ITEM_ID_1;
-import static com.ubmarketplace.app.TestStatic.TEST_ITEM_ID_2;
-import static com.ubmarketplace.app.TestStatic.TEST_ITEM_ID_3;
-import static com.ubmarketplace.app.TestStatic.TEST_ITEM_IMAGE_3;
-import static com.ubmarketplace.app.TestStatic.TEST_ITEM_MEETING_PLACE_3;
-import static com.ubmarketplace.app.TestStatic.TEST_ITEM_NAME_1;
-import static com.ubmarketplace.app.TestStatic.TEST_ITEM_NAME_2;
-import static com.ubmarketplace.app.TestStatic.TEST_ITEM_NAME_3;
-import static com.ubmarketplace.app.TestStatic.TEST_ITEM_PRICE_3;
-import static com.ubmarketplace.app.TestStatic.TEST_PASSWORD_3;
-import static com.ubmarketplace.app.TestStatic.TEST_USER_NAME_3;
+import static com.ubmarketplace.app.TestStatic.*;
 
 @SpringBootTest
 @DirtiesContext(classMode = DirtiesContext.ClassMode.BEFORE_CLASS)
@@ -45,6 +34,7 @@ public class ItemManagerTest {
         Item item = itemmanager.addNewItem(
                 TEST_ITEM_NAME_3,
                 TEST_USER_NAME_3,
+                TEST_ITEM_CATEGORY_3,
                 TEST_ITEM_DESCRIPTION_3,
                 TEST_ITEM_PRICE_3,
                 TEST_ITEM_IMAGE_3,
