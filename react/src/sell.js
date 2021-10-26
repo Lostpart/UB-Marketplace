@@ -109,7 +109,7 @@ class Sell extends React.Component {
                         headers: { 'Content-Type': 'application/json' },
                         body: JSON.stringify({ 
                             userId: email,
-                            Image: base64
+                            image: base64
                         })
                     };
                     fetch('/api/image/upload', imageRequestOptions)
@@ -156,7 +156,7 @@ class Sell extends React.Component {
                         meetingPlace: this.state.location
                      })
                 };
-                fetch('/api/newItem', requestOptions)
+                fetch('/api/newitem', requestOptions)
                     .then(response => {
                         if (response.status !== 200) {
                             handleAPIError(response);
