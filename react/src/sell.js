@@ -119,7 +119,7 @@ class Sell extends React.Component {
                                 resolve(null);
                             } else {
                                 response.json().then(data => {
-                                    resolve(data.Image.thumb);
+                                    resolve(data.image.thumb);
                                 });
                             }
                         })
