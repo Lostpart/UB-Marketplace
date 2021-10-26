@@ -1,11 +1,21 @@
-export function handleAPIError(response) {
+export function handleAPIError(response, ret=true) {
     const contentType = response.headers.get("content-type");
     if (contentType && contentType.indexOf("application/json") !== -1) {
-        return response.json().then(data => {
+        if (ret) {
+            return response.json().then(data => {
+                alert(data.message);
+            });
+        }
+        response.json().then(data => {
             alert(data.message);
         });
     } else {
-        return response.text().then(text => {
+        if (ret) {
+            return response.text().then(text => {
+                alert(text);
+            });
+        }
+        response.text().then(text => {
             alert(text);
         });
     }

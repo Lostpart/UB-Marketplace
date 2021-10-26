@@ -14,6 +14,7 @@ class Sell extends React.Component {
             category: 'none',
             description: '',
             images: [],
+            imageFiles: [],
             location: 'none'
         };
         this.changeName = this.changeName.bind(this);
@@ -22,6 +23,8 @@ class Sell extends React.Component {
         this.changeDescription = this.changeDescription.bind(this);
         this.uploadImage = this.uploadImage.bind(this);
         this.changeLocation = this.changeLocation.bind(this);
+
+        this.handleSubmit = this.handleSubmit.bind(this);
     }
     
     changeName(event) {
@@ -69,13 +72,22 @@ class Sell extends React.Component {
 
     uploadImage(event) {
         const file = event.target.files[0];
+        
         if (file.type.split('/')[0] !== 'image') {
             alert("Invalid file type!");
             return;
         }
+
+        if (file.size > 10000000) {
+            alert("Uploaded file is too big! Please upload a file less than 10MB");
+        }
         const objectURL = URL.createObjectURL(file);
         const newImageList = this.state.images.concat(objectURL);
-        this.setState({ images: newImageList })
+        const newImageFileList = this.state.imageFiles.concat(file);
+        this.setState({ 
+            images: newImageList,
+            imageFiles: newImageFileList 
+        })
     }
 
     changeLocation(event) {
@@ -85,13 +97,51 @@ class Sell extends React.Component {
 
     handleSubmit(event) {
         event.preventDefault();
+        const email = localStorage.getItem("email");
+        if (!email) {
+            alert("You must log in to list an item!");
+            return;
+        }
+        
+        let imageIds = [];
+        for (let file of this.state.imageFiles) {
+            const reader = new FileReader();
+            reader.readAsDataURL(file);
+            reader.onload = function () {
+                console.log(reader.result);
+                let base64 = reader.result.split('base64,')[1];
+                console.log(base64);
+                let imageRequestOptions = {
+                    method: 'POST',
+                    headers: { 'Content-Type': 'application/json' },
+                    body: JSON.stringify({ 
+                        'userId': email,
+                        'Image': base64
+                    })
+                };
+                fetch('/api/image/upload', imageRequestOptions)
+                    .then(response => {
+                        if (response.status !== 200) {
+                            handleAPIError(response, false);
+                        } else {
+                            response.json().then(data => {
+                                imageIds.append(data.Image.thumb);
+                            });
+                        }
+                });
+            };
+            reader.onerror = function (error) {
+                alert('Error: ', error);
+            };
+        }
+
         /*
         const requestOptions = {
             method: 'POST',
             headers: { 'Content-Type': 'application/json' },
             body: JSON.stringify({ 'hello': 'world' })
         };
-        fetch('/api/register', requestOptions)
+        fetch('/api/imaage/upload', requestOptions)
             .then(response => {
                 if (response.status !== 200) {
                     handleAPIError(response);
