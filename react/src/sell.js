@@ -135,21 +135,29 @@ class Sell extends React.Component {
             };
         }
 
-        /*
         const requestOptions = {
             method: 'POST',
             headers: { 'Content-Type': 'application/json' },
-            body: JSON.stringify({ 'hello': 'world' })
+            body: JSON.stringify({ 
+                'name': this.state.name,
+                'userId': email,
+                'category': this.state.category,
+                'description': this.state.description,
+                'price': parseFloat(this.state.price),
+                'images': imageIds,
+                'meetingPlace': this.state.location
+             })
         };
-        fetch('/api/imaage/upload', requestOptions)
+        fetch('/api/newItem', requestOptions)
             .then(response => {
                 if (response.status !== 200) {
                     handleAPIError(response);
                 } else {
-                    this.props.history.push('/login');
+                    response.json().then(data => {
+                        this.props.history.push(`/item/${data.itemId}`);
+                    });
                 }
             });
-        */
     }
     
     render() {
