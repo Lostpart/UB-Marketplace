@@ -24,6 +24,7 @@ class Sell extends React.Component {
         this.uploadImage = this.uploadImage.bind(this);
         this.changeLocation = this.changeLocation.bind(this);
 
+        this.getImages = this.getImages.bind(this);
         this.handleSubmit = this.handleSubmit.bind(this);
     }
     
@@ -95,7 +96,44 @@ class Sell extends React.Component {
         this.setState({location: event.target.value});
     }
 
-    handleSubmit(event) {
+    async getImages(email) {
+        let imagePromises = [];
+        for (let file of this.state.imageFiles) {
+            imagePromises.push(new Promise((resolve) => {
+                const reader = new FileReader();
+                reader.readAsDataURL(file);
+                reader.onload = function () {
+                    let base64 = reader.result.split('base64,')[1];
+                    let imageRequestOptions = {
+                        method: 'POST',
+                        headers: { 'Content-Type': 'application/json' },
+                        body: JSON.stringify({ 
+                            userId: email,
+                            Image: base64
+                        })
+                    };
+                    fetch('/api/image/upload', imageRequestOptions)
+                        .then(response => {
+                            if (response.status !== 200) {
+                                handleAPIError(response, false)
+                                resolve(null);
+                            } else {
+                                response.json().then(data => {
+                                    resolve(data.Image.thumb);
+                                });
+                            }
+                        })
+                };
+                reader.onerror = function (error) {
+                    alert('Error: ', error);
+                    resolve(null);
+                };
+            }));
+        }
+        return Promise.all(imagePromises);
+    }
+
+    async handleSubmit(event) {
         event.preventDefault();
         const email = localStorage.getItem("email");
         if (!email) {
@@ -103,61 +141,33 @@ class Sell extends React.Component {
             return;
         }
         
-        let imageIds = [];
-        for (let file of this.state.imageFiles) {
-            const reader = new FileReader();
-            reader.readAsDataURL(file);
-            reader.onload = function () {
-                console.log(reader.result);
-                let base64 = reader.result.split('base64,')[1];
-                console.log(base64);
-                let imageRequestOptions = {
+        this.getImages(email)
+            .then(imageIds => {
+                const requestOptions = {
                     method: 'POST',
                     headers: { 'Content-Type': 'application/json' },
                     body: JSON.stringify({ 
-                        'userId': email,
-                        'Image': base64
-                    })
+                        name: this.state.name,
+                        userId: email,
+                        category: this.state.category,
+                        description: this.state.description,
+                        price: parseFloat(this.state.price),
+                        images: imageIds,
+                        meetingPlace: this.state.location
+                     })
                 };
-                fetch('/api/image/upload', imageRequestOptions)
+                fetch('/api/newItem', requestOptions)
                     .then(response => {
                         if (response.status !== 200) {
-                            handleAPIError(response, false);
+                            handleAPIError(response);
                         } else {
                             response.json().then(data => {
-                                imageIds.append(data.Image.thumb);
+                                this.props.history.push(`/item/${data.itemId}`);
                             });
                         }
-                });
-            };
-            reader.onerror = function (error) {
-                alert('Error: ', error);
-            };
-        }
-
-        const requestOptions = {
-            method: 'POST',
-            headers: { 'Content-Type': 'application/json' },
-            body: JSON.stringify({ 
-                'name': this.state.name,
-                'userId': email,
-                'category': this.state.category,
-                'description': this.state.description,
-                'price': parseFloat(this.state.price),
-                'images': imageIds,
-                'meetingPlace': this.state.location
-             })
-        };
-        fetch('/api/newItem', requestOptions)
-            .then(response => {
-                if (response.status !== 200) {
-                    handleAPIError(response);
-                } else {
-                    response.json().then(data => {
-                        this.props.history.push(`/item/${data.itemId}`);
                     });
-                }
-            });
+            
+                })
     }
     
     render() {
