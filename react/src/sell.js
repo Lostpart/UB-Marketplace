@@ -156,7 +156,7 @@ class Sell extends React.Component {
                         meetingPlace: this.state.location
                      })
                 };
-                fetch('/api/newitem', requestOptions)
+                fetch('/api/newItem', requestOptions)
                     .then(response => {
                         if (response.status !== 200) {
                             handleAPIError(response);
