@@ -108,8 +108,8 @@ class Sell extends React.Component {
                         method: 'POST',
                         headers: { 'Content-Type': 'application/json' },
                         body: JSON.stringify({ 
-                            'userId': email,
-                            'Image': base64
+                            userId: email,
+                            Image: base64
                         })
                     };
                     fetch('/api/image/upload', imageRequestOptions)
@@ -147,13 +147,13 @@ class Sell extends React.Component {
                     method: 'POST',
                     headers: { 'Content-Type': 'application/json' },
                     body: JSON.stringify({ 
-                        'name': this.state.name,
-                        'userId': email,
-                        'category': this.state.category,
-                        'description': this.state.description,
-                        'price': parseFloat(this.state.price),
-                        'images': imageIds,
-                        'meetingPlace': this.state.location
+                        name: this.state.name,
+                        userId: email,
+                        category: this.state.category,
+                        description: this.state.description,
+                        price: parseFloat(this.state.price),
+                        images: imageIds,
+                        meetingPlace: this.state.location
                      })
                 };
                 fetch('/api/newItem', requestOptions)
