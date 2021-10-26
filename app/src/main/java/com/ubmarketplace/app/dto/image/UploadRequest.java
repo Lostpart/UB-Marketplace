@@ -21,7 +21,7 @@ public class UploadRequest {
 
     @NotNull(message = "Image cannot be empty")
     @Pattern(regexp="^([A-Za-z0-9+/]{4})*([A-Za-z0-9+/]{4}|[A-Za-z0-9+/]{3}=|[A-Za-z0-9+/]{2}==)$",
-            message = "Format incorrect: userId(Username) should be a buffalo.edu email")
+            message = "Format incorrect: Base64 format incorrect")
     @Length(max = 14000000, message = "Image should not larger then 10 Mb")
     private String image;
 }
