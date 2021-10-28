@@ -40,6 +40,19 @@ public class UserManager {
         return password.equals(user.getPassword());
     }
 
+    public User getUserByUserId(@NonNull String userId) {
+        if(userId.isEmpty()){
+            log.info("Empty userId when getUserByUserId");
+            throw new InvalidParameterException("Empty username or password");
+        }
+        User user = userRepository.findById(userId);
+        if (user == null){
+            log.warning(String.format("Error when get user information for user %s", userId));
+            throw new InvalidParameterException("Error when get user information");
+        }
+        return user;
+    }
+
     public User addNewUser(@NonNull String username, @NonNull String password){
         if(username.isEmpty() || password.isEmpty()){
             log.info(String.format("Empty username or password when creating new account for %s", username));

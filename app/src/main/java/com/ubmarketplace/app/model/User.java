@@ -18,7 +18,7 @@ import org.springframework.data.annotation.Id;
 @EqualsAndHashCode
 public class User {
     @Id
-    private String username;
+    private String username; // also known as userId (use "userId" and stop use "username")
     @JsonIgnore
     private String password;
 }
