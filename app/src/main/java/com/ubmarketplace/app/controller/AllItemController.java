@@ -48,7 +48,6 @@ public class AllItemController {
                         .meetingPlace(item.getMeetingPlace())
                         .createdTime(item.getCreatedTime())
                         .build())
-                .sorted((x,y) -> (int) (y.getCreatedTime() - x.getCreatedTime()))
                 .collect(Collectors.toList());
 
         return AllItemResponse.builder().item(response).build();
