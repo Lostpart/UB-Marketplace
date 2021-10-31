@@ -4,6 +4,7 @@ import com.ubmarketplace.app.dto.CategorizeItemRequest;
 import com.ubmarketplace.app.dto.CategorizeItemResponse;
 import com.ubmarketplace.app.manager.ImageManager;
 import com.ubmarketplace.app.manager.ItemManager;
+import com.ubmarketplace.app.manager.UserManager;
 import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.BeforeAll;
 import org.junit.jupiter.api.Test;
@@ -48,6 +49,8 @@ public class CategoryItemControllerTest {
     ImageManager imageManager;
     @Mock
     ItemManager itemManager;
+    @Mock
+    UserManager userManager;
 
     @BeforeAll
     public void setup() {
@@ -55,7 +58,7 @@ public class CategoryItemControllerTest {
         Mockito.when(imageManager.getThumbUrl(anyString())).thenReturn("Test Failed");
         Mockito.when(imageManager.getThumbUrl(eq(TEST_IMAGE_IMAGE_ID_1))).thenReturn(TEST_IMAGE_THUMB_1);
         Mockito.when(imageManager.getThumbUrl(eq(TEST_IMAGE_IMAGE_ID_2))).thenReturn(TEST_IMAGE_THUMB_2);
-        categoryItemController = new CategoryItemController(imageManager, itemManager);
+        categoryItemController = new CategoryItemController(imageManager, itemManager, userManager);
     }
 
     @Test
