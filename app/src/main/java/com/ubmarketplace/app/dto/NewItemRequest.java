@@ -20,8 +20,6 @@ public class NewItemRequest {
 
     private String userId;
 
-    private String displayName;
-
     @NotNull(message = "Category cannot be empty")
     private String category;
 

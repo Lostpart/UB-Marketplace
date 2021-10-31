@@ -26,7 +26,6 @@ public class NewItemController {
         Item item = itemManager.addNewItem(
                 newItemRequest.getName(),
                 newItemRequest.getUserId(),
-                newItemRequest.getDisplayName(),
                 newItemRequest.getCategory(),
                 newItemRequest.getDescription(),
                 newItemRequest.getPrice(),

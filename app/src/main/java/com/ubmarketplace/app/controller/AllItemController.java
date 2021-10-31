@@ -3,6 +3,7 @@ package com.ubmarketplace.app.controller;
 import com.ubmarketplace.app.dto.AllItemResponse;
 import com.ubmarketplace.app.manager.ImageManager;
 import com.ubmarketplace.app.manager.ItemManager;
+import com.ubmarketplace.app.manager.UserManager;
 import com.ubmarketplace.app.model.Item;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -17,11 +18,13 @@ public class AllItemController {
 
     final ImageManager imageManager;
     final ItemManager itemManager;
+    final UserManager userManager;
 
     @Autowired
-    public AllItemController(ImageManager imageManager, ItemManager itemManager) {
+    public AllItemController(ImageManager imageManager, ItemManager itemManager, UserManager userManager) {
         this.imageManager = imageManager;
         this.itemManager = itemManager;
+        this.userManager = userManager;
     }
 
     @RequestMapping(value = "/api/allitem", method = RequestMethod.GET,produces = "application/json;charset=UTF-8")
@@ -37,7 +40,7 @@ public class AllItemController {
                         .name(item.getName())
                         .owner(AllItemResponse.AllItemResponseItemOwner.builder()
                                 .username(item.getUserId())
-                                .displayName(item.getDisplayName()) // Todo: @Kevin add displayName once you merge displayName
+                                .displayName(userManager.getDiisplayName(item.getUserId()))
                                 .build())
                         .category(item.getCategory())
                         .description(item.getDescription())

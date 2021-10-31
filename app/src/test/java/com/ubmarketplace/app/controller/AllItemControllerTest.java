@@ -3,6 +3,7 @@ package com.ubmarketplace.app.controller;
 import com.ubmarketplace.app.dto.AllItemResponse;
 import com.ubmarketplace.app.manager.ImageManager;
 import com.ubmarketplace.app.manager.ItemManager;
+import com.ubmarketplace.app.manager.UserManager;
 import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.BeforeAll;
 import org.junit.jupiter.api.Test;
@@ -48,13 +49,16 @@ public class AllItemControllerTest {
     @Mock
     ItemManager itemManager;
 
+    @Mock
+    UserManager userManager;
+
     @BeforeAll
     public void setup() {
         Mockito.when(itemManager.getAllItem()).thenReturn(Arrays.asList(TEST_ITEM_4, TEST_ITEM_5));
         Mockito.when(imageManager.getThumbUrl(anyString())).thenReturn("Test Failed");
         Mockito.when(imageManager.getThumbUrl(eq(TEST_IMAGE_IMAGE_ID_1))).thenReturn(TEST_IMAGE_THUMB_1);
         Mockito.when(imageManager.getThumbUrl(eq(TEST_IMAGE_IMAGE_ID_2))).thenReturn(TEST_IMAGE_THUMB_2);
-        allItemController = new AllItemController(imageManager, itemManager);
+        allItemController = new AllItemController(imageManager, itemManager, userManager);
     }
 
     @Test

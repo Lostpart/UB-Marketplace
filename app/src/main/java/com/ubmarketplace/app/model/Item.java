@@ -24,7 +24,6 @@ public class Item {
     private String itemId = RandomStringUtils.randomAlphanumeric(8).toLowerCase();
     private String name;
     private String userId;
-    private String displayName;
     private String category;
     private String description;
     private Double price;

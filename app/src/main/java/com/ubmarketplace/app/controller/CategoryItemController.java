@@ -5,6 +5,7 @@ import com.ubmarketplace.app.dto.CategorizeItemRequest;
 import com.ubmarketplace.app.dto.CategorizeItemResponse;
 import com.ubmarketplace.app.manager.ImageManager;
 import com.ubmarketplace.app.manager.ItemManager;
+import com.ubmarketplace.app.manager.UserManager;
 import com.ubmarketplace.app.model.Item;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.RequestBody;
@@ -20,11 +21,13 @@ public class CategoryItemController {
 
     final ImageManager imageManager;
     final ItemManager itemManager;
+    final UserManager userManager;
 
     @Autowired
-    public CategoryItemController(ImageManager imageManager, ItemManager itemManager) {
+    public CategoryItemController(ImageManager imageManager, ItemManager itemManager, UserManager userManager) {
         this.imageManager = imageManager;
         this.itemManager = itemManager;
+        this.userManager = userManager;
     }
 
     @RequestMapping(value = "/api/categoryitem", method = RequestMethod.GET,produces = "application/json;charset=UTF-8")
@@ -40,7 +43,7 @@ public class CategoryItemController {
                         .name(item.getName())
                         .owner(CategorizeItemResponse.CategorizeItemResponseItemOwner.builder()
                                 .username(item.getUserId())
-                                .displayName(item.getDisplayName())
+                                .displayName(userManager.getDiisplayName(item.getUserId()))
                                 .build())
                         .category(item.getCategory())
                         .description(item.getDescription())
