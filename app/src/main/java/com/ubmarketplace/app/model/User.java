@@ -21,4 +21,5 @@ public class User {
     private String username; // also known as userId (use "userId" and stop use "username")
     @JsonIgnore
     private String password;
+    private String displayName;
 }

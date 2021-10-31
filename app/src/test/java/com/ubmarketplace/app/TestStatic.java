@@ -52,6 +52,7 @@ public class TestStatic {
     final static public Double TEST_ITEM_PRICE_3 = 150.0;
     final static public List<String> TEST_ITEM_IMAGE_3 = Lists.newArrayList("https://images.unsplash.com/photo-1496181133206-80ce9b88a853?ixid=MnwxMjA3fDB8MHxzZWFyY2h8Mnx8bGFwdG9wfGVufDB8fDB8fA%3D%3D&ixlib=rb-1.2.1&auto=format&fit=crop&w=600&q=60", "https://images.unsplash.com/photo-1554415707-6e8cfc93fe23?ixid=MnwxMjA3fDB8MHxzZWFyY2h8M3x8bGFwdG9wfGVufDB8fDB8fA%3D%3D&ixlib=rb-1.2.1&auto=format&fit=crop&w=600&q=60");
     final static public String TEST_ITEM_MEETING_PLACE_3 = TEST_ITEM_MEETING_PLACE_STUDENT_UNION;
+    final static public String TEST_ITEM_DISPLAYNAME_3 = "displayname3";
 
     final static public String TEST_ITEM_ID_4 = "c173278d";
     final static public String TEST_NAME_4 = "Test item 4";

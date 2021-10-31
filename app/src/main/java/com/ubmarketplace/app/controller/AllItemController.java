@@ -37,7 +37,7 @@ public class AllItemController {
                         .name(item.getName())
                         .owner(AllItemResponse.AllItemResponseItemOwner.builder()
                                 .username(item.getUserId())
-                                .displayName("No Display Name Yet, waiting code merge") // Todo: @Kevin add displayName once you merge displayName
+                                .displayName(item.getDisplayName()) // Todo: @Kevin add displayName once you merge displayName
                                 .build())
                         .category(item.getCategory())
                         .description(item.getDescription())

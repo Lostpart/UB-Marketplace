@@ -24,7 +24,7 @@ public class NewItemControllerTest {
 
     @BeforeAll
     static void setup(@Autowired UserRepository userRepository){
-        userRepository.insert(User.builder().username(TEST_USER_NAME_3).password(TEST_PASSWORD_3).build());
+        userRepository.insert(User.builder().username(TEST_USER_NAME_3).password(TEST_PASSWORD_3).displayName(TEST_ITEM_DISPLAYNAME_3).build());
     }
 
     @Test
@@ -32,6 +32,7 @@ public class NewItemControllerTest {
         Item item = Item.builder().
                 name(TEST_ITEM_NAME_3).
                 userId(TEST_USER_NAME_3).
+                displayName(TEST_ITEM_DISPLAYNAME_3).
                 category(TEST_ITEM_CATEGORY_3).
                 description(TEST_ITEM_DESCRIPTION_3).
                 price(TEST_ITEM_PRICE_3).
@@ -42,6 +43,7 @@ public class NewItemControllerTest {
                 new NewItemRequest(
                         TEST_ITEM_NAME_3,
                         TEST_USER_NAME_3,
+                        TEST_ITEM_DISPLAYNAME_3,
                         TEST_ITEM_CATEGORY_3,
                         TEST_ITEM_DESCRIPTION_3,
                         TEST_ITEM_PRICE_3,
@@ -52,6 +54,7 @@ public class NewItemControllerTest {
 
         Assertions.assertEquals(testItem.getName(), item.getName());
         Assertions.assertEquals(testItem.getUserId(), item.getUserId());
+        Assertions.assertEquals(testItem.getDisplayName(), item.getDisplayName());
         Assertions.assertEquals(testItem.getDescription(), item.getDescription());
         Assertions.assertEquals(testItem.getPrice(), item.getPrice());
         Assertions.assertEquals(testItem.getImages(), item.getImages());
