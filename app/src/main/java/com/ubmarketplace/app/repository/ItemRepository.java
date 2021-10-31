@@ -5,6 +5,8 @@ import com.ubmarketplace.app.dao.ItemDao;
 import com.ubmarketplace.app.model.Item;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.mongodb.core.MongoTemplate;
+import org.springframework.data.mongodb.core.query.Criteria;
+import org.springframework.data.mongodb.core.query.Query;
 import org.springframework.stereotype.Repository;
 
 import java.util.List;
@@ -37,5 +39,13 @@ public class ItemRepository implements ItemDao {
     @Override
     public Item findById(String itemId) {
         return mongoTemplate.findById(itemId, Item.class);
+    }
+
+
+    public List<Item> getCategorizeItem(String category){
+        Query query = new Query();
+        query.addCriteria(Criteria.where("category").is(category));
+        List<Item> result = mongoTemplate.find(query, Item.class);
+        return result;
     }
 }

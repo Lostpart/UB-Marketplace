@@ -24,7 +24,7 @@ public class NewItemControllerTest {
 
     @BeforeAll
     static void setup(@Autowired UserRepository userRepository){
-        userRepository.insert(User.builder().username(TEST_USER_NAME_3).password(TEST_PASSWORD_3).build());
+        userRepository.insert(User.builder().username(TEST_USER_NAME_3).password(TEST_PASSWORD_3).displayName(TEST_ITEM_DISPLAYNAME_3).build());
     }
 
     @Test

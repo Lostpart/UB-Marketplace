@@ -29,10 +29,11 @@ public class RegisterControllerTest {
 
     @BeforeAll
     public void setup() {
-        Mockito.when(userManager.addNewUser(anyString(), anyString())).thenAnswer(
+        Mockito.when(userManager.addNewUser(anyString(), anyString(), anyString())).thenAnswer(
                 (Answer<User>) invocation -> User.builder()
                         .username(invocation.getArgument(0))
                         .password(invocation.getArgument(1))
+                        .displayName(invocation.getArgument(2))
                         .build()
         );
         registerController = new RegisterController(userManager);
@@ -43,6 +44,7 @@ public class RegisterControllerTest {
         RegisterResponse response = registerController.register(RegisterRequest.builder()
                 .username(TEST_USER_NAME_1)
                 .password(TEST_PASSWORD_1)
+                .displayName("Displayname")
                 .build());
         Assertions.assertEquals(TEST_USER_NAME_1, response.getUser().getUsername());
     }

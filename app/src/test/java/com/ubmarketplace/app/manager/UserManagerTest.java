@@ -33,8 +33,8 @@ public class UserManagerTest {
     @Test
     public void GIVEN_goodInput_WHEN_addNewUser_THEN_returnTrue(@Autowired UserRepository userRepository){
         User user = User.builder().username(TEST_USER_NAME_3).password(TEST_PASSWORD_3).build();
-        usermanager.addNewUser(TEST_USER_NAME_3, TEST_PASSWORD_3);
-        Assertions.assertEquals(userRepository.findById(TEST_USER_NAME_3), user);
+        usermanager.addNewUser(TEST_USER_NAME_3, TEST_PASSWORD_3, "DisplayName");
+        Assertions.assertEquals(userRepository.findById(TEST_USER_NAME_3).getUsername(), user.getUsername());
     }
 
     @Test

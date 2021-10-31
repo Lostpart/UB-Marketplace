@@ -11,6 +11,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.context.SpringBootTest;
 import org.springframework.test.annotation.DirtiesContext;
 
+import java.security.InvalidParameterException;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -59,6 +60,19 @@ public class ItemManagerTest {
         for(Item item : result){
             Assertions.assertTrue(validItemId.contains(item.getItemId()));
         }
+    }
+
+    @Test
+    public void Remove_Item_THEN_returnTrue(@Autowired ItemRepository itemRepository){
+        Assertions.assertEquals(itemmanager.deleteItem(TEST_ITEM_ID_1), true);
+        itemRepository.insert(Item.builder().itemId(TEST_ITEM_ID_1).name(TEST_ITEM_NAME_1).build());
+
+    }
+
+    @Test
+    public void Remove_ItemTwice_THEN_returnTrue(@Autowired ItemRepository itemRepository){
+        Assertions.assertEquals(itemmanager.deleteItem(TEST_ITEM_ID_1), true);
+        Assertions.assertThrows(InvalidParameterException.class, () -> itemmanager.deleteItem(TEST_ITEM_ID_1));
     }
 
 }

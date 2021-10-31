@@ -2,8 +2,11 @@ package com.ubmarketplace.app;
 
 import com.google.common.collect.Lists;
 import com.ubmarketplace.app.model.Image;
+import com.ubmarketplace.app.model.Item;
 
-import java.util.ArrayList;
+import java.util.Arrays;
+import java.util.Collections;
+import java.util.List;
 
 public class TestStatic {
     final static public Long TEST_CURRENT_TIME = 1635051672000L;
@@ -15,18 +18,6 @@ public class TestStatic {
     final static public String TEST_USER_NAME_3 = "UnitTest_TestUser3@test.com";
     final static public String TEST_PASSWORD_3 = "70a44f128682264f16d291c6ff938974f6534f098c173278d940d43d71b45c84"; //Before hash: GoodPassword3
     final static public String TEST_ALWAYS_WRONG_PASSWORD = "ac606172c5011f97569a0b7960ae344e7d76d7b93eee312839b44694ccebcadd"; //Before hash: BadPassword
-
-    final static public String TEST_ITEM_ID_1 = "55188c206c4e44e6977f75631a55c047";
-    final static public String TEST_ITEM_NAME_1 = "UnitTest_TestItem1";
-    final static public String TEST_ITEM_ID_2 = "68c8cd3624f94fd684c3ca7899731403";
-    final static public String TEST_ITEM_NAME_2 = "UnitTest_TestItem2";
-    final static public String TEST_ITEM_ID_3 = "7b686b06e46b41c6998a1c120b966365";
-    final static public String TEST_ITEM_NAME_3 = "UnitTest_TestItem3";
-    final static public String TEST_ITEM_CATEGORY_3 = "Electronic";
-    final static public String TEST_ITEM_DESCRIPTION_3 = "Laptop";
-    final static public Double TEST_ITEM_PRICE_3 = 150.0;
-    final static public ArrayList<String> TEST_ITEM_IMAGE_3 = Lists.newArrayList("https://images.unsplash.com/photo-1496181133206-80ce9b88a853?ixid=MnwxMjA3fDB8MHxzZWFyY2h8Mnx8bGFwdG9wfGVufDB8fDB8fA%3D%3D&ixlib=rb-1.2.1&auto=format&fit=crop&w=600&q=60", "https://images.unsplash.com/photo-1554415707-6e8cfc93fe23?ixid=MnwxMjA3fDB8MHxzZWFyY2h8M3x8bGFwdG9wfGVufDB8fDB8fA%3D%3D&ixlib=rb-1.2.1&auto=format&fit=crop&w=600&q=60");
-    final static public String TEST_ITEM_MEETING_PLACE_3 = "Student Union";
 
     final static public String TEST_IMAGE_IMAGE_ID_1 = "IMGTestId01";
     final static public String TEST_IMAGE_THUMB_1 = "https://i.ibb.co/vmqm7fP/41bdffe1324e.png"; // Sample Image
@@ -45,6 +36,61 @@ public class TestStatic {
     final static public Long TEST_IMAGE_UPLOAD_TIME_2 = TEST_CURRENT_TIME;
     final static public Image TEST_IMAGE_2 = new Image(TEST_IMAGE_IMAGE_ID_2, TEST_IMAGE_THUMB_2, TEST_IMAGE_MEDIUM_2,
             TEST_IMAGE_LARGE_2, TEST_IMAGE_UPLOAD_BY_2, TEST_IMAGE_UPLOAD_TIME_2);
+
+    final static public String TEST_ITEM_CATEGORY_ELECTRONIC = "Electronic";
+    final static public String TEST_ITEM_MEETING_PLACE_STUDENT_UNION = "Student Union";
+    final static public String TEST_ITEM_MEETING_PLACE_KNOX = "Knox";
+
+    final static public String TEST_ITEM_ID_1 = "55188c206c4e44e6977f75631a55c047";
+    final static public String TEST_ITEM_NAME_1 = "UnitTest_TestItem1";
+    final static public String TEST_ITEM_ID_2 = "68c8cd3624f94fd684c3ca7899731403";
+    final static public String TEST_ITEM_NAME_2 = "UnitTest_TestItem2";
+    final static public String TEST_ITEM_ID_3 = "7b686b06e46b41c6998a1c120b966365";
+    final static public String TEST_ITEM_NAME_3 = "UnitTest_TestItem3";
+    final static public String TEST_ITEM_CATEGORY_3 = TEST_ITEM_CATEGORY_ELECTRONIC;
+    final static public String TEST_ITEM_DESCRIPTION_3 = "Laptop";
+    final static public Double TEST_ITEM_PRICE_3 = 150.0;
+    final static public List<String> TEST_ITEM_IMAGE_3 = Lists.newArrayList("https://images.unsplash.com/photo-1496181133206-80ce9b88a853?ixid=MnwxMjA3fDB8MHxzZWFyY2h8Mnx8bGFwdG9wfGVufDB8fDB8fA%3D%3D&ixlib=rb-1.2.1&auto=format&fit=crop&w=600&q=60", "https://images.unsplash.com/photo-1554415707-6e8cfc93fe23?ixid=MnwxMjA3fDB8MHxzZWFyY2h8M3x8bGFwdG9wfGVufDB8fDB8fA%3D%3D&ixlib=rb-1.2.1&auto=format&fit=crop&w=600&q=60");
+    final static public String TEST_ITEM_MEETING_PLACE_3 = TEST_ITEM_MEETING_PLACE_STUDENT_UNION;
+    final static public String TEST_ITEM_DISPLAYNAME_3 = "displayname3";
+
+    final static public String TEST_ITEM_ID_4 = "c173278d";
+    final static public String TEST_NAME_4 = "Test item 4";
+    final static public String TEST_ITEM_USER_ID_4 = TEST_USER_NAME_1;
+    final static public String TEST_ITEM_CATEGORY_4 = TEST_ITEM_CATEGORY_ELECTRONIC;
+    final static public String TEST_ITEM_DESCRIPTION_4 = "Test item 4 description";
+    final static public Double TEST_ITEM_PRICE_4 = 43.25;
+    final static public List<String> TEST_ITEM_IMAGE_4 = Arrays.asList(TEST_IMAGE_IMAGE_ID_1, TEST_IMAGE_IMAGE_ID_2);
+    final static public String TEST_ITEM_MEETING_PLACE_4 = TEST_ITEM_MEETING_PLACE_STUDENT_UNION;
+    final static public Item TEST_ITEM_4 = Item.builder()
+            .itemId(TEST_ITEM_ID_4)
+            .name(TEST_NAME_4)
+            .userId(TEST_ITEM_USER_ID_4)
+            .category(TEST_ITEM_CATEGORY_4)
+            .description(TEST_ITEM_DESCRIPTION_4)
+            .price(TEST_ITEM_PRICE_4)
+            .images(TEST_ITEM_IMAGE_4)
+            .meetingPlace(TEST_ITEM_MEETING_PLACE_4)
+            .build();
+
+    final static public String TEST_ITEM_ID_5 = "a8cfdc34";
+    final static public String TEST_NAME_5 = "Test item 5";
+    final static public String TEST_ITEM_USER_ID_5 = TEST_USER_NAME_2;
+    final static public String TEST_ITEM_CATEGORY_5 = TEST_ITEM_CATEGORY_ELECTRONIC;
+    final static public String TEST_ITEM_DESCRIPTION_5 = "Test item 5 description";
+    final static public Double TEST_ITEM_PRICE_5 = 17.96;
+    final static public List<String> TEST_ITEM_IMAGE_5 = Collections.singletonList(TEST_IMAGE_IMAGE_ID_2);
+    final static public String TEST_ITEM_MEETING_PLACE_5 = TEST_ITEM_MEETING_PLACE_KNOX;
+    final static public Item TEST_ITEM_5 = Item.builder()
+            .itemId(TEST_ITEM_ID_5)
+            .name(TEST_NAME_5)
+            .userId(TEST_ITEM_USER_ID_5)
+            .category(TEST_ITEM_CATEGORY_5)
+            .description(TEST_ITEM_DESCRIPTION_5)
+            .price(TEST_ITEM_PRICE_5)
+            .images(TEST_ITEM_IMAGE_5)
+            .meetingPlace(TEST_ITEM_MEETING_PLACE_5)
+            .build();
 
     final static public String TEST_IMAGE_IMAGE_ID_INVALID = "BadImageId";
 
