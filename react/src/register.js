@@ -7,10 +7,11 @@ import React from 'react';
 class Register extends React.Component {
     constructor(props) {
         super(props);
-        this.state = {username: '', password: ''};
+        this.state = {username: '', password: '', displayName: '', confirm: ''};
         this.changeUsername = this.changeUsername.bind(this);
         this.changePassword = this.changePassword.bind(this);
         this.changeConfirm = this.changeConfirm.bind(this);
+        this.changeDisplayName = this.changeDisplayName.bind(this);
         this.handleSubmit = this.handleSubmit.bind(this);
     }
     
@@ -26,6 +27,10 @@ class Register extends React.Component {
         this.setState({confirm: event.target.value})
     }
 
+    changeDisplayName(event) {
+        this.setState({displayName: event.target.value})
+    }
+
     handleSubmit(event) {
         event.preventDefault();
         if (this.state.password !== this.state.confirm) {
@@ -39,7 +44,7 @@ class Register extends React.Component {
         const requestOptions = {
             method: 'POST',
             headers: { 'Content-Type': 'application/json' },
-            body: JSON.stringify({ username: this.state.username, password: sha256(this.state.password) })
+            body: JSON.stringify({ username: this.state.username, password: sha256(this.state.password), displayName: this.state.displayName })
         };
         fetch('/api/register', requestOptions)
             .then(response => {
@@ -59,6 +64,8 @@ class Register extends React.Component {
                     <form onSubmit={this.handleSubmit}>
                         <label for="username">Email</label>
                         <input type="text" name="username" value={this.state.username} onChange={this.changeUsername} />
+                        <label for="displayName">Username</label>
+                        <input type="text" name="displayName" value={this.state.displayName} onChange={this.changeDisplayName} />
                         <label for="password">Password</label>
                         <input type="password" name="password" value={this.state.password} onChange={this.changePassword} />
                         <label for="confirm">Confirm Password</label>
