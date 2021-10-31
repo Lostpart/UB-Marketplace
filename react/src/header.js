@@ -1,9 +1,8 @@
 import {Link} from "react-router-dom";
-
 function Header() {
     return (
-        <div className="header">
-            <p className="title">UB Marketplace</p>
+        <Link className="header">
+            <p className="title"><Link to="">UB Marketplace</Link></p>
             <div className="dropdown">
                 <button className="dropbtn">Profile</button>
                 <div className="dropdown-content">
@@ -11,7 +10,7 @@ function Header() {
                     <Link to="/profile">View Profile</Link>
                 </div>
             </div>
-        </div>
+        </Link>
     )
 }
 

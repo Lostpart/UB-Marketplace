@@ -7,6 +7,8 @@ import Item_Detail from './item_detail';
 import {Route, Switch, HashRouter} from "react-router-dom"
 import Register from './register';
 import Sell from './sell';
+import Listing from './listing';
+
 
 function App() {
   return (
@@ -18,6 +20,7 @@ function App() {
           <Route path="/register" component={Register} />
           <Route path="/sell" component={Sell} />
           <Route path="/item" component={Item_Detail} />
+          <Route path="/listing" component={Listing} />
         </Switch>
       </HashRouter>
   );

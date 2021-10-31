@@ -22,6 +22,14 @@ class item_detail extends Component{
             }
 
         };
+        /*actual api fetch function once insert item gets finished*/
+        // fetch('/api/allitem',requestOptions)
+        //     .then(res=>res.json())
+        //     .then(data=>{
+        //         this.setState({
+        //             isLoaded: true,
+        //             items: data})
+        //     })
 
         fetch('http://ubmarketplace-develop.herokuapp.com/api/allitem',requestOptions)
             .then(res=>{
