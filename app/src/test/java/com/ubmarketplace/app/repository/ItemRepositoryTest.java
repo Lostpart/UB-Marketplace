@@ -60,4 +60,20 @@ public class ItemRepositoryTest {
 
         Assertions.assertEquals(item1, itemRepository.findById(TEST_ITEM_ID_1));
     }
+
+
+    @Test
+    void GIVEN_itemsInDatabase_WHEN_findcategorize_THEN_findAllcategorizeItems() {
+        itemRepository.insert(Item.builder().itemId(TEST_ITEM_ID_1).name(TEST_ITEM_NAME_1).category("Book").build());
+        itemRepository.insert(Item.builder().itemId(TEST_ITEM_ID_2).name(TEST_ITEM_NAME_2).category("Car").build());
+
+        List<String> validItemId = new ArrayList<String>(){{
+            add(TEST_ITEM_ID_1);
+        }};
+
+        List<Item> result = itemRepository.getCategorizeItem("Book");
+        for(Item item : result){
+            Assertions.assertTrue(validItemId.contains(item.getItemId()));
+        }
+    }
 }

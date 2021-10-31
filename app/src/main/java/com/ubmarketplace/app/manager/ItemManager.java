@@ -70,4 +70,9 @@ public class ItemManager {
         }
 
     }
+
+
+    public List<Item> getCategoryItem(String category) {
+        return itemRepository.getCategorizeItem(category);
+    }
 }
