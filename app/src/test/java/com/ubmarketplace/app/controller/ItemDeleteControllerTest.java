@@ -17,8 +17,7 @@ import org.springframework.test.annotation.DirtiesContext;
 
 import java.security.InvalidParameterException;
 
-import static com.ubmarketplace.app.Static.*;
-import static com.ubmarketplace.app.Static.TEST_PASSWORD_3;
+import static com.ubmarketplace.app.TestStatic.*;
 
 @SpringBootTest
 @DirtiesContext(classMode = DirtiesContext.ClassMode.BEFORE_CLASS)

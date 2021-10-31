@@ -25,6 +25,7 @@ public class ItemManager {
 
     public Item addNewItem(@NonNull String name,
                            @NonNull String userId,
+                           @NonNull String displayName,
                            @NonNull String category,
                            @NonNull String description,
                            @NonNull Double price,
@@ -34,6 +35,7 @@ public class ItemManager {
         Item item = Item.builder()
                 .name(name)
                 .userId(userId)
+                .displayName(displayName)
                 .category(category)
                 .description(description)
                 .price(price)
@@ -52,7 +54,7 @@ public class ItemManager {
 
 
     public Boolean deleteItem(@NotNull String itemID){
-        Item find = itemRepository.findByItemID(itemID);
+        Item find = itemRepository.findById(itemID);
 
         if (find == null){
             throw new InvalidParameterException("No such item");

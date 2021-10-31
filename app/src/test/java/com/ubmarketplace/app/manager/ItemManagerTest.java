@@ -11,6 +11,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.context.SpringBootTest;
 import org.springframework.test.annotation.DirtiesContext;
 
+import java.security.InvalidParameterException;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -34,6 +35,7 @@ public class ItemManagerTest {
         Item item = itemmanager.addNewItem(
                 TEST_ITEM_NAME_3,
                 TEST_USER_NAME_3,
+                TEST_ITEM_DISPLAYNAME_3,
                 TEST_ITEM_CATEGORY_3,
                 TEST_ITEM_DESCRIPTION_3,
                 TEST_ITEM_PRICE_3,
