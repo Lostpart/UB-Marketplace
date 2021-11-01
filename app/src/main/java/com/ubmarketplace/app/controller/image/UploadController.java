@@ -6,6 +6,7 @@ import com.ubmarketplace.app.manager.ImageManager;
 import com.ubmarketplace.app.model.Image;
 import lombok.extern.java.Log;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.validation.annotation.Validated;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
@@ -15,6 +16,7 @@ import javax.validation.Valid;
 
 @RestController
 @Log
+@Validated
 public class UploadController {
     final ImageManager imageManager;
 
