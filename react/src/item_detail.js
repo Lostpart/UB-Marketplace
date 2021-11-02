@@ -4,16 +4,20 @@ import './item_detail.css';
 import { handleAPIError } from "./errors";
 
 
-class item_detail extends Component{
+class Item_Detail extends Component{
     constructor(props) {
         super();
         this.state ={
             item: null,
             relatedItems: null,
+            id: null
         }
     }
     componentDidMount() {
         const id = this.props.match.params.id;
+        this.setState({
+            id: id
+        })
         const requestOptions = {
             method: "GET",
             headers: {
@@ -29,7 +33,7 @@ class item_detail extends Component{
                     /*
                     this.setState({
                         item: {"itemId":"0",
-                        "name":"Item Name1",
+                        "name":`Item Name ${id}`,
                         "owner":{"username":"abc@buffalo.edu","password":"123456"},
                         "description":"Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry's standard dummy text ever since the 1500s, when an unknown printer took a galley of type and scrambled it to make a type specimen book. It has survived not only five centuries, but also the leap into electronic typesetting, remaining essentially unchanged. It was popularised in the 1960s with the release of Letraset sheets containing Lorem Ipsum passages, and more recently with desktop publishing software like Aldus PageMaker including versions of Lorem Ipsum.",
                         "price":25.0,
@@ -78,9 +82,9 @@ class item_detail extends Component{
 
         const related = relatedItems ? relatedItems.map(item=>(
             <div className="itemImg">
-                <Link to={'/item/'+item.itemId.toString()}>
+                <a href={'#/item/'+item.itemId.toString()} target="_blank">
                     <img src={item.images[0]} alt={item.name} />
-                </Link>
+                </a>
                 <p>{item.name}</p>
                 <p>${item.price}</p>
             </div>
@@ -141,4 +145,4 @@ class item_detail extends Component{
     }
 }
 
-export default item_detail;
+export default Item_Detail;
