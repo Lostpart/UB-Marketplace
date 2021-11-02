@@ -43,9 +43,20 @@ class item_detail extends Component{
 
     render() {
         let{item,relatedItems} = this.state;
-        {/*show only 5 related products to load faster*/}
+        /*show only 5 related products to load faster*/
+
+        const related = relatedItems ? relatedItems.map(item=>(
+            <div className="itemImg">
+                <a href="/#/item">
+                    <img src={item.images[0]} alt={item.name} />
+                </a>
+                <p>{item.name}</p>
+                <p>${item.price}</p>
+            </div>
+        )) : null;
 
         return (
+            
             <div className="home">
                 <div className="header">
                     <Link to="/">
@@ -91,26 +102,14 @@ class item_detail extends Component{
                 : 
                     <p>Loading...</p>
                 }
-                
-                
-
-                    { relatedItems ? 
-                        <div className="relatedList">
-                            {relatedItems = relatedItems.slice(0,5)}
-                            <div className="relatedItems">
-                                <h3>Related Items</h3>
-                            </div>
-                            {relatedItems.map(item=>(
-                                <div className="itemImg">
-                                    <a href="/#/item">
-                                        <img src={item.images[0]} alt={item.name} />
-                                    </a>
-                                    <p>{item.name}</p>
-                                    <p>${item.price}</p>
-                                </div>
-                            ))} 
+                { related ? 
+                    <div className="relatedList">
+                        <div className="relatedItems">
+                            <h3>Related Items</h3>
                         </div>
-                    : '' }
+                        {related}
+                    </div>
+                : '' }
                 
 
             </div>
