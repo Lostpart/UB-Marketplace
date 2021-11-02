@@ -84,8 +84,7 @@ class home extends Component{
                         <Carousel  show={5} infiniteLoop>
                             {items.map(item=>(
                                 <div className="itemImg">
-                                    {/*link needs to be uuid ex) item.uuid */}
-                                    <Link to={"/item" + item.itemId}>
+                                    <Link to={"/item/" + item.itemId}>
                                         <img src={item.images} alt={item.name}/>
                                     </Link>
                                     <p>{item.name}</p>
