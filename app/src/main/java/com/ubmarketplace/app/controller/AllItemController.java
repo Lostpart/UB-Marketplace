@@ -39,7 +39,7 @@ public class AllItemController {
                         .itemId(item.getItemId())
                         .name(item.getName())
                         .owner(AllItemResponse.AllItemResponseItemOwner.builder()
-                                .username(item.getUserId())
+                                .userId(item.getUserId())
                                 .displayName(userManager.getDiisplayName(item.getUserId()))
                                 .build())
                         .category(item.getCategory())

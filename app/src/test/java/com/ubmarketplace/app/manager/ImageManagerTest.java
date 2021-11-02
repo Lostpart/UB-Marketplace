@@ -20,7 +20,7 @@ import static com.ubmarketplace.app.TestStatic.TEST_IMAGE_IMAGE_ID_INVALID;
 import static com.ubmarketplace.app.TestStatic.TEST_IMAGE_LARGE_1;
 import static com.ubmarketplace.app.TestStatic.TEST_IMAGE_MEDIUM_1;
 import static com.ubmarketplace.app.TestStatic.TEST_IMAGE_THUMB_1;
-import static com.ubmarketplace.app.TestStatic.TEST_USER_NAME_1;
+import static com.ubmarketplace.app.TestStatic.TEST_USER_ID_1;
 
 @SpringBootTest
 @DirtiesContext(classMode = DirtiesContext.ClassMode.BEFORE_EACH_TEST_METHOD)
@@ -47,7 +47,7 @@ public class ImageManagerTest {
     @Test
     public void GIVEN_ValidImage_WHEN_uploadAndInsertImage_THEN_returnImage(){
         Assertions.assertDoesNotThrow(() -> {
-            Image image = imageManager.uploadAndInsertImage(TEST_IMAGE_BASE64, TEST_USER_NAME_1, true);
+            Image image = imageManager.uploadAndInsertImage(TEST_IMAGE_BASE64, TEST_USER_ID_1, true);
             System.out.printf("Image link for human verify (expired after 10 min): %s", image.getLarge());
         });
         // When testing locally, this could fail when you didn't set up environment variable ImgBBApiKey

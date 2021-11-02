@@ -40,7 +40,7 @@ public class AllItemResponse {
     @AllArgsConstructor
     @NoArgsConstructor
     public static class AllItemResponseItemOwner {
-        private String username;
+        private String userId;
         private String displayName;
     }
 }

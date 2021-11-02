@@ -13,7 +13,15 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.context.SpringBootTest;
 import org.springframework.test.annotation.DirtiesContext;
 
-import static com.ubmarketplace.app.TestStatic.*;
+import static com.ubmarketplace.app.TestStatic.TEST_ITEM_CATEGORY_3;
+import static com.ubmarketplace.app.TestStatic.TEST_ITEM_DESCRIPTION_3;
+import static com.ubmarketplace.app.TestStatic.TEST_ITEM_DISPLAYNAME_3;
+import static com.ubmarketplace.app.TestStatic.TEST_ITEM_IMAGE_3;
+import static com.ubmarketplace.app.TestStatic.TEST_ITEM_MEETING_PLACE_3;
+import static com.ubmarketplace.app.TestStatic.TEST_ITEM_NAME_3;
+import static com.ubmarketplace.app.TestStatic.TEST_ITEM_PRICE_3;
+import static com.ubmarketplace.app.TestStatic.TEST_PASSWORD_3;
+import static com.ubmarketplace.app.TestStatic.TEST_USER_ID_3;
 
 
 @SpringBootTest
@@ -24,14 +32,14 @@ public class NewItemControllerTest {
 
     @BeforeAll
     static void setup(@Autowired UserRepository userRepository){
-        userRepository.insert(User.builder().username(TEST_USER_NAME_3).password(TEST_PASSWORD_3).displayName(TEST_ITEM_DISPLAYNAME_3).build());
+        userRepository.insert(User.builder().userId(TEST_USER_ID_3).password(TEST_PASSWORD_3).displayName(TEST_ITEM_DISPLAYNAME_3).build());
     }
 
     @Test
     public void GIVEN_goodInput_WHEN_add_new_item_THEN_returnCorrectNewItemResponse(@Autowired ItemRepository itemRepository){
         Item item = Item.builder().
                 name(TEST_ITEM_NAME_3).
-                userId(TEST_USER_NAME_3).
+                userId(TEST_USER_ID_3).
                 category(TEST_ITEM_CATEGORY_3).
                 description(TEST_ITEM_DESCRIPTION_3).
                 price(TEST_ITEM_PRICE_3).
@@ -41,7 +49,7 @@ public class NewItemControllerTest {
         NewItemResponse response = newItemController.newItem(
                 new NewItemRequest(
                         TEST_ITEM_NAME_3,
-                        TEST_USER_NAME_3,
+                        TEST_USER_ID_3,
                         TEST_ITEM_CATEGORY_3,
                         TEST_ITEM_DESCRIPTION_3,
                         TEST_ITEM_PRICE_3,

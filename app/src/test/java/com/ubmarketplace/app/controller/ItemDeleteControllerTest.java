@@ -1,9 +1,6 @@
 package com.ubmarketplace.app.controller;
 
 import com.ubmarketplace.app.dto.ItemDeleteRequest;
-import com.ubmarketplace.app.dto.LoginRequest;
-import com.ubmarketplace.app.dto.LoginResponse;
-import com.ubmarketplace.app.manager.ItemManager;
 import com.ubmarketplace.app.model.Item;
 import com.ubmarketplace.app.model.User;
 import com.ubmarketplace.app.repository.ItemRepository;
@@ -17,7 +14,12 @@ import org.springframework.test.annotation.DirtiesContext;
 
 import java.security.InvalidParameterException;
 
-import static com.ubmarketplace.app.TestStatic.*;
+import static com.ubmarketplace.app.TestStatic.TEST_ITEM_ID_1;
+import static com.ubmarketplace.app.TestStatic.TEST_ITEM_ID_2;
+import static com.ubmarketplace.app.TestStatic.TEST_ITEM_NAME_1;
+import static com.ubmarketplace.app.TestStatic.TEST_ITEM_NAME_2;
+import static com.ubmarketplace.app.TestStatic.TEST_PASSWORD_3;
+import static com.ubmarketplace.app.TestStatic.TEST_USER_ID_3;
 
 @SpringBootTest
 @DirtiesContext(classMode = DirtiesContext.ClassMode.BEFORE_CLASS)
@@ -29,7 +31,7 @@ public class ItemDeleteControllerTest {
 
     @BeforeAll
     static void setup(@Autowired ItemRepository itemRepository, @Autowired UserRepository userRepository) {
-        userRepository.insert(User.builder().username(TEST_USER_NAME_3).password(TEST_PASSWORD_3).build());
+        userRepository.insert(User.builder().userId(TEST_USER_ID_3).password(TEST_PASSWORD_3).build());
         itemRepository.insert(Item.builder().itemId(TEST_ITEM_ID_1).name(TEST_ITEM_NAME_1).build());
         itemRepository.insert(Item.builder().itemId(TEST_ITEM_ID_2).name(TEST_ITEM_NAME_2).build());
     }
