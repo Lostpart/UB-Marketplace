@@ -60,12 +60,7 @@ public class ItemManager {
 
         DeleteResult result = itemRepository.remove(find);
 
-        if (result.wasAcknowledged()){
-            return true;
-        }
-        else{
-            return false;
-        }
+        return result.wasAcknowledged();
 
     }
 

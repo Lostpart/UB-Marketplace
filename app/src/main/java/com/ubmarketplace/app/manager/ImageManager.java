@@ -45,9 +45,7 @@ public class ImageManager {
             throw new InvalidParameterException("Empty imageId");
         }
 
-        Image image;
-
-        image = imageRepository.findById(imageId);
+        Image image = imageRepository.findById(imageId);
 
         if(image == null) {
             log.warning(String.format("Failed to find imageId %s, no such image exist", imageId));

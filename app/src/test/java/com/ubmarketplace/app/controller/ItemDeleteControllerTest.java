@@ -43,7 +43,7 @@ public class ItemDeleteControllerTest {
     }
 
     @Test
-    void DeleteItemByWrongID_THEN_return_Falsee() {
+    void DeleteItemByWrongID_THEN_return_False() {
         Assertions.assertThrows(InvalidParameterException.class, () -> itemDeleteController.delete(new ItemDeleteRequest("123")));
     }
 
