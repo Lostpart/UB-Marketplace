@@ -7,15 +7,15 @@ import { handleAPIError } from './errors';
 class Login extends React.Component {
     constructor(props) {
         super(props);
-        this.state = {username: '', password: ''};
-        this.changeUsername = this.changeUsername.bind(this);
+        this.state = {userId: '', password: ''};
+        this.changeUserId = this.changeUserId.bind(this);
         this.changePassword = this.changePassword.bind(this);
         this.handleSubmit = this.handleSubmit.bind(this);
         this.goToRegistration = this.goToRegistration.bind(this);
     }
     
-    changeUsername(event) {
-        this.setState({username: event.target.value});
+    changeUserId(event) {
+        this.setState({userId: event.target.value});
     }
 
     changePassword(event) {
@@ -26,15 +26,15 @@ class Login extends React.Component {
         const requestOptions = {
             method: 'POST',
             headers: { 'Content-Type': 'application/json' },
-            body: JSON.stringify({ username: this.state.username, password: sha256(this.state.password) })
+            body: JSON.stringify({ userId: this.state.userId, password: sha256(this.state.password) })
         };
         
-        fetch('https://ubmarketplace-develop.herokuapp.com/api/login', requestOptions)
+        fetch('/api/login', requestOptions)
             .then(response => {
                 if (response.status !== 200) {
                     handleAPIError(response)
                 } else {
-                    localStorage.setItem("email", this.state.username);
+                    localStorage.setItem("email", this.state.userId);
                     this.props.history.push({pathname:"/",state: {name: this.state.username}})
                 }
             });
@@ -53,8 +53,8 @@ class Login extends React.Component {
                 <h1>UB Marketplace</h1>
                 <div className='panel login'>
                     <form onSubmit={this.handleSubmit}>
-                        <label htmlFor="username">Email</label>
-                        <input type="text" name="username" value={this.state.username} onChange={this.changeUsername} />
+                        <label htmlFor="userId">Email</label>
+                        <input type="text" name="userId" value={this.state.userId} onChange={this.changeUserId} />
                         <label htmlFor="password">Password</label>
                         <input type="password" name="password" value={this.state.password} onChange={this.changePassword} />
 

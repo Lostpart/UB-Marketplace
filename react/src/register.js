@@ -7,16 +7,16 @@ import React from 'react';
 class Register extends React.Component {
     constructor(props) {
         super(props);
-        this.state = {username: '', password: '', displayName: '', confirm: ''};
-        this.changeUsername = this.changeUsername.bind(this);
+        this.state = {userId: '', password: '', displayName: '', confirm: ''};
+        this.changeUserId = this.changeUserId.bind(this);
         this.changePassword = this.changePassword.bind(this);
         this.changeConfirm = this.changeConfirm.bind(this);
         this.changeDisplayName = this.changeDisplayName.bind(this);
         this.handleSubmit = this.handleSubmit.bind(this);
     }
     
-    changeUsername(event) {
-        this.setState({username: event.target.value});
+    changeUserId(event) {
+        this.setState({userId: event.target.value});
     }
 
     changePassword(event) {
@@ -44,7 +44,7 @@ class Register extends React.Component {
         const requestOptions = {
             method: 'POST',
             headers: { 'Content-Type': 'application/json' },
-            body: JSON.stringify({ username: this.state.username, password: sha256(this.state.password), displayName: this.state.displayName })
+            body: JSON.stringify({ userId: this.state.userId, password: sha256(this.state.password), displayName: this.state.displayName })
         };
         fetch('/api/register', requestOptions)
             .then(response => {
@@ -62,8 +62,8 @@ class Register extends React.Component {
                 <h1>UB Marketplace</h1>
                 <div className='panel login'>
                     <form onSubmit={this.handleSubmit}>
-                        <label for="username">Email</label>
-                        <input type="text" name="username" value={this.state.username} onChange={this.changeUsername} />
+                        <label for="userId">Email</label>
+                        <input type="text" name="userId" value={this.state.userId} onChange={this.changeUserId} />
                         <label for="displayName">Username</label>
                         <input type="text" name="displayName" value={this.state.displayName} onChange={this.changeDisplayName} />
                         <label for="password">Password</label>
