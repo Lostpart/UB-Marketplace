@@ -15,12 +15,14 @@ import org.springframework.test.annotation.DirtiesContext;
 
 import static com.ubmarketplace.app.TestStatic.TEST_ITEM_CATEGORY_3;
 import static com.ubmarketplace.app.TestStatic.TEST_ITEM_DESCRIPTION_3;
-import static com.ubmarketplace.app.TestStatic.TEST_ITEM_DISPLAYNAME_3;
 import static com.ubmarketplace.app.TestStatic.TEST_ITEM_IMAGE_3;
 import static com.ubmarketplace.app.TestStatic.TEST_ITEM_MEETING_PLACE_3;
 import static com.ubmarketplace.app.TestStatic.TEST_ITEM_NAME_3;
+import static com.ubmarketplace.app.TestStatic.TEST_ITEM_PHONE_NUMBER_FORMATTED_3;
+import static com.ubmarketplace.app.TestStatic.TEST_ITEM_PHONE_NUMBER_UNFORMATTED_3;
 import static com.ubmarketplace.app.TestStatic.TEST_ITEM_PRICE_3;
 import static com.ubmarketplace.app.TestStatic.TEST_PASSWORD_3;
+import static com.ubmarketplace.app.TestStatic.TEST_USER_DISPLAY_NAME_3;
 import static com.ubmarketplace.app.TestStatic.TEST_USER_ID_3;
 
 
@@ -31,12 +33,12 @@ public class NewItemControllerTest {
     NewItemController newItemController;
 
     @BeforeAll
-    static void setup(@Autowired UserRepository userRepository){
-        userRepository.insert(User.builder().userId(TEST_USER_ID_3).password(TEST_PASSWORD_3).displayName(TEST_ITEM_DISPLAYNAME_3).build());
+    static void setup(@Autowired UserRepository userRepository) {
+        userRepository.insert(User.builder().userId(TEST_USER_ID_3).password(TEST_PASSWORD_3).displayName(TEST_USER_DISPLAY_NAME_3).build());
     }
 
     @Test
-    public void GIVEN_goodInput_WHEN_add_new_item_THEN_returnCorrectNewItemResponse(@Autowired ItemRepository itemRepository){
+    public void GIVEN_goodInput_WHEN_add_new_item_THEN_returnCorrectNewItemResponse(@Autowired ItemRepository itemRepository) {
         Item item = Item.builder().
                 name(TEST_ITEM_NAME_3).
                 userId(TEST_USER_ID_3).
@@ -54,15 +56,17 @@ public class NewItemControllerTest {
                         TEST_ITEM_DESCRIPTION_3,
                         TEST_ITEM_PRICE_3,
                         TEST_ITEM_IMAGE_3,
-                        TEST_ITEM_MEETING_PLACE_3));
+                        TEST_ITEM_MEETING_PLACE_3,
+                        TEST_ITEM_PHONE_NUMBER_UNFORMATTED_3));
 
         Item testItem = itemRepository.findById(response.getItem().getItemId());
 
-        Assertions.assertEquals(testItem.getName(), item.getName());
-        Assertions.assertEquals(testItem.getUserId(), item.getUserId());
-        Assertions.assertEquals(testItem.getDescription(), item.getDescription());
-        Assertions.assertEquals(testItem.getPrice(), item.getPrice());
-        Assertions.assertEquals(testItem.getImages(), item.getImages());
-        Assertions.assertEquals(testItem.getMeetingPlace(), item.getMeetingPlace());
+        Assertions.assertEquals(TEST_ITEM_NAME_3, testItem.getName());
+        Assertions.assertEquals(TEST_USER_ID_3, testItem.getUserId());
+        Assertions.assertEquals(TEST_ITEM_DESCRIPTION_3, testItem.getDescription());
+        Assertions.assertEquals(TEST_ITEM_PRICE_3, testItem.getPrice());
+        Assertions.assertEquals(TEST_ITEM_IMAGE_3, testItem.getImages());
+        Assertions.assertEquals(TEST_ITEM_MEETING_PLACE_3, testItem.getMeetingPlace());
+        Assertions.assertEquals(TEST_ITEM_PHONE_NUMBER_FORMATTED_3, testItem.getContactPhoneNumber());
     }
 }

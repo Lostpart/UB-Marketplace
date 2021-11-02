@@ -5,6 +5,7 @@ import com.ubmarketplace.app.manager.ImageManager;
 import com.ubmarketplace.app.manager.ItemManager;
 import com.ubmarketplace.app.manager.UserManager;
 import com.ubmarketplace.app.model.Item;
+import com.ubmarketplace.app.model.ResponseItem;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
@@ -12,6 +13,8 @@ import org.springframework.web.bind.annotation.RestController;
 
 import java.util.List;
 import java.util.stream.Collectors;
+
+import static com.ubmarketplace.app.model.ResponseItem.imageType.THUMB;
 
 @RestController
 public class AllItemController {
@@ -27,30 +30,15 @@ public class AllItemController {
         this.userManager = userManager;
     }
 
-    @RequestMapping(value = "/api/allitem", method = RequestMethod.GET,produces = "application/json;charset=UTF-8")
-    public AllItemResponse allItem(){
+    @RequestMapping(value = "/api/allitem", method = RequestMethod.GET, produces = "application/json;charset=UTF-8")
+    public AllItemResponse allItem() {
 
         // Get the queryResult
         List<Item> queryResult = itemManager.getAllItem();
 
         // Convert List<Item> to List<AllItemResponse.AllItemResponseItem>
-        List<AllItemResponse.AllItemResponseItem> response = queryResult.parallelStream()
-                .map(item -> AllItemResponse.AllItemResponseItem.builder()
-                        .itemId(item.getItemId())
-                        .name(item.getName())
-                        .owner(AllItemResponse.AllItemResponseItemOwner.builder()
-                                .userId(item.getUserId())
-                                .displayName(userManager.getDiisplayName(item.getUserId()))
-                                .build())
-                        .category(item.getCategory())
-                        .description(item.getDescription())
-                        .price(item.getPrice())
-                        .images(item.getImages().parallelStream()
-                                .map(imageManager::getThumbUrl)
-                                .collect(Collectors.toList()))
-                        .meetingPlace(item.getMeetingPlace())
-                        .createdTime(item.getCreatedTime())
-                        .build())
+        List<ResponseItem> response = queryResult.parallelStream()
+                .map(item -> new ResponseItem(item, THUMB, userManager, imageManager))
                 .collect(Collectors.toList());
 
         return AllItemResponse.builder().item(response).build();

@@ -4,6 +4,7 @@ import com.ubmarketplace.app.dto.AllItemResponse;
 import com.ubmarketplace.app.manager.ImageManager;
 import com.ubmarketplace.app.manager.ItemManager;
 import com.ubmarketplace.app.manager.UserManager;
+import com.ubmarketplace.app.model.ResponseItem;
 import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.BeforeAll;
 import org.junit.jupiter.api.Test;
@@ -29,6 +30,8 @@ import static com.ubmarketplace.app.TestStatic.TEST_ITEM_ID_4;
 import static com.ubmarketplace.app.TestStatic.TEST_ITEM_ID_5;
 import static com.ubmarketplace.app.TestStatic.TEST_ITEM_MEETING_PLACE_4;
 import static com.ubmarketplace.app.TestStatic.TEST_ITEM_MEETING_PLACE_5;
+import static com.ubmarketplace.app.TestStatic.TEST_ITEM_PHONE_NUMBER_FORMATTED_4;
+import static com.ubmarketplace.app.TestStatic.TEST_ITEM_PHONE_NUMBER_FORMATTED_5;
 import static com.ubmarketplace.app.TestStatic.TEST_ITEM_PRICE_4;
 import static com.ubmarketplace.app.TestStatic.TEST_ITEM_PRICE_5;
 import static com.ubmarketplace.app.TestStatic.TEST_ITEM_USER_ID_4;
@@ -48,7 +51,6 @@ public class AllItemControllerTest {
     ImageManager imageManager;
     @Mock
     ItemManager itemManager;
-
     @Mock
     UserManager userManager;
 
@@ -65,9 +67,9 @@ public class AllItemControllerTest {
     public void GIVEN_goodInput_WHEN_allItem_THEN_returnItemList() {
         AllItemResponse response = allItemController.allItem();
 
-        Assertions.assertEquals(2,response.getItem().size());
+        Assertions.assertEquals(2, response.getItem().size());
 
-        AllItemResponse.AllItemResponseItem item1 = response.getItem().get(0);
+        ResponseItem item1 = response.getItem().get(0);
         Assertions.assertEquals(TEST_ITEM_ID_4, item1.getItemId());
         Assertions.assertEquals(TEST_NAME_4, item1.getName());
         Assertions.assertEquals(TEST_ITEM_USER_ID_4, item1.getOwner().getUserId());
@@ -77,8 +79,9 @@ public class AllItemControllerTest {
         Assertions.assertEquals(TEST_IMAGE_THUMB_1, item1.getImages().get(0));
         Assertions.assertEquals(TEST_IMAGE_THUMB_2, item1.getImages().get(1));
         Assertions.assertEquals(TEST_ITEM_MEETING_PLACE_4, item1.getMeetingPlace());
+        Assertions.assertEquals(TEST_ITEM_PHONE_NUMBER_FORMATTED_4, item1.getContactPhoneNumber());
 
-        AllItemResponse.AllItemResponseItem item2 = response.getItem().get(1);
+        ResponseItem item2 = response.getItem().get(1);
         Assertions.assertEquals(TEST_ITEM_ID_5, item2.getItemId());
         Assertions.assertEquals(TEST_NAME_5, item2.getName());
         Assertions.assertEquals(TEST_ITEM_USER_ID_5, item2.getOwner().getUserId());
@@ -87,5 +90,6 @@ public class AllItemControllerTest {
         Assertions.assertEquals(TEST_ITEM_PRICE_5, item2.getPrice());
         Assertions.assertEquals(TEST_IMAGE_THUMB_2, item2.getImages().get(0));
         Assertions.assertEquals(TEST_ITEM_MEETING_PLACE_5, item2.getMeetingPlace());
+        Assertions.assertEquals(TEST_ITEM_PHONE_NUMBER_FORMATTED_5, item2.getContactPhoneNumber());
     }
 }
