@@ -1,7 +1,8 @@
-package com.ubmarketplace.app.model;
+package com.ubmarketplace.app.dto;
 
 import com.ubmarketplace.app.manager.ImageManager;
 import com.ubmarketplace.app.manager.UserManager;
+import com.ubmarketplace.app.model.Item;
 import lombok.AllArgsConstructor;
 import lombok.Builder;
 import lombok.Getter;

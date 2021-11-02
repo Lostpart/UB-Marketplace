@@ -1,11 +1,11 @@
 package com.ubmarketplace.app.controller;
 
 import com.ubmarketplace.app.dto.GetItemResponse;
+import com.ubmarketplace.app.dto.ResponseItem;
 import com.ubmarketplace.app.manager.ImageManager;
 import com.ubmarketplace.app.manager.ItemManager;
 import com.ubmarketplace.app.manager.UserManager;
 import com.ubmarketplace.app.model.Item;
-import com.ubmarketplace.app.model.ResponseItem;
 import lombok.extern.java.Log;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.validation.annotation.Validated;
@@ -16,7 +16,7 @@ import org.springframework.web.bind.annotation.RestController;
 
 import javax.validation.constraints.Pattern;
 
-import static com.ubmarketplace.app.model.ResponseItem.imageType.LARGE;
+import static com.ubmarketplace.app.dto.ResponseItem.imageType.LARGE;
 
 @RestController
 @Log

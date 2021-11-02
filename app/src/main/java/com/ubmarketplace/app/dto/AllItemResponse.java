@@ -1,6 +1,5 @@
 package com.ubmarketplace.app.dto;
 
-import com.ubmarketplace.app.model.ResponseItem;
 import lombok.AllArgsConstructor;
 import lombok.Builder;
 import lombok.Getter;

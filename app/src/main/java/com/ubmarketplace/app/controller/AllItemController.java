@@ -1,11 +1,11 @@
 package com.ubmarketplace.app.controller;
 
 import com.ubmarketplace.app.dto.AllItemResponse;
+import com.ubmarketplace.app.dto.ResponseItem;
 import com.ubmarketplace.app.manager.ImageManager;
 import com.ubmarketplace.app.manager.ItemManager;
 import com.ubmarketplace.app.manager.UserManager;
 import com.ubmarketplace.app.model.Item;
-import com.ubmarketplace.app.model.ResponseItem;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
@@ -14,7 +14,7 @@ import org.springframework.web.bind.annotation.RestController;
 import java.util.List;
 import java.util.stream.Collectors;
 
-import static com.ubmarketplace.app.model.ResponseItem.imageType.THUMB;
+import static com.ubmarketplace.app.dto.ResponseItem.imageType.THUMB;
 
 @RestController
 public class AllItemController {

@@ -1,10 +1,10 @@
 package com.ubmarketplace.app.controller;
 
 import com.ubmarketplace.app.dto.GetItemResponse;
+import com.ubmarketplace.app.dto.ResponseItem;
 import com.ubmarketplace.app.manager.ImageManager;
 import com.ubmarketplace.app.manager.ItemManager;
 import com.ubmarketplace.app.manager.UserManager;
-import com.ubmarketplace.app.model.ResponseItem;
 import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.BeforeAll;
 import org.junit.jupiter.api.Test;
