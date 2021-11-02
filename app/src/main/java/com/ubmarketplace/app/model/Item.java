@@ -30,6 +30,8 @@ public class Item {
     private List<String> images;
     private String meetingPlace;
 
+    private String contactPhoneNumber;
+
     @EqualsAndHashCode.Exclude @Builder.Default
     private Long createdTime = getCurrentEpochMilli();
 }

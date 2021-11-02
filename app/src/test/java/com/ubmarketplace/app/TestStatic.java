@@ -17,6 +17,7 @@ public class TestStatic {
     final static public String TEST_PASSWORD_2 = "02a8cfdc38de40f29ca5b3a680b2eb1affd7bd370f86807219a0574b576fd7e4"; //Before hash: GoodPassword2
     final static public String TEST_USER_ID_3 = "UnitTest_TestUser3@test.com";
     final static public String TEST_PASSWORD_3 = "70a44f128682264f16d291c6ff938974f6534f098c173278d940d43d71b45c84"; //Before hash: GoodPassword3
+    final static public String TEST_USER_DISPLAY_NAME_3 = "displayname3";
     final static public String TEST_ALWAYS_WRONG_PASSWORD = "ac606172c5011f97569a0b7960ae344e7d76d7b93eee312839b44694ccebcadd"; //Before hash: BadPassword
 
     final static public String TEST_IMAGE_IMAGE_ID_1 = "IMGTestId01";
@@ -52,7 +53,8 @@ public class TestStatic {
     final static public Double TEST_ITEM_PRICE_3 = 150.0;
     final static public List<String> TEST_ITEM_IMAGE_3 = Lists.newArrayList("https://images.unsplash.com/photo-1496181133206-80ce9b88a853?ixid=MnwxMjA3fDB8MHxzZWFyY2h8Mnx8bGFwdG9wfGVufDB8fDB8fA%3D%3D&ixlib=rb-1.2.1&auto=format&fit=crop&w=600&q=60", "https://images.unsplash.com/photo-1554415707-6e8cfc93fe23?ixid=MnwxMjA3fDB8MHxzZWFyY2h8M3x8bGFwdG9wfGVufDB8fDB8fA%3D%3D&ixlib=rb-1.2.1&auto=format&fit=crop&w=600&q=60");
     final static public String TEST_ITEM_MEETING_PLACE_3 = TEST_ITEM_MEETING_PLACE_STUDENT_UNION;
-    final static public String TEST_ITEM_DISPLAYNAME_3 = "displayname3";
+    final static public String TEST_ITEM_PHONE_NUMBER_UNFORMATTED_3 = "7166451234";
+    final static public String TEST_ITEM_PHONE_NUMBER_FORMATTED_3 = "(716) 645-1234";
 
     final static public String TEST_ITEM_ID_4 = "c173278d";
     final static public String TEST_NAME_4 = "Test item 4";
@@ -62,6 +64,8 @@ public class TestStatic {
     final static public Double TEST_ITEM_PRICE_4 = 43.25;
     final static public List<String> TEST_ITEM_IMAGE_4 = Arrays.asList(TEST_IMAGE_IMAGE_ID_1, TEST_IMAGE_IMAGE_ID_2);
     final static public String TEST_ITEM_MEETING_PLACE_4 = TEST_ITEM_MEETING_PLACE_STUDENT_UNION;
+    final static public String TEST_ITEM_PHONE_NUMBER_UNFORMATTED_4 = "7166454444";
+    final static public String TEST_ITEM_PHONE_NUMBER_FORMATTED_4 = "(716) 645-4444";
     final static public Item TEST_ITEM_4 = Item.builder()
             .itemId(TEST_ITEM_ID_4)
             .name(TEST_NAME_4)
@@ -71,6 +75,7 @@ public class TestStatic {
             .price(TEST_ITEM_PRICE_4)
             .images(TEST_ITEM_IMAGE_4)
             .meetingPlace(TEST_ITEM_MEETING_PLACE_4)
+            .contactPhoneNumber(TEST_ITEM_PHONE_NUMBER_FORMATTED_4)
             .build();
 
     final static public String TEST_ITEM_ID_5 = "a8cfdc34";
@@ -81,6 +86,8 @@ public class TestStatic {
     final static public Double TEST_ITEM_PRICE_5 = 17.96;
     final static public List<String> TEST_ITEM_IMAGE_5 = Collections.singletonList(TEST_IMAGE_IMAGE_ID_2);
     final static public String TEST_ITEM_MEETING_PLACE_5 = TEST_ITEM_MEETING_PLACE_KNOX;
+    final static public String TEST_ITEM_PHONE_NUMBER_UNFORMATTED_5 = "7166455555";
+    final static public String TEST_ITEM_PHONE_NUMBER_FORMATTED_5 = "(716) 645-5555";
     final static public Item TEST_ITEM_5 = Item.builder()
             .itemId(TEST_ITEM_ID_5)
             .name(TEST_NAME_5)
@@ -90,6 +97,7 @@ public class TestStatic {
             .price(TEST_ITEM_PRICE_5)
             .images(TEST_ITEM_IMAGE_5)
             .meetingPlace(TEST_ITEM_MEETING_PLACE_5)
+            .contactPhoneNumber(TEST_ITEM_PHONE_NUMBER_FORMATTED_5)
             .build();
 
     final static public String TEST_IMAGE_IMAGE_ID_INVALID = "BadImageId";

@@ -45,7 +45,6 @@ public class ItemRepository implements ItemDao {
     public List<Item> getCategorizeItem(String category){
         Query query = new Query();
         query.addCriteria(Criteria.where("category").is(category));
-        List<Item> result = mongoTemplate.find(query, Item.class);
-        return result;
+        return mongoTemplate.find(query, Item.class);
     }
 }

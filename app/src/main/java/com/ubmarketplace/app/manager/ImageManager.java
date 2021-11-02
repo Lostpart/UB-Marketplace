@@ -29,10 +29,9 @@ import static com.ubmarketplace.app.Static.IMGBB_EXPIRATION_SECS;
 @Component
 @Log
 public class ImageManager {
+    final ImageRepository imageRepository;
     @Value("${ImgBBApiKey: #{null}}")
     private String ImgBBApiKey = "";
-
-    final ImageRepository imageRepository;
 
     @Autowired
     public ImageManager(ImageRepository imageRepository) {
@@ -40,16 +39,14 @@ public class ImageManager {
     }
 
     public Image getImage(@NonNull String imageId) {
-        if(imageId.isEmpty()) {
+        if (imageId.isEmpty()) {
             log.info("Empty imageId when running getImage()");
             throw new InvalidParameterException("Empty imageId");
         }
 
-        Image image;
+        Image image = imageRepository.findById(imageId);
 
-        image = imageRepository.findById(imageId);
-
-        if(image == null) {
+        if (image == null) {
             log.warning(String.format("Failed to find imageId %s, no such image exist", imageId));
             throw new InvalidParameterException("Failed to find image");
         }
@@ -89,7 +86,7 @@ public class ImageManager {
         bodyMap.add("key", ImgBBApiKey);
         bodyMap.add("name", image.getImageId());
 
-        if(test){
+        if (test) {
             bodyMap.add("expiration", IMGBB_EXPIRATION_SECS);
         }
 
@@ -98,9 +95,9 @@ public class ImageManager {
 
         RestTemplate restTemplate = new RestTemplate();
         ResponseEntity<ImgBBRepository> response;
-        try{
+        try {
             response = restTemplate.exchange(IMGBB_API_URL, HttpMethod.POST, requestEntity, ImgBBRepository.class);
-        } catch(HttpClientErrorException e) {
+        } catch (HttpClientErrorException e) {
             log.warning(String.format("Unable to upload image: %s", e.getMessage()));
             throw new InvalidParameterException("Unable to upload image");
             // When testing locally, this could happen when you didn't set up environment variable ImgBBApiKey
@@ -108,7 +105,7 @@ public class ImageManager {
         }
 
 
-        if(response.getBody() == null){
+        if (response.getBody() == null) {
             log.warning("Response body is empty when uploading image");
             throw new NullPointerException("Error while upload image");
         }
@@ -116,7 +113,7 @@ public class ImageManager {
         image.setThumb(response.getBody().getData().getThumb().getUrl());
         image.setLarge(response.getBody().getData().getImage().getUrl());
 
-        if(response.getBody().getData().getMedium() == null){
+        if (response.getBody().getData().getMedium() == null) {
             image.setMedium(image.getLarge());
         } else {
             image.setMedium(response.getBody().getData().getMedium().getUrl());
@@ -131,7 +128,7 @@ public class ImageManager {
         try {
             imageRepository.insert(image);
         } catch (DuplicateKeyException e) {
-            log.warning(String.format("Failed to find imageId %s, such image already exist", image));
+            log.warning(String.format("Failed to insert imageId %s, such image already exist", image.getImageId()));
             throw new InvalidParameterException("Failed to insert imageId");
             // Not the best exception, could update to a custom exception
         }
