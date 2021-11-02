@@ -33,7 +33,7 @@ class item_detail extends Component{
                         const thisItem = items.filter(item => item.itemId === id);
 
                         this.setState({
-                            item: thisItem,
+                            item: thisItem[0],
                             relatedItems: otherItems
                         }) 
                     });
