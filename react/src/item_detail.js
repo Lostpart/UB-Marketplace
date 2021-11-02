@@ -28,7 +28,7 @@ class item_detail extends Component{
                     handleAPIError(res);
                 } else {
                     res.json().then(data => { 
-                        const items = data.items;
+                        const items = data.item;
                         const otherItems = items.filter(item => item.itemId !== id);
                         const thisItem = items.filter(item => item.itemId === id);
 
