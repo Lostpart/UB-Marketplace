@@ -19,7 +19,7 @@ function App() {
           <Route path="/login" component={Login} />
           <Route path="/register" component={Register} />
           <Route path="/sell" component={Sell} />
-          <Route path="/item" component={Item_Detail} />
+          <Route path="/item/:id" component={Item_Detail} />
           <Route path="/listing" component={Listing} />
         </Switch>
       </HashRouter>

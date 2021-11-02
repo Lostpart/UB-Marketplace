@@ -106,3 +106,7 @@
     height: 150px;
     padding-right: 20px;
 }
+
+p {
+    text-align: center;
+}
