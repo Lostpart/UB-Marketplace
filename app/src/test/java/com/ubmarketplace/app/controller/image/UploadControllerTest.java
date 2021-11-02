@@ -19,7 +19,7 @@ import static com.ubmarketplace.app.TestStatic.TEST_IMAGE_BASE64;
 import static com.ubmarketplace.app.TestStatic.TEST_IMAGE_LARGE_1;
 import static com.ubmarketplace.app.TestStatic.TEST_IMAGE_MEDIUM_1;
 import static com.ubmarketplace.app.TestStatic.TEST_IMAGE_THUMB_1;
-import static com.ubmarketplace.app.TestStatic.TEST_USER_NAME_1;
+import static com.ubmarketplace.app.TestStatic.TEST_USER_ID_1;
 import static org.mockito.ArgumentMatchers.anyString;
 
 @SpringBootTest
@@ -52,10 +52,10 @@ public class UploadControllerTest {
     @Test
     public void GIVEN_goodInput_WHEN_upload_THEN_returnCorrectUploadResponse() {
         UploadResponse response = uploadController.upload(UploadRequest.builder()
-                        .userId(TEST_USER_NAME_1)
+                        .userId(TEST_USER_ID_1)
                         .image(TEST_IMAGE_BASE64)
                         .build());
-        Assertions.assertEquals(TEST_USER_NAME_1, response.getImage().getUploadBy());
+        Assertions.assertEquals(TEST_USER_ID_1, response.getImage().getUploadBy());
         Assertions.assertEquals(TEST_IMAGE_LARGE_1, response.getImage().getLarge());
         Assertions.assertEquals(TEST_IMAGE_MEDIUM_1, response.getImage().getMedium());
         Assertions.assertEquals(TEST_IMAGE_THUMB_1, response.getImage().getThumb());

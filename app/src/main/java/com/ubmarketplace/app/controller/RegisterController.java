@@ -25,9 +25,9 @@ public class RegisterController {
 
     @RequestMapping(value = "/api/register", method = RequestMethod.POST)
     public RegisterResponse register(@RequestBody @Valid RegisterRequest registerRequest){
-        log.info(String.format("Receiving register request from %s", registerRequest.getUsername()));
+        log.info(String.format("Receiving register request from %s", registerRequest.getUserId()));
 
-        User user = userManager.addNewUser(registerRequest.getUsername(), registerRequest.getPassword(), registerRequest.getDisplayName());
+        User user = userManager.addNewUser(registerRequest.getUserId(), registerRequest.getPassword(), registerRequest.getDisplayName());
 
         return RegisterResponse.builder().user(user).build();
     }

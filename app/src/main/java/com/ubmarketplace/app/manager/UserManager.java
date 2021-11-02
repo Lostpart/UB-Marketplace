@@ -1,6 +1,7 @@
 package com.ubmarketplace.app.manager;
 
 import com.google.inject.Singleton;
+import com.mongodb.client.result.DeleteResult;
 import com.ubmarketplace.app.model.User;
 import com.ubmarketplace.app.repository.UserRepository;
 import lombok.NonNull;
@@ -8,8 +9,6 @@ import lombok.extern.java.Log;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.dao.DuplicateKeyException;
 import org.springframework.stereotype.Component;
-
-import com.mongodb.client.result.DeleteResult;
 
 import javax.validation.constraints.NotNull;
 import java.security.InvalidParameterException;
@@ -63,7 +62,7 @@ public class UserManager {
         }
         log.info(String.format("Creating new account for %s", username));
 
-        User user = User.builder().username(username).password(password).displayName(displayName).build();
+        User user = User.builder().userId(username).password(password).displayName(displayName).build();
 
         try {
             userRepository.insert(user);
@@ -95,23 +94,23 @@ public class UserManager {
 
         DeleteResult delete = userRepository.remove(old_user);
         if (!delete.wasAcknowledged()){
-            log.info(String.format("Fail to delete account for %s", old_user.getUsername()));
+            log.info(String.format("Fail to delete account for %s", old_user.getUserId()));
             throw new InvalidParameterException("Fail to delete");
         }
 
         User updated_user;
 
         if (password.isEmpty() && !displayName.isEmpty()){
-            updated_user = User.builder().username(username).password(old_user.getPassword()).displayName(displayName).build();
+            updated_user = User.builder().userId(username).password(old_user.getPassword()).displayName(displayName).build();
         }
         else if (displayName.isEmpty() && !password.isEmpty()){
-            updated_user = User.builder().username(username).password(password).displayName(old_user.getDisplayName()).build();
+            updated_user = User.builder().userId(username).password(password).displayName(old_user.getDisplayName()).build();
         }
         else if (displayName.isEmpty()){
-            updated_user = User.builder().username(username).password(old_user.getPassword()).displayName(old_user.getDisplayName()).build();
+            updated_user = User.builder().userId(username).password(old_user.getPassword()).displayName(old_user.getDisplayName()).build();
         }
         else {
-            updated_user = User.builder().username(username).password(password).displayName(displayName).build();
+            updated_user = User.builder().userId(username).password(password).displayName(displayName).build();
         }
 
 

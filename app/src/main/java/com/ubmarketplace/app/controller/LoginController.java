@@ -28,9 +28,9 @@ public class LoginController {
     @RequestMapping(value = "/api/login", method = RequestMethod.POST, produces="application/json;charset=UTF-8")
     public LoginResponse login(@RequestBody @Valid LoginRequest loginRequest) {
 
-        log.info(String.format("Receiving login request from %s", loginRequest.getUsername()));
+        log.info(String.format("Receiving login request from %s", loginRequest.getUserId()));
 
-        boolean validPassword = userManager.loginVerification(loginRequest.getUsername(), loginRequest.getPassword());
+        boolean validPassword = userManager.loginVerification(loginRequest.getUserId(), loginRequest.getPassword());
 
         if (!validPassword) {
             throw new InvalidParameterException("Username and password doesn't match");
@@ -38,8 +38,8 @@ public class LoginController {
 
         return LoginResponse.builder()
                 .user(User.builder()
-                        .username(loginRequest.getUsername())
-                        .displayName(userManager.getDiisplayName(loginRequest.getUsername()))
+                        .userId(loginRequest.getUserId())
+                        .displayName(userManager.getDiisplayName(loginRequest.getUserId()))
                         .build())
                 .build();
     }

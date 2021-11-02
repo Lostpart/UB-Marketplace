@@ -16,8 +16,8 @@ import java.security.InvalidParameterException;
 import static com.ubmarketplace.app.TestStatic.TEST_ALWAYS_WRONG_PASSWORD;
 import static com.ubmarketplace.app.TestStatic.TEST_PASSWORD_1;
 import static com.ubmarketplace.app.TestStatic.TEST_PASSWORD_2;
-import static com.ubmarketplace.app.TestStatic.TEST_USER_NAME_1;
-import static com.ubmarketplace.app.TestStatic.TEST_USER_NAME_2;
+import static com.ubmarketplace.app.TestStatic.TEST_USER_ID_1;
+import static com.ubmarketplace.app.TestStatic.TEST_USER_ID_2;
 
 @SpringBootTest
 @DirtiesContext(classMode = DirtiesContext.ClassMode.BEFORE_CLASS)
@@ -28,19 +28,19 @@ public class LoginControllerTest {
 
     @BeforeAll
     static void setup(@Autowired UserRepository userRepository) {
-        userRepository.insert(User.builder().username(TEST_USER_NAME_1).password(TEST_PASSWORD_1).build());
-        userRepository.insert(User.builder().username(TEST_USER_NAME_2).password(TEST_PASSWORD_2).build());
+        userRepository.insert(User.builder().userId(TEST_USER_ID_1).password(TEST_PASSWORD_1).build());
+        userRepository.insert(User.builder().userId(TEST_USER_ID_2).password(TEST_PASSWORD_2).build());
     }
 
     @Test
     public void GIVEN_correctUsernamePassword_THEN_returnTrue(){
-        LoginResponse response = loginController.login(new LoginRequest(TEST_USER_NAME_1, TEST_PASSWORD_1));
-        Assertions.assertEquals(response.getUser().getUsername(), TEST_USER_NAME_1);
+        LoginResponse response = loginController.login(new LoginRequest(TEST_USER_ID_1, TEST_PASSWORD_1));
+        Assertions.assertEquals(response.getUser().getUserId(), TEST_USER_ID_1);
     }
 
     @Test
     public void GIVEN_correctUsernameWrongPassword_THEN_returnTrue(){
-        Assertions.assertThrows(InvalidParameterException.class, () -> loginController.login(new LoginRequest(TEST_USER_NAME_1, TEST_ALWAYS_WRONG_PASSWORD)));
+        Assertions.assertThrows(InvalidParameterException.class, () -> loginController.login(new LoginRequest(TEST_USER_ID_1, TEST_ALWAYS_WRONG_PASSWORD)));
     }
 
     @Test

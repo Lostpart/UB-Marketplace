@@ -1,6 +1,7 @@
 package com.ubmarketplace.app.model;
 
 
+import com.fasterxml.jackson.annotation.JsonAlias;
 import com.fasterxml.jackson.annotation.JsonIgnore;
 import lombok.AllArgsConstructor;
 import lombok.Builder;
@@ -17,8 +18,9 @@ import org.springframework.data.annotation.Id;
 @AllArgsConstructor
 @EqualsAndHashCode
 public class User {
+    @JsonAlias({"username"})
     @Id
-    private String username; // also known as userId (use "userId" and stop use "username")
+    private String userId; // also known as username (use "userId" and stop use "username")
     @JsonIgnore
     private String password;
     private String displayName;

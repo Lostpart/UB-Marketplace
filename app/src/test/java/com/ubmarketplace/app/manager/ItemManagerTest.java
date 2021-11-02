@@ -15,7 +15,19 @@ import java.security.InvalidParameterException;
 import java.util.ArrayList;
 import java.util.List;
 
-import static com.ubmarketplace.app.TestStatic.*;
+import static com.ubmarketplace.app.TestStatic.TEST_ITEM_CATEGORY_3;
+import static com.ubmarketplace.app.TestStatic.TEST_ITEM_DESCRIPTION_3;
+import static com.ubmarketplace.app.TestStatic.TEST_ITEM_ID_1;
+import static com.ubmarketplace.app.TestStatic.TEST_ITEM_ID_2;
+import static com.ubmarketplace.app.TestStatic.TEST_ITEM_ID_3;
+import static com.ubmarketplace.app.TestStatic.TEST_ITEM_IMAGE_3;
+import static com.ubmarketplace.app.TestStatic.TEST_ITEM_MEETING_PLACE_3;
+import static com.ubmarketplace.app.TestStatic.TEST_ITEM_NAME_1;
+import static com.ubmarketplace.app.TestStatic.TEST_ITEM_NAME_2;
+import static com.ubmarketplace.app.TestStatic.TEST_ITEM_NAME_3;
+import static com.ubmarketplace.app.TestStatic.TEST_ITEM_PRICE_3;
+import static com.ubmarketplace.app.TestStatic.TEST_PASSWORD_3;
+import static com.ubmarketplace.app.TestStatic.TEST_USER_ID_3;
 
 @SpringBootTest
 @DirtiesContext(classMode = DirtiesContext.ClassMode.BEFORE_CLASS)
@@ -25,7 +37,7 @@ public class ItemManagerTest {
 
     @BeforeAll
     static void setup(@Autowired ItemRepository itemRepository, @Autowired UserRepository userRepository) {
-        userRepository.insert(User.builder().username(TEST_USER_NAME_3).password(TEST_PASSWORD_3).build());
+        userRepository.insert(User.builder().userId(TEST_USER_ID_3).password(TEST_PASSWORD_3).build());
         itemRepository.insert(Item.builder().itemId(TEST_ITEM_ID_1).name(TEST_ITEM_NAME_1).build());
         itemRepository.insert(Item.builder().itemId(TEST_ITEM_ID_2).name(TEST_ITEM_NAME_2).build());
     }
@@ -34,7 +46,7 @@ public class ItemManagerTest {
     public void GIVEN_goodInput_When_addNewItem_Then_returnTrue(@Autowired ItemRepository itemRepository, @Autowired UserRepository userRepository){
         Item item = itemmanager.addNewItem(
                 TEST_ITEM_NAME_3,
-                TEST_USER_NAME_3,
+                TEST_USER_ID_3,
                 TEST_ITEM_CATEGORY_3,
                 TEST_ITEM_DESCRIPTION_3,
                 TEST_ITEM_PRICE_3,

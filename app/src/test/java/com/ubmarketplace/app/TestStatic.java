@@ -11,11 +11,11 @@ import java.util.List;
 public class TestStatic {
     final static public Long TEST_CURRENT_TIME = 1635051672000L;
 
-    final static public String TEST_USER_NAME_1 = "UnitTest_TestUser1@test.com";
+    final static public String TEST_USER_ID_1 = "UnitTest_TestUser1@test.com";
     final static public String TEST_PASSWORD_1 = "0a446a38175032f569a8c63dfb7ca4a1a82a7a072cb22b8e5ae58d77447cec44"; //Before hash: GoodPassword
-    final static public String TEST_USER_NAME_2 = "UnitTest_TestUser2@test.com";
+    final static public String TEST_USER_ID_2 = "UnitTest_TestUser2@test.com";
     final static public String TEST_PASSWORD_2 = "02a8cfdc38de40f29ca5b3a680b2eb1affd7bd370f86807219a0574b576fd7e4"; //Before hash: GoodPassword2
-    final static public String TEST_USER_NAME_3 = "UnitTest_TestUser3@test.com";
+    final static public String TEST_USER_ID_3 = "UnitTest_TestUser3@test.com";
     final static public String TEST_PASSWORD_3 = "70a44f128682264f16d291c6ff938974f6534f098c173278d940d43d71b45c84"; //Before hash: GoodPassword3
     final static public String TEST_ALWAYS_WRONG_PASSWORD = "ac606172c5011f97569a0b7960ae344e7d76d7b93eee312839b44694ccebcadd"; //Before hash: BadPassword
 
@@ -56,7 +56,7 @@ public class TestStatic {
 
     final static public String TEST_ITEM_ID_4 = "c173278d";
     final static public String TEST_NAME_4 = "Test item 4";
-    final static public String TEST_ITEM_USER_ID_4 = TEST_USER_NAME_1;
+    final static public String TEST_ITEM_USER_ID_4 = TEST_USER_ID_1;
     final static public String TEST_ITEM_CATEGORY_4 = TEST_ITEM_CATEGORY_ELECTRONIC;
     final static public String TEST_ITEM_DESCRIPTION_4 = "Test item 4 description";
     final static public Double TEST_ITEM_PRICE_4 = 43.25;
@@ -75,7 +75,7 @@ public class TestStatic {
 
     final static public String TEST_ITEM_ID_5 = "a8cfdc34";
     final static public String TEST_NAME_5 = "Test item 5";
-    final static public String TEST_ITEM_USER_ID_5 = TEST_USER_NAME_2;
+    final static public String TEST_ITEM_USER_ID_5 = TEST_USER_ID_2;
     final static public String TEST_ITEM_CATEGORY_5 = TEST_ITEM_CATEGORY_ELECTRONIC;
     final static public String TEST_ITEM_DESCRIPTION_5 = "Test item 5 description";
     final static public Double TEST_ITEM_PRICE_5 = 17.96;

@@ -1,6 +1,5 @@
 package com.ubmarketplace.app.controller;
 
-import com.ubmarketplace.app.dto.AllItemResponse;
 import com.ubmarketplace.app.dto.CategorizeItemRequest;
 import com.ubmarketplace.app.dto.CategorizeItemResponse;
 import com.ubmarketplace.app.manager.ImageManager;

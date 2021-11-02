@@ -70,7 +70,7 @@ public class AllItemControllerTest {
         AllItemResponse.AllItemResponseItem item1 = response.getItem().get(0);
         Assertions.assertEquals(TEST_ITEM_ID_4, item1.getItemId());
         Assertions.assertEquals(TEST_NAME_4, item1.getName());
-        Assertions.assertEquals(TEST_ITEM_USER_ID_4, item1.getOwner().getUsername());
+        Assertions.assertEquals(TEST_ITEM_USER_ID_4, item1.getOwner().getUserId());
         Assertions.assertEquals(TEST_ITEM_CATEGORY_4, item1.getCategory());
         Assertions.assertEquals(TEST_ITEM_DESCRIPTION_4, item1.getDescription());
         Assertions.assertEquals(TEST_ITEM_PRICE_4, item1.getPrice());
@@ -81,7 +81,7 @@ public class AllItemControllerTest {
         AllItemResponse.AllItemResponseItem item2 = response.getItem().get(1);
         Assertions.assertEquals(TEST_ITEM_ID_5, item2.getItemId());
         Assertions.assertEquals(TEST_NAME_5, item2.getName());
-        Assertions.assertEquals(TEST_ITEM_USER_ID_5, item2.getOwner().getUsername());
+        Assertions.assertEquals(TEST_ITEM_USER_ID_5, item2.getOwner().getUserId());
         Assertions.assertEquals(TEST_ITEM_CATEGORY_5, item2.getCategory());
         Assertions.assertEquals(TEST_ITEM_DESCRIPTION_5, item2.getDescription());
         Assertions.assertEquals(TEST_ITEM_PRICE_5, item2.getPrice());
