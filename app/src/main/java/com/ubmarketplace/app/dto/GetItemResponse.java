@@ -7,13 +7,11 @@ import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
 
-import java.util.List;
-
 @Getter
 @Setter
 @Builder
 @AllArgsConstructor
 @NoArgsConstructor
-public class AllItemResponse {
-    private List<ResponseItem> item;
+public class GetItemResponse {
+    private ResponseItem item;
 }

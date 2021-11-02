@@ -8,6 +8,7 @@ import lombok.Setter;
 import javax.validation.constraints.Max;
 import javax.validation.constraints.Min;
 import javax.validation.constraints.NotNull;
+import javax.validation.constraints.Pattern;
 import java.util.List;
 
 @Getter
@@ -18,6 +19,8 @@ public class NewItemRequest {
     @NotNull(message = "Item name cannot be empty")
     private String name;
 
+    @NotNull(message = "userId cannot be empty")
+    @Pattern(regexp = "^[a-zA-Z0-9_]+@(buffalo.edu|test.com)$", message = "Format incorrect: userId should be a buffalo.edu email")
     private String userId;
 
     @NotNull(message = "Category cannot be empty")
@@ -36,4 +39,9 @@ public class NewItemRequest {
 
     @NotNull(message = "Meeting place cannot be empty")
     private String meetingPlace;
+
+    // contactPhoneNumber should be 10 digits number in string or empty string
+    @Pattern(regexp = "(^\\d{10}$|^$)",
+            message = "Format incorrect: Contact phone number should be 10 digits number or empty")
+    private String contactPhoneNumber;
 }
