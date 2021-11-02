@@ -22,6 +22,20 @@ class item_detail extends Component{
 
         };
 
+        fetch(`/api/getItem/${id}`, requestOptions)
+            .then(res=>{
+                if (res.status !== 200) {
+                    handleAPIError(res);
+                } else {
+                    res.json().then(data => {
+                        const item = data.item;
+                        this.setState({
+                            item: item
+                        })
+                    })
+                }
+            })
+
         fetch('/api/allitem',requestOptions)
             .then(res=>{
                 if (res.status !== 200) {
@@ -29,11 +43,8 @@ class item_detail extends Component{
                 } else {
                     res.json().then(data => { 
                         const items = data.item;
-                        const otherItems = items.filter(item => item.itemId !== id);
-                        const thisItem = items.filter(item => item.itemId === id);
-
+                        const otherItems = items.filter(item => item.itemId !== id).slice(0,5);
                         this.setState({
-                            item: thisItem[0],
                             relatedItems: otherItems
                         }) 
                     });
@@ -43,20 +54,18 @@ class item_detail extends Component{
 
     render() {
         let{item,relatedItems} = this.state;
-        /*show only 5 related products to load faster*/
 
         const related = relatedItems ? relatedItems.map(item=>(
             <div className="itemImg">
-                <a href="/#/item">
+                <Link to={'/item/'+item.itemId.toString()}>
                     <img src={item.images[0]} alt={item.name} />
-                </a>
+                </Link>
                 <p>{item.name}</p>
                 <p>${item.price}</p>
             </div>
         )) : null;
 
         return (
-            
             <div className="home">
                 <div className="header">
                     <Link to="/">
@@ -78,8 +87,6 @@ class item_detail extends Component{
                                 <img src={item.images[0]} alt={item.name} />
                             </div>
                         </div>
-
-
                         <div className="itemRight">
                             <div className="itemName">
                                 <h2>{item.name}</h2>
@@ -96,8 +103,6 @@ class item_detail extends Component{
                                 {item.description}
                             </div>
                         </div>
-
-
                     </div>
                 : 
                     <p>Loading...</p>
@@ -110,16 +115,9 @@ class item_detail extends Component{
                         {related}
                     </div>
                 : '' }
-                
-
             </div>
-
-
-
         );
-
     }
-
 }
 
 export default item_detail;

@@ -20,7 +20,6 @@ class home extends Component{
     componentDidMount() {
         const requestOptions = {
             /*remove 'no-cors' once item insertion function gets finished*/
-            // mode: 'no-cors',
             method: "get",
             headers: {
                 "Content-Type": "application/json"
@@ -58,7 +57,7 @@ class home extends Component{
         //         })
         //     })
 
-        fetch("https://ubmarketplace-develop.herokuapp.com/api/allitem",requestOptions)
+        fetch("/api/allitem",requestOptions)
             .then(response=> {
                 if (response.status !== 200) {
                     handleAPIError(response);
@@ -86,8 +85,9 @@ class home extends Component{
                             {items.map(item=>(
                                 <div className="itemImg">
                                     {/*link needs to be uuid ex) item.uuid */}
-                                    <Link to="/item">
-                                    <img src={item.images}/></Link>
+                                    <Link to={"/item" + item.itemId}>
+                                        <img src={item.images} alt={item.name}/>
+                                    </Link>
                                     <p>{item.name}</p>
                                     <p>${item.price}</p>
 
@@ -149,7 +149,7 @@ class home extends Component{
                         <Carousel  show={5} infiniteLoop>
                             {items.map(item=>(
                                 <div className="itemImg">
-                                    <img src={item.imageFilePath}/>
+                                    <img src={item.images[0]}/>
                                     <p>{item.name}</p>
                                     <p>${item.price}</p>
                                 </div>
