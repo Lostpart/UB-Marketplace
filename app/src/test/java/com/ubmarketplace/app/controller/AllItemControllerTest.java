@@ -1,5 +1,6 @@
 package com.ubmarketplace.app.controller;
 
+import com.ubmarketplace.app.dto.AllItemRequest;
 import com.ubmarketplace.app.dto.AllItemResponse;
 import com.ubmarketplace.app.dto.ResponseItem;
 import com.ubmarketplace.app.manager.ImageManager;
@@ -56,7 +57,7 @@ public class AllItemControllerTest {
 
     @BeforeAll
     public void setup() {
-        Mockito.when(itemManager.getAllItem()).thenReturn(Arrays.asList(TEST_ITEM_4, TEST_ITEM_5));
+        Mockito.when(itemManager.getCategoryItem("", "", "", "")).thenReturn(Arrays.asList(TEST_ITEM_4, TEST_ITEM_5));
         Mockito.when(imageManager.getThumbUrl(anyString())).thenReturn("Test Failed");
         Mockito.when(imageManager.getThumbUrl(eq(TEST_IMAGE_IMAGE_ID_1))).thenReturn(TEST_IMAGE_THUMB_1);
         Mockito.when(imageManager.getThumbUrl(eq(TEST_IMAGE_IMAGE_ID_2))).thenReturn(TEST_IMAGE_THUMB_2);
@@ -65,7 +66,7 @@ public class AllItemControllerTest {
 
     @Test
     public void GIVEN_goodInput_WHEN_allItem_THEN_returnItemList() {
-        AllItemResponse response = allItemController.allItem();
+        AllItemResponse response = allItemController.allItem(new AllItemRequest("", "", "", ""));
 
         Assertions.assertEquals(2, response.getItem().size());
 

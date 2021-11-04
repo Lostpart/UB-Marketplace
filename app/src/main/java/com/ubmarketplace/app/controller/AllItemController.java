@@ -1,5 +1,6 @@
 package com.ubmarketplace.app.controller;
 
+import com.ubmarketplace.app.dto.AllItemRequest;
 import com.ubmarketplace.app.dto.AllItemResponse;
 import com.ubmarketplace.app.dto.ResponseItem;
 import com.ubmarketplace.app.manager.ImageManager;
@@ -7,6 +8,7 @@ import com.ubmarketplace.app.manager.ItemManager;
 import com.ubmarketplace.app.manager.UserManager;
 import com.ubmarketplace.app.model.Item;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RestController;
@@ -31,10 +33,10 @@ public class AllItemController {
     }
 
     @RequestMapping(value = "/api/allitem", method = RequestMethod.GET, produces = "application/json;charset=UTF-8")
-    public AllItemResponse allItem() {
+    public AllItemResponse allItem(@RequestBody AllItemRequest request) {
 
         // Get the queryResult
-        List<Item> queryResult = itemManager.getAllItem();
+        List<Item> queryResult = itemManager.getCategoryItem(request.getUserId(), request.getCategory(), request.getLocation(), request.getPricing());
 
         // Convert List<Item> to List<AllItemResponse.AllItemResponseItem>
         List<ResponseItem> response = queryResult.parallelStream()

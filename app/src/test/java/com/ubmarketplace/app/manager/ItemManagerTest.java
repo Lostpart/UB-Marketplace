@@ -12,35 +12,11 @@ import org.springframework.boot.test.context.SpringBootTest;
 import org.springframework.test.annotation.DirtiesContext;
 
 import java.security.InvalidParameterException;
+import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
 
-import static com.ubmarketplace.app.TestStatic.TEST_IMAGE_IMAGE_ID_1;
-import static com.ubmarketplace.app.TestStatic.TEST_IMAGE_IMAGE_ID_2;
-import static com.ubmarketplace.app.TestStatic.TEST_ITEM_4;
-import static com.ubmarketplace.app.TestStatic.TEST_ITEM_5;
-import static com.ubmarketplace.app.TestStatic.TEST_ITEM_CATEGORY_3;
-import static com.ubmarketplace.app.TestStatic.TEST_ITEM_CATEGORY_4;
-import static com.ubmarketplace.app.TestStatic.TEST_ITEM_DESCRIPTION_3;
-import static com.ubmarketplace.app.TestStatic.TEST_ITEM_DESCRIPTION_4;
-import static com.ubmarketplace.app.TestStatic.TEST_ITEM_ID_1;
-import static com.ubmarketplace.app.TestStatic.TEST_ITEM_ID_2;
-import static com.ubmarketplace.app.TestStatic.TEST_ITEM_ID_3;
-import static com.ubmarketplace.app.TestStatic.TEST_ITEM_ID_4;
-import static com.ubmarketplace.app.TestStatic.TEST_ITEM_ID_5;
-import static com.ubmarketplace.app.TestStatic.TEST_ITEM_IMAGE_3;
-import static com.ubmarketplace.app.TestStatic.TEST_ITEM_MEETING_PLACE_3;
-import static com.ubmarketplace.app.TestStatic.TEST_ITEM_MEETING_PLACE_4;
-import static com.ubmarketplace.app.TestStatic.TEST_ITEM_NAME_1;
-import static com.ubmarketplace.app.TestStatic.TEST_ITEM_NAME_2;
-import static com.ubmarketplace.app.TestStatic.TEST_ITEM_NAME_3;
-import static com.ubmarketplace.app.TestStatic.TEST_ITEM_PHONE_NUMBER_FORMATTED_4;
-import static com.ubmarketplace.app.TestStatic.TEST_ITEM_PRICE_3;
-import static com.ubmarketplace.app.TestStatic.TEST_ITEM_PRICE_4;
-import static com.ubmarketplace.app.TestStatic.TEST_ITEM_USER_ID_4;
-import static com.ubmarketplace.app.TestStatic.TEST_NAME_4;
-import static com.ubmarketplace.app.TestStatic.TEST_PASSWORD_3;
-import static com.ubmarketplace.app.TestStatic.TEST_USER_ID_3;
+import static com.ubmarketplace.app.TestStatic.*;
 
 @SpringBootTest
 @DirtiesContext(classMode = DirtiesContext.ClassMode.BEFORE_CLASS)
@@ -122,5 +98,24 @@ public class ItemManagerTest {
 
         Assertions.assertThrows(InvalidParameterException.class,
                 () -> itemManager.getItemById("NotValidItemID"));
+    }
+
+
+    @Test
+    void GIVEN_itemsInDatabase_WHEN_findcategorize_THEN_findAllcategorizeItems() {
+
+        List<String> validItemId = new ArrayList<String>(){{
+            add(TEST_ITEM_ID_1);
+            add(TEST_ITEM_ID_2);
+            add(TEST_ITEM_ID_4);
+            add(TEST_ITEM_ID_5);
+        }};
+
+        List<Item> result = itemManager.getCategoryItem("", "", "", "");
+
+        for(Item item : result){
+            Assertions.assertTrue(validItemId.contains(item.getItemId()));
+        }
+        Assertions.assertTrue(result.size() == 4);
     }
 }

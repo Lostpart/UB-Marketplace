@@ -10,10 +10,7 @@ import org.springframework.test.annotation.DirtiesContext;
 import java.util.ArrayList;
 import java.util.List;
 
-import static com.ubmarketplace.app.TestStatic.TEST_ITEM_ID_1;
-import static com.ubmarketplace.app.TestStatic.TEST_ITEM_ID_2;
-import static com.ubmarketplace.app.TestStatic.TEST_ITEM_NAME_1;
-import static com.ubmarketplace.app.TestStatic.TEST_ITEM_NAME_2;
+import static com.ubmarketplace.app.TestStatic.*;
 
 @SpringBootTest
 @DirtiesContext(classMode = DirtiesContext.ClassMode.BEFORE_EACH_TEST_METHOD)
@@ -63,17 +60,104 @@ public class ItemRepositoryTest {
 
 
     @Test
-    void GIVEN_itemsInDatabase_WHEN_findcategorize_THEN_findAllcategorizeItems() {
-        itemRepository.insert(Item.builder().itemId(TEST_ITEM_ID_1).name(TEST_ITEM_NAME_1).category("Book").build());
-        itemRepository.insert(Item.builder().itemId(TEST_ITEM_ID_2).name(TEST_ITEM_NAME_2).category("Car").build());
+    void GIVEN_itemsInDatabase_WHEN_findcategorizeWITH_ID_THEN_findAllcategorizeItems() {
+        itemRepository.insert(Item.builder().itemId(TEST_ITEM_ID_1).name(TEST_ITEM_NAME_1).userId(TEST_USER_ID_1).category("Book").price(23.0).build());
+        itemRepository.insert(Item.builder().itemId(TEST_ITEM_ID_2).name(TEST_ITEM_NAME_1).userId(TEST_USER_ID_1).category("Car").price(1.0).build());
+        itemRepository.insert(Item.builder().itemId(TEST_ITEM_ID_3).name(TEST_ITEM_NAME_1).userId(TEST_USER_ID_2).category("Car").price(40.0).build());
 
         List<String> validItemId = new ArrayList<String>(){{
             add(TEST_ITEM_ID_1);
+            add(TEST_ITEM_ID_2);
         }};
 
-        List<Item> result = itemRepository.getCategorizeItem("Book");
+        List<Item> result = itemRepository.getCategorizeItem(TEST_USER_ID_1, "", "", "");
+
         for(Item item : result){
             Assertions.assertTrue(validItemId.contains(item.getItemId()));
         }
+        Assertions.assertTrue(result.size() == 2);
+    }
+
+
+    @Test
+    void GIVEN_itemsInDatabase_WHEN_findcategorizeWITH_Category_THEN_findAllcategorizeItems() {
+        itemRepository.insert(Item.builder().itemId(TEST_ITEM_ID_1).name(TEST_ITEM_NAME_1).userId(TEST_USER_ID_1).category("Book").price(23.0).build());
+        itemRepository.insert(Item.builder().itemId(TEST_ITEM_ID_2).name(TEST_ITEM_NAME_1).userId(TEST_USER_ID_1).category("Car").price(1.0).build());
+        itemRepository.insert(Item.builder().itemId(TEST_ITEM_ID_3).name(TEST_ITEM_NAME_1).userId(TEST_USER_ID_2).category("Car").price(40.0).build());
+
+        List<String> validItemId = new ArrayList<String>(){{
+            add(TEST_ITEM_ID_2);
+            add(TEST_ITEM_ID_3);
+        }};
+
+        List<Item> result = itemRepository.getCategorizeItem("", "Car", "", "");
+
+        for(Item item : result){
+            Assertions.assertTrue(validItemId.contains(item.getItemId()));
+        }
+        Assertions.assertTrue(result.size() == 2);
+    }
+
+    @Test
+    void GIVEN_itemsInDatabase_WHEN_findcategorizeWITH_Location_THEN_findAllcategorizeItems() {
+        itemRepository.insert(Item.builder().itemId(TEST_ITEM_ID_1).name(TEST_ITEM_NAME_1).userId(TEST_USER_ID_1).category("Book").meetingPlace(TEST_ITEM_MEETING_PLACE_3).price(23.0).build());
+        itemRepository.insert(Item.builder().itemId(TEST_ITEM_ID_2).name(TEST_ITEM_NAME_1).userId(TEST_USER_ID_1).category("Car").price(1.0).build());
+        itemRepository.insert(Item.builder().itemId(TEST_ITEM_ID_3).name(TEST_ITEM_NAME_1).userId(TEST_USER_ID_2).category("Car").price(40.0).build());
+
+        List<String> validItemId = new ArrayList<String>(){{
+            add(TEST_ITEM_ID_1);
+
+        }};
+
+        List<Item> result = itemRepository.getCategorizeItem("", "", TEST_ITEM_MEETING_PLACE_3, "");
+
+        for(Item item : result){
+            Assertions.assertTrue(validItemId.contains(item.getItemId()));
+        }
+        Assertions.assertTrue(result.size() == 1);
+    }
+
+
+    @Test
+    void GIVEN_itemsInDatabase_WHEN_findcategorize_THEN_findAllcategorizeItems() {
+        itemRepository.insert(Item.builder().itemId(TEST_ITEM_ID_1).name(TEST_ITEM_NAME_1).userId(TEST_USER_ID_1).category("Book").price(23.0).build());
+        itemRepository.insert(Item.builder().itemId(TEST_ITEM_ID_2).name(TEST_ITEM_NAME_1).userId(TEST_USER_ID_1).category("Car").price(1.0).build());
+        itemRepository.insert(Item.builder().itemId(TEST_ITEM_ID_3).name(TEST_ITEM_NAME_1).userId(TEST_USER_ID_2).category("Car").price(40.0).build());
+
+        List<String> validItemId = new ArrayList<String>(){{
+            add(TEST_ITEM_ID_1);
+            add(TEST_ITEM_ID_2);
+            add(TEST_ITEM_ID_3);
+        }};
+
+        List<Item> result = itemRepository.getCategorizeItem("", "", "", "");
+
+        for(Item item : result){
+            Assertions.assertTrue(validItemId.contains(item.getItemId()));
+        }
+        Assertions.assertTrue(result.size() == 3);
+    }
+
+    @Test
+    void GIVEN_itemsInDatabase_WHEN_findcategorize_WITH_PRICE_THEN_findAllcategorizeItems() {
+        itemRepository.insert(Item.builder().itemId(TEST_ITEM_ID_1).name(TEST_ITEM_NAME_1).userId(TEST_USER_ID_1).category("Book").price(23.0).build());
+        itemRepository.insert(Item.builder().itemId(TEST_ITEM_ID_2).name(TEST_ITEM_NAME_1).userId(TEST_USER_ID_1).category("Car").price(1.0).build());
+        itemRepository.insert(Item.builder().itemId(TEST_ITEM_ID_3).name(TEST_ITEM_NAME_1).userId(TEST_USER_ID_2).category("Car").price(40.0).build());
+
+        List<String> validItemId = new ArrayList<String>(){{
+            add(TEST_ITEM_ID_1);
+            add(TEST_ITEM_ID_2);
+            add(TEST_ITEM_ID_3);
+        }};
+
+        List<Item> result = itemRepository.getCategorizeItem("", "", "", "descend");
+
+        double lastPrice = result.get(0).getPrice();
+        for(Item item : result){
+            Assertions.assertTrue(validItemId.contains(item.getItemId()));
+            Assertions.assertTrue(item.getPrice() <= lastPrice);
+            lastPrice = item.getPrice();
+        }
+        Assertions.assertTrue(result.size() == 3);
     }
 }

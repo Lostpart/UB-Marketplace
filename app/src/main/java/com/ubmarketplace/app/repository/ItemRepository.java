@@ -4,6 +4,7 @@ import com.mongodb.client.result.DeleteResult;
 import com.ubmarketplace.app.dao.ItemDao;
 import com.ubmarketplace.app.model.Item;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.data.domain.Sort;
 import org.springframework.data.mongodb.core.MongoTemplate;
 import org.springframework.data.mongodb.core.query.Criteria;
 import org.springframework.data.mongodb.core.query.Query;
@@ -42,9 +43,36 @@ public class ItemRepository implements ItemDao {
     }
 
 
-    public List<Item> getCategorizeItem(String category){
-        Query query = new Query();
-        query.addCriteria(Criteria.where("category").is(category));
-        return mongoTemplate.find(query, Item.class);
+    public List<Item> getCategorizeItem(String userId, String category, String location, String pricing){
+
+        Criteria criteria = new Criteria();
+        if (userId.isEmpty() && category.isEmpty() && location.isEmpty() && pricing.isEmpty()){
+            return mongoTemplate.findAll(Item.class);
+        }
+
+        if (!userId.isEmpty()){
+            criteria.and("userId").is(userId);
+        }
+        if (!category.isEmpty()){
+            criteria = criteria.and("category").is(category);
+        }
+        if (!location.isEmpty()){
+            criteria = criteria.and("meetingPlace").is(location);
+        }
+
+        Query query = new Query(criteria);
+
+        if (!pricing.isEmpty()){
+            if (pricing.equals("descend")){
+                query = query.with(Sort.by(Sort.Order.desc("price")));
+            }
+            else if (pricing.equals("ascend")){
+                query = query.with(Sort.by(Sort.Order.asc("price")));
+            }
+        }
+
+        List<Item> queryResult = mongoTemplate.find(query, Item.class);
+
+        return queryResult;
     }
 }
