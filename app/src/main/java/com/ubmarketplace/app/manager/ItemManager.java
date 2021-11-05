@@ -93,7 +93,7 @@ public class ItemManager {
         return item;
     }
 
-    public List<Item> getCategoryItem(String category) {
-        return itemRepository.getCategorizeItem(category);
+    public List<Item> getCategoryItem(String category, String userId, String location, String pricing) {
+        return itemRepository.getCategoryItem(category, userId, location, pricing);
     }
 }

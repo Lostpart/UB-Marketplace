@@ -1,7 +1,8 @@
 package com.ubmarketplace.app.controller;
 
-import com.ubmarketplace.app.dto.CategorizeItemRequest;
-import com.ubmarketplace.app.dto.CategorizeItemResponse;
+import com.ubmarketplace.app.dto.CategoryItemRequest;
+import com.ubmarketplace.app.dto.CategoryItemResponse;
+import com.ubmarketplace.app.dto.ResponseItem;
 import com.ubmarketplace.app.manager.ImageManager;
 import com.ubmarketplace.app.manager.ItemManager;
 import com.ubmarketplace.app.manager.UserManager;
@@ -14,6 +15,8 @@ import org.springframework.web.bind.annotation.RestController;
 
 import java.util.List;
 import java.util.stream.Collectors;
+
+import static com.ubmarketplace.app.dto.ResponseItem.imageType.THUMB;
 
 @RestController
 public class CategoryItemController {
@@ -29,32 +32,18 @@ public class CategoryItemController {
         this.userManager = userManager;
     }
 
-    @RequestMapping(value = "/api/categoryitem", method = RequestMethod.GET,produces = "application/json;charset=UTF-8")
-    public CategorizeItemResponse categorizeItem(@RequestBody CategorizeItemRequest request){
+    @RequestMapping(value = "/api/categoryitem", method = RequestMethod.POST,produces = "application/json;charset=UTF-8")
+    public CategoryItemResponse categorizeItem(@RequestBody CategoryItemRequest request){
 
         // Get the queryResult
-        List<Item> queryResult = itemManager.getCategoryItem(request.getCategorize());
+        List<Item> queryResult = itemManager.getCategoryItem(request.getCategory(), request.getUserId(), request.getLocation(), request.getPricing());
 
         // Convert List<Item> to List<AllItemResponse.AllItemResponseItem>
-        List<CategorizeItemResponse.CategorizetemResponseItem> response = queryResult.parallelStream()
-                .map(item -> CategorizeItemResponse.CategorizetemResponseItem.builder()
-                        .itemId(item.getItemId())
-                        .name(item.getName())
-                        .owner(CategorizeItemResponse.CategorizeItemResponseItemOwner.builder()
-                                .username(item.getUserId())
-                                .displayName(userManager.getDiisplayName(item.getUserId()))
-                                .build())
-                        .category(item.getCategory())
-                        .description(item.getDescription())
-                        .price(item.getPrice())
-                        .images(item.getImages().parallelStream()
-                                .map(imageManager::getThumbUrl)
-                                .collect(Collectors.toList()))
-                        .meetingPlace(item.getMeetingPlace())
-                        .createdTime(item.getCreatedTime())
-                        .build())
+        List<ResponseItem> response = queryResult.parallelStream()
+                .map(item -> new ResponseItem(item, THUMB, userManager, imageManager))
                 .collect(Collectors.toList());
 
-        return CategorizeItemResponse.builder().item(response).build();
+
+        return CategoryItemResponse.builder().item(response).build();
     }
 }
