@@ -14,7 +14,7 @@ const Listing = () =>{
     useEffect(()=> {
         const fetchPosts = async () => {
             setLoading(true);
-            const res = await axios.get('https://ubmarketplace-develop.herokuapp.com/api/allitem');
+            const res = await axios.get('/api/allitem');
             setPosts(res.data.item);
             setLoading(false);
         }
