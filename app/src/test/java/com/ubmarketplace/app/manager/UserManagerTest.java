@@ -26,8 +26,8 @@ public class UserManagerTest {
 
     @BeforeAll
     static void setup(@Autowired UserRepository userRepository) {
-        userRepository.insert(User.builder().userId(TEST_USER_ID_1).password(TEST_PASSWORD_1).build());
-        userRepository.insert(User.builder().userId(TEST_USER_ID_2).password(TEST_PASSWORD_2).build());
+        userRepository.insert(User.builder().userId(TEST_USER_ID_1).role("User").password(TEST_PASSWORD_1).displayName("displayName").build());
+        userRepository.insert(User.builder().userId(TEST_USER_ID_2).role("Admin").password(TEST_PASSWORD_2).displayName("displayName").build());
     }
 
     @Test
@@ -35,6 +35,11 @@ public class UserManagerTest {
         User user = User.builder().userId(TEST_USER_ID_3).password(TEST_PASSWORD_3).build();
         usermanager.addNewUser(TEST_USER_ID_3, TEST_PASSWORD_3, "DisplayName");
         Assertions.assertEquals(userRepository.findById(TEST_USER_ID_3).getUserId(), user.getUserId());
+    }
+    @Test
+    public void GIVEN_goodInput_WHEN_loginVerification_THEN_returnGOOD_DisplayName_accordingly(@Autowired UserRepository userRepository){
+        Assertions.assertEquals(userRepository.findById(TEST_USER_ID_1).getDisplayName(), usermanager.getDiisplayName(TEST_USER_ID_1));
+        Assertions.assertEquals("Admin", usermanager.getDiisplayName(TEST_USER_ID_2));
     }
 
     @Test

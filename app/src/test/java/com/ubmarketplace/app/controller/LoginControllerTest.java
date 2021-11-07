@@ -28,8 +28,8 @@ public class LoginControllerTest {
 
     @BeforeAll
     static void setup(@Autowired UserRepository userRepository) {
-        userRepository.insert(User.builder().userId(TEST_USER_ID_1).password(TEST_PASSWORD_1).build());
-        userRepository.insert(User.builder().userId(TEST_USER_ID_2).password(TEST_PASSWORD_2).build());
+        userRepository.insert(User.builder().userId(TEST_USER_ID_1).role("User").password(TEST_PASSWORD_1).displayName("displayName").build());
+        userRepository.insert(User.builder().userId(TEST_USER_ID_2).role("Admin").password(TEST_PASSWORD_2).displayName("displayName").build());
     }
 
     @Test
@@ -48,6 +48,14 @@ public class LoginControllerTest {
         Assertions.assertThrows(InvalidParameterException.class, () -> loginController.login(new LoginRequest("", TEST_ALWAYS_WRONG_PASSWORD)));
     }
 
+    @Test
+    public void GIVEN_correctUsernamePassword_THEN_return_correctDisplayName_accordingly(@Autowired UserRepository userRepository){
+        LoginResponse userResponse = loginController.login(new LoginRequest(TEST_USER_ID_1, TEST_PASSWORD_1));
+        LoginResponse adminResponse = loginController.login(new LoginRequest(TEST_USER_ID_2, TEST_PASSWORD_2));
+
+        Assertions.assertEquals(userRepository.findById(TEST_USER_ID_1).getDisplayName(), userResponse.getUser().getDisplayName());
+        Assertions.assertEquals("Admin", adminResponse.getUser().getDisplayName());
+    }
 
 
 }
