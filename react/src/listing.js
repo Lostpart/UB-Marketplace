@@ -1,100 +1,44 @@
-import {Link} from "react-router-dom";
-import React, {Component} from 'react';
+import React, {useEffect,useState} from 'react';
+import axios from 'axios'
 import './listing.css';
 import Header from "./header";
-import {handleAPIError} from "./errors";
+import Posts from './posts'
+import Pagination from './Pagination'
 
+const Listing = () =>{
+    const[posts, setPosts] = useState([]);
+    const[loading, setLoading] = useState(false);
+    const[currentPage, setCurrentPage] = useState(1);
+    const[postPerPage] = useState(8);
 
-class listing extends Component{
-    constructor(props) {
-        super(props);
-        this.state ={
-            items:[],
-            isLoaded: true,
-
+    useEffect(()=> {
+        const fetchPosts = async () => {
+            setLoading(true);
+            const res = await axios.get('https://ubmarketplace-develop.herokuapp.com/api/allitem');
+            setPosts(res.data.item);
+            setLoading(false);
         }
-    }
+        fetchPosts();
+    }, []);
 
-    componentDidMount() {
-        const requestOptions = {
-            /*remove 'no-cors' once item insertion function gets finished*/
-            method: "get",
-            headers: {
-                "Content-Type": "application/json"
-            }
+    const indexOfLastPost = currentPage * postPerPage;
+    const indexofFirstPost = indexOfLastPost - postPerPage;
+    const currentPosts = posts.slice(indexofFirstPost, indexOfLastPost);
+    const paginate = (pageNumber) => setCurrentPage(pageNumber);
 
-        };
+    return (
+        <div className="listing">
+            <Header/>
+            <div className="searchBar">
+                <input type="text"></input>
+                <button name="searchBtn">Search</button>
+            </div>
+            <Posts posts={currentPosts} loading={loading}/>
+            <Pagination postsPerPage={postPerPage} totalPosts={posts.length} paginate={paginate} currentPage={currentPage}/>
+        </div>
 
-        fetch("https://ubmarketplace-develop.herokuapp.com/api/allitem",requestOptions)
-            .then(response=> {
-                if (response.status !== 200) {
-                    handleAPIError(response);
-
-                } else {
-                    response.json().then(data => {
-                        console.log(data);
-                        this.setState({
-                            isLoaded: true,
-                            items: data.item})
-                    });
-                }
-            })
-
-
-
-    }
-
-    render() {
-        var{isLoaded, items} = this.state;
-        const {name} = (this.props.location && this.props.location.state) || {};
-
-        if(isLoaded==true){
-            return (
-                <div className="listing">
-                    <Header/>
-                    <div className="searchBar">
-                        <input type="text"></input>
-                        <button name="searchBtn">Search</button>
-                    </div>
-
-                    <div className="row">
-                        {items.slice(0,8).map(item=>(
-                            <div className="column">
-                                <div className="card">
-                                    <Link to="/item">
-                                        <img src={item.images}/>
-                                    </Link>
-                                    <p>{item.name}</p>
-                                    <p>${item.price}</p>
-                                </div>
-                            </div>
-                        ))}
-                    </div>
-
-                    <div className="center">
-                        <div className="pagination">
-
-                            <a href="#/listing">&laquo;</a>
-                            <a href="#/listing" className="active">1</a>
-                            <a href="#/listing">2</a>
-                            <a href="#/listing">3</a>
-                            <a href="#/listing">4</a>
-                            <a href="#/listing">5</a>
-                            <a href="#/listing">6</a>
-                            <a href="#/listing">7</a>
-                            <a href="#/listing">8</a>
-                            <a href="#">&raquo;</a>
-                        </div>
-                    </div>
-
-                </div>
-
-            );
-        }
-
-
-    }
-
+    );
 }
 
-export default listing;
+
+export default Listing;
