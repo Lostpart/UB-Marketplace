@@ -60,9 +60,10 @@ public class UserManager {
             log.info(String.format("Empty username or password or display name when creating new account for %s", username));
             throw new InvalidParameterException("Empty username or password or displayName");
         }
-        log.info(String.format("Creating new account for %s", username));
 
-        User user = User.builder().userId(username).password(password).displayName(displayName).build();
+        User user = User.builder().userId(username).role("User").password(password).displayName(displayName).build();
+
+        log.info(String.format("Creating new account for %s", username));
 
         try {
             userRepository.insert(user);
@@ -70,17 +71,27 @@ public class UserManager {
             log.warning(String.format("Failed to create new account for %s, an account with same username already exist", username));
             throw new InvalidParameterException("Failed to create new account, an account with same username already exist");
         }
-
         return user;
+    }
+
+    public String getUserRole(@NotNull String userId){
+        if(userId.isEmpty()){
+            throw new InvalidParameterException("Empty username");
+        }
+        return userRepository.findById(userId).getRole();
     }
 
     public String getDiisplayName(@NotNull String username){
         if (username.isEmpty()){
             throw new InvalidParameterException("Empty username");
         }
-
+        //In order to check the role is admin or user, display username as "Admin", if the user role is admin
+        if(getUserRole(username).equals("Admin")){
+            User tmp = userRepository.findById(username);
+            tmp.setDisplayName(getUserRole(tmp.getUserId()));
+            userRepository.save(tmp);
+        }
         return userRepository.findById(username).getDisplayName();
-
     }
 
     public User updateUser(@NonNull String username, @NonNull String password, @NonNull String displayName) {

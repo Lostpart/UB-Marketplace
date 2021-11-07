@@ -39,4 +39,5 @@ public class UserRepository implements UserDao {
         return mongoTemplate.findById(id, User.class);
     }
 
+    public User save(User user) {return mongoTemplate.save(user);}
 }

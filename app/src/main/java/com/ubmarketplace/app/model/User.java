@@ -21,6 +21,7 @@ public class User {
     @JsonAlias({"username"})
     @Id
     private String userId; // also known as username (use "userId" and stop use "username")
+    private String role;
     @JsonIgnore
     private String password;
     private String displayName;
