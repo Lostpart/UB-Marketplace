@@ -158,13 +158,7 @@ class Sell extends React.Component {
                 };
                 fetch('/api/newItem', requestOptions)
                     .then(response => {
-                        if (response.status !== 200) {
-                            handleAPIError(response);
-                        } else {
-                            response.json().then(data => {
-                                this.props.history.push(`/item/${data.itemId}`);
-                            });
-                        }
+                        this.props.history.push(`/`);
                     });
             
                 })
