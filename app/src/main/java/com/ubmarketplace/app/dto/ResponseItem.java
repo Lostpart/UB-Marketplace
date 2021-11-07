@@ -27,7 +27,7 @@ public class ResponseItem {
         this.name = item.getName();
         this.owner = ResponseItemOwner.builder()
                 .userId(item.getUserId())
-                .displayName(userManager.getDiisplayName(item.getUserId()))
+                .displayName(userManager.getDisplayName(item.getUserId()))
                 .build();
         this.category = item.getCategory();
         this.description = item.getDescription();

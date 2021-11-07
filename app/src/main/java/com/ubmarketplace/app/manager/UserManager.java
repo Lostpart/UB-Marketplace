@@ -74,7 +74,7 @@ public class UserManager {
         return user;
     }
 
-    public String getDiisplayName(@NotNull String username){
+    public String getDisplayName(@NotNull String username){
         if (username.isEmpty()){
             throw new InvalidParameterException("Empty username");
         }
