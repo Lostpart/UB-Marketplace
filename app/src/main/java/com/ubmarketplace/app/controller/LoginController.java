@@ -39,6 +39,7 @@ public class LoginController {
         return LoginResponse.builder()
                 .user(User.builder()
                         .userId(loginRequest.getUserId())
+                        .role(userManager.getUserRole(loginRequest.getUserId()))
                         .displayName(userManager.getDisplayName(loginRequest.getUserId()))
                         .build())
                 .build();
