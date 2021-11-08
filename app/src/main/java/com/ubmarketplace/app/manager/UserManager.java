@@ -78,13 +78,7 @@ public class UserManager {
         if(userId.isEmpty()){
             throw new InvalidParameterException("Empty username");
         }
-
-        //In order to check the role is admin or user, display username as "Admin", if the user role is admin
-        //if(userRepository.findById(userId).getRole().equals("Admin")){
-        //    User tmp = userRepository.findById(userId);
-        //   tmp.setDisplayName(getUserRole(tmp.getUserId()));
-        //    userRepository.save(tmp);
-        //}
+        
         return userRepository.findById(userId).getRole();
     }
 
