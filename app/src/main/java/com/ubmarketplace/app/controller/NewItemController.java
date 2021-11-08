@@ -34,7 +34,7 @@ public class NewItemController {
                 newItemRequest.getPrice(),
                 newItemRequest.getImages(),
                 newItemRequest.getMeetingPlace(),
-                newItemRequest.getContactPhoneNumber()
+                (newItemRequest.getContactPhoneNumber() == null) ? "" : newItemRequest.getContactPhoneNumber()
         );
 
 
