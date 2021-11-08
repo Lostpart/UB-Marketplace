@@ -82,7 +82,7 @@ public class UserManager {
         return userRepository.findById(userId).getRole();
     }
 
-    public String getDiisplayName(@NotNull String username){
+    public String getDisplayName(@NonNull String username){
         if (username.isEmpty()){
             throw new InvalidParameterException("Empty username");
         }

@@ -40,7 +40,7 @@ public class LoginController {
                 .user(User.builder()
                         .userId(loginRequest.getUserId())
                         .role(userManager.getUserRole(loginRequest.getUserId()))
-                        .displayName(userManager.getDiisplayName(loginRequest.getUserId()))
+                        .displayName(userManager.getDisplayName(loginRequest.getUserId()))
                         .build())
                 .build();
     }
