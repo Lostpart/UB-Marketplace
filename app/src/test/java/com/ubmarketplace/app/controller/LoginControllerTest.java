@@ -53,8 +53,8 @@ public class LoginControllerTest {
         LoginResponse userResponse = loginController.login(new LoginRequest(TEST_USER_ID_1, TEST_PASSWORD_1));
         LoginResponse adminResponse = loginController.login(new LoginRequest(TEST_USER_ID_2, TEST_PASSWORD_2));
 
-        Assertions.assertEquals(userRepository.findById(TEST_USER_ID_1).getDisplayName(), userResponse.getUser().getDisplayName());
-        Assertions.assertEquals("Admin", adminResponse.getUser().getDisplayName());
+        Assertions.assertEquals(userRepository.findById(TEST_USER_ID_1).getRole(), userResponse.getUser().getRole());
+        Assertions.assertEquals(userRepository.findById(TEST_USER_ID_2).getRole(), adminResponse.getUser().getRole());
     }
 
 

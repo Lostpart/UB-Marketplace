@@ -37,9 +37,9 @@ public class UserManagerTest {
         Assertions.assertEquals(userRepository.findById(TEST_USER_ID_3).getUserId(), user.getUserId());
     }
     @Test
-    public void GIVEN_goodInput_WHEN_loginVerification_THEN_returnGOOD_DisplayName_accordingly(@Autowired UserRepository userRepository){
-        Assertions.assertEquals(userRepository.findById(TEST_USER_ID_1).getDisplayName(), usermanager.getDiisplayName(TEST_USER_ID_1));
-        Assertions.assertEquals("Admin", usermanager.getDiisplayName(TEST_USER_ID_2));
+    public void GIVEN_goodInput_WHEN_getUserRole_THEN_return_appropriate_user_Role(@Autowired UserRepository userRepository){
+        Assertions.assertEquals(userRepository.findById(TEST_USER_ID_1).getRole(), usermanager.getUserRole(TEST_USER_ID_1));
+        Assertions.assertEquals(userRepository.findById(TEST_USER_ID_2).getRole(), usermanager.getUserRole(TEST_USER_ID_2));
     }
 
     @Test
