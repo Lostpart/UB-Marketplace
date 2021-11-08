@@ -10,7 +10,6 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.dao.DuplicateKeyException;
 import org.springframework.stereotype.Component;
 
-import javax.validation.constraints.NotNull;
 import java.security.InvalidParameterException;
 
 @Singleton
@@ -74,7 +73,7 @@ public class UserManager {
         return user;
     }
 
-    public String getDisplayName(@NotNull String username){
+    public String getDisplayName(@NonNull String username){
         if (username.isEmpty()){
             throw new InvalidParameterException("Empty username");
         }
