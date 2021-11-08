@@ -74,7 +74,7 @@ public class UserManager {
         return user;
     }
 
-    public String getUserRole(@NotNull String userId){
+    public String getUserRole(@NonNull String userId){
         if(userId.isEmpty()){
             throw new InvalidParameterException("Empty username");
         }
