@@ -34,11 +34,11 @@ import static com.ubmarketplace.app.TestStatic.TEST_ITEM_MEETING_PLACE_4;
 import static com.ubmarketplace.app.TestStatic.TEST_ITEM_NAME_1;
 import static com.ubmarketplace.app.TestStatic.TEST_ITEM_NAME_2;
 import static com.ubmarketplace.app.TestStatic.TEST_ITEM_NAME_3;
+import static com.ubmarketplace.app.TestStatic.TEST_ITEM_NAME_4;
 import static com.ubmarketplace.app.TestStatic.TEST_ITEM_PHONE_NUMBER_FORMATTED_4;
 import static com.ubmarketplace.app.TestStatic.TEST_ITEM_PRICE_3;
 import static com.ubmarketplace.app.TestStatic.TEST_ITEM_PRICE_4;
 import static com.ubmarketplace.app.TestStatic.TEST_ITEM_USER_ID_4;
-import static com.ubmarketplace.app.TestStatic.TEST_NAME_4;
 import static com.ubmarketplace.app.TestStatic.TEST_PASSWORD_3;
 import static com.ubmarketplace.app.TestStatic.TEST_USER_ID_3;
 
@@ -104,7 +104,7 @@ public class ItemManagerTest {
     public void GIVEN_validItemId_WHEN_getItemById_THEN_returnItem() {
         Item item = itemManager.getItemById(TEST_ITEM_ID_4);
         Assertions.assertEquals(TEST_ITEM_ID_4, item.getItemId());
-        Assertions.assertEquals(TEST_NAME_4, item.getName());
+        Assertions.assertEquals(TEST_ITEM_NAME_4, item.getName());
         Assertions.assertEquals(TEST_ITEM_USER_ID_4, item.getUserId());
         Assertions.assertEquals(TEST_ITEM_CATEGORY_4, item.getCategory());
         Assertions.assertEquals(TEST_ITEM_DESCRIPTION_4, item.getDescription());

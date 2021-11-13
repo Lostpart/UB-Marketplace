@@ -30,14 +30,14 @@ import static com.ubmarketplace.app.TestStatic.TEST_ITEM_ID_4;
 import static com.ubmarketplace.app.TestStatic.TEST_ITEM_ID_5;
 import static com.ubmarketplace.app.TestStatic.TEST_ITEM_MEETING_PLACE_4;
 import static com.ubmarketplace.app.TestStatic.TEST_ITEM_MEETING_PLACE_5;
+import static com.ubmarketplace.app.TestStatic.TEST_ITEM_NAME_4;
+import static com.ubmarketplace.app.TestStatic.TEST_ITEM_NAME_5;
 import static com.ubmarketplace.app.TestStatic.TEST_ITEM_PHONE_NUMBER_FORMATTED_4;
 import static com.ubmarketplace.app.TestStatic.TEST_ITEM_PHONE_NUMBER_FORMATTED_5;
 import static com.ubmarketplace.app.TestStatic.TEST_ITEM_PRICE_4;
 import static com.ubmarketplace.app.TestStatic.TEST_ITEM_PRICE_5;
 import static com.ubmarketplace.app.TestStatic.TEST_ITEM_USER_ID_4;
 import static com.ubmarketplace.app.TestStatic.TEST_ITEM_USER_ID_5;
-import static com.ubmarketplace.app.TestStatic.TEST_NAME_4;
-import static com.ubmarketplace.app.TestStatic.TEST_NAME_5;
 import static org.mockito.ArgumentMatchers.anyString;
 import static org.mockito.ArgumentMatchers.eq;
 
@@ -71,7 +71,7 @@ public class AllItemControllerTest {
 
         ResponseItem item1 = response.getItem().get(0);
         Assertions.assertEquals(TEST_ITEM_ID_4, item1.getItemId());
-        Assertions.assertEquals(TEST_NAME_4, item1.getName());
+        Assertions.assertEquals(TEST_ITEM_NAME_4, item1.getName());
         Assertions.assertEquals(TEST_ITEM_USER_ID_4, item1.getOwner().getUserId());
         Assertions.assertEquals(TEST_ITEM_CATEGORY_4, item1.getCategory());
         Assertions.assertEquals(TEST_ITEM_DESCRIPTION_4, item1.getDescription());
@@ -83,7 +83,7 @@ public class AllItemControllerTest {
 
         ResponseItem item2 = response.getItem().get(1);
         Assertions.assertEquals(TEST_ITEM_ID_5, item2.getItemId());
-        Assertions.assertEquals(TEST_NAME_5, item2.getName());
+        Assertions.assertEquals(TEST_ITEM_NAME_5, item2.getName());
         Assertions.assertEquals(TEST_ITEM_USER_ID_5, item2.getOwner().getUserId());
         Assertions.assertEquals(TEST_ITEM_CATEGORY_5, item2.getCategory());
         Assertions.assertEquals(TEST_ITEM_DESCRIPTION_5, item2.getDescription());
