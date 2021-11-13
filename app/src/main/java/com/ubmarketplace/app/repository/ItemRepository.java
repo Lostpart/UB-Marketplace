@@ -8,6 +8,7 @@ import org.springframework.data.domain.Sort;
 import org.springframework.data.mongodb.core.MongoTemplate;
 import org.springframework.data.mongodb.core.query.Criteria;
 import org.springframework.data.mongodb.core.query.Query;
+import org.springframework.data.mongodb.core.query.Update;
 import org.springframework.stereotype.Repository;
 
 import java.util.List;
@@ -42,6 +43,22 @@ public class ItemRepository implements ItemDao {
         return mongoTemplate.findById(itemId, Item.class);
     }
 
+    public void update(Item item) {
+        Query query = new Query();
+        query.addCriteria(Criteria.where("_id").is(item.getItemId()));
+        Update update = new Update();
+        update.set("name", item.getName());
+        update.set("category", item.getCategory());
+        update.set("description", item.getDescription());
+        update.set("price", item.getPrice());
+        update.set("images", item.getImages());
+        update.set("meetingPlace", item.getMeetingPlace());
+        if (item.getContactPhoneNumber() != null && !"".equals(item.getContactPhoneNumber())){
+            update.set("contactPhoneNumber", item.getContactPhoneNumber());
+        }
+        mongoTemplate.updateFirst(query, update, Item.class);
+    }
+
 
     public List<Item> getCategoryItem(String category, String userId, String location, String pricing){
         Criteria criteria = new Criteria();
@@ -70,8 +87,6 @@ public class ItemRepository implements ItemDao {
             }
         }
 
-        List<Item> queryResult = mongoTemplate.find(query, Item.class);
-
-        return queryResult;
+        return mongoTemplate.find(query, Item.class);
     }
 }
