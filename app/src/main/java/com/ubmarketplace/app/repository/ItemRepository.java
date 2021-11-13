@@ -3,6 +3,7 @@ package com.ubmarketplace.app.repository;
 import com.mongodb.client.result.DeleteResult;
 import com.ubmarketplace.app.dao.ItemDao;
 import com.ubmarketplace.app.model.Item;
+import lombok.NonNull;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Sort;
 import org.springframework.data.mongodb.core.MongoTemplate;
@@ -24,12 +25,12 @@ public class ItemRepository implements ItemDao {
     }
 
     @Override
-    public void insert(Item item) {
+    public void insert(@NonNull Item item) {
         mongoTemplate.insert(item);
     }
 
     @Override
-    public DeleteResult remove(Item item) {
+    public DeleteResult remove(@NonNull Item item) {
         return mongoTemplate.remove(item);
     }
 
@@ -43,18 +44,20 @@ public class ItemRepository implements ItemDao {
         return mongoTemplate.findById(itemId, Item.class);
     }
 
-    public void update(Item item) {
+    public void update(@NonNull String itemId, @NonNull String name, @NonNull String category,
+                       @NonNull String description, @NonNull Double price, @NonNull List<String> images,
+                       String meetingPlace, @NonNull String contactPhoneNumber) {
         Query query = new Query();
-        query.addCriteria(Criteria.where("_id").is(item.getItemId()));
+        query.addCriteria(Criteria.where("_id").is(itemId));
         Update update = new Update();
-        update.set("name", item.getName());
-        update.set("category", item.getCategory());
-        update.set("description", item.getDescription());
-        update.set("price", item.getPrice());
-        update.set("images", item.getImages());
-        update.set("meetingPlace", item.getMeetingPlace());
-        if (item.getContactPhoneNumber() != null && !"".equals(item.getContactPhoneNumber())){
-            update.set("contactPhoneNumber", item.getContactPhoneNumber());
+        update.set("name", name);
+        update.set("category", category);
+        update.set("description", description);
+        update.set("price", price);
+        update.set("images", images);
+        update.set("meetingPlace", meetingPlace);
+        if (!"".equals(contactPhoneNumber)){
+            update.set("contactPhoneNumber", contactPhoneNumber);
         }
         mongoTemplate.updateFirst(query, update, Item.class);
     }
