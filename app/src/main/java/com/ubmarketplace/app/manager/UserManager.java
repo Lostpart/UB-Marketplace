@@ -10,7 +10,6 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.dao.DuplicateKeyException;
 import org.springframework.stereotype.Component;
 
-import javax.validation.constraints.NotNull;
 import java.security.InvalidParameterException;
 
 @Singleton
@@ -80,6 +79,10 @@ public class UserManager {
         }
         
         return userRepository.findById(userId).getRole();
+    }
+
+    public Boolean isAdmin(@NonNull String userId){
+        return getUserRole(userId).equals("admin");
     }
 
     public String getDisplayName(@NonNull String username){

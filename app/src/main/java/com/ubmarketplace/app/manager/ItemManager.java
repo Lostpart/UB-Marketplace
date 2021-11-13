@@ -12,6 +12,7 @@ import org.springframework.stereotype.Component;
 
 import java.security.InvalidParameterException;
 import java.util.List;
+import java.util.Objects;
 
 @Singleton
 @Component
@@ -90,6 +91,28 @@ public class ItemManager {
         }
 
         return item;
+    }
+
+    public void editItem(@NonNull String itemId, @NonNull String name, @NonNull String category,
+                         @NonNull String description, @NonNull Double price, @NonNull List<String> images,
+                         String meetingPlace, @NonNull String contactPhoneNumber, @NonNull String editByUserId,
+                         @Autowired @NonNull UserManager userManager) {
+        if(itemId.isEmpty()) {
+            log.info("Empty itemId when editItem");
+            throw new InvalidParameterException("Empty itemId");
+        }
+        if(editByUserId.isEmpty()) {
+            log.info("Empty editByUserId when editItem");
+            throw new InvalidParameterException("Empty editByUserId");
+        }
+
+        if(!Objects.equals(getItemById(itemId).getUserId(), editByUserId) || !userManager.isAdmin(editByUserId)){
+            log.warning(String.format("User %s is trying to edit itemId %s, but not an owner or admin",
+                    editByUserId, itemId));
+            throw new InvalidParameterException("No permission to edit user");
+        }
+
+        itemRepository.update(itemId, name, category, description, price, images, meetingPlace, contactPhoneNumber);
     }
 
     public List<Item> getCategoryItem(String category, String userId, String location, String pricing) {
