@@ -10,7 +10,6 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.dao.DuplicateKeyException;
 import org.springframework.stereotype.Component;
 
-import javax.validation.constraints.NotNull;
 import java.security.InvalidParameterException;
 import java.util.List;
 
@@ -32,7 +31,7 @@ public class ItemManager {
                            @NonNull Double price,
                            @NonNull List<String> imageIds,
                            @NonNull String meetingPlace,
-                           @NotNull String contactPhoneNumber) {
+                           @NonNull String contactPhoneNumber) {
 
         Item item = Item.builder()
                 .name(name)

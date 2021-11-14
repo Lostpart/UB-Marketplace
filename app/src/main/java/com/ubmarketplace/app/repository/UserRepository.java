@@ -38,5 +38,4 @@ public class UserRepository implements UserDao {
     public User findById(String id) {
         return mongoTemplate.findById(id, User.class);
     }
-
 }
