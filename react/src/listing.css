@@ -26,6 +26,7 @@ body {
 .searchBar button{
     width: 100px;
     height: 40px;
+    margin-left: 10px;
     font-weight: bold;
 }
 .row{
