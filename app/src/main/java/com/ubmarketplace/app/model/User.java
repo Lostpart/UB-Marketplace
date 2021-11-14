@@ -21,21 +21,8 @@ public class User {
     @JsonAlias({"username"})
     @Id
     private String userId; // also known as username (use "userId" and stop use "username")
-    private UserRole role;
+    private String role;
     @JsonIgnore
     private String password;
     private String displayName;
-
-    public enum UserRole {
-        USER {
-            public String toString() {
-                return "User";
-            }
-        },
-        ADMIN {
-            public String toString() {
-                return "Admin";
-            }
-        }
-    }
 }

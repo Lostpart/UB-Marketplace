@@ -11,6 +11,8 @@ import org.springframework.test.annotation.DirtiesContext;
 
 import java.security.InvalidParameterException;
 
+import static com.ubmarketplace.app.Static.USER_ROLE_ADMIN;
+import static com.ubmarketplace.app.Static.USER_ROLE_USER;
 import static com.ubmarketplace.app.TestStatic.TEST_ALWAYS_WRONG_PASSWORD;
 import static com.ubmarketplace.app.TestStatic.TEST_PASSWORD_1;
 import static com.ubmarketplace.app.TestStatic.TEST_PASSWORD_2;
@@ -26,8 +28,8 @@ public class UserManagerTest {
 
     @BeforeAll
     static void setup(@Autowired UserRepository userRepository) {
-        userRepository.insert(User.builder().userId(TEST_USER_ID_1).role(User.UserRole.USER).password(TEST_PASSWORD_1).displayName("displayName").build());
-        userRepository.insert(User.builder().userId(TEST_USER_ID_2).role(User.UserRole.ADMIN).password(TEST_PASSWORD_2).displayName("displayName").build());
+        userRepository.insert(User.builder().userId(TEST_USER_ID_1).role(USER_ROLE_USER).password(TEST_PASSWORD_1).displayName("displayName").build());
+        userRepository.insert(User.builder().userId(TEST_USER_ID_2).role(USER_ROLE_ADMIN).password(TEST_PASSWORD_2).displayName("displayName").build());
     }
 
     @Test

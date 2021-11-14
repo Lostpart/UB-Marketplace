@@ -9,8 +9,12 @@ import org.springframework.test.annotation.DirtiesContext;
 
 import java.security.InvalidParameterException;
 import java.util.ArrayList;
+import java.util.Arrays;
+import java.util.Collections;
 import java.util.List;
 
+import static com.ubmarketplace.app.TestStatic.TEST_IMAGE_IMAGE_ID_1;
+import static com.ubmarketplace.app.TestStatic.TEST_IMAGE_IMAGE_ID_2;
 import static com.ubmarketplace.app.TestStatic.TEST_ITEM_4;
 import static com.ubmarketplace.app.TestStatic.TEST_ITEM_5;
 import static com.ubmarketplace.app.TestStatic.TEST_ITEM_CATEGORY_4;
@@ -192,6 +196,52 @@ public class ItemRepositoryTest {
             lastPrice = item.getPrice();
         }
         Assertions.assertEquals(3, result.size());
+    }
+
+    @Test
+    void GIVEN_validInput_WHEN_update_THEN_updateGivenItem() {
+        itemRepository.insert(TEST_ITEM_4);
+        itemRepository.insert(TEST_ITEM_5);
+
+        itemRepository.update(TEST_ITEM_ID_4, "new name", TEST_ITEM_CATEGORY_4, TEST_ITEM_DESCRIPTION_4,
+                TEST_ITEM_PRICE_4, TEST_ITEM_IMAGE_4, TEST_ITEM_MEETING_PLACE_4, TEST_ITEM_PHONE_NUMBER_FORMATTED_4);
+
+        Item afterChange = itemRepository.findById(TEST_ITEM_ID_4);
+        Assertions.assertEquals("new name", afterChange.getName());
+    }
+
+    @Test
+    void GIVEN_validInputUpdateImage_WHEN_update_THEN_updateGivenItem() {
+        itemRepository.insert(TEST_ITEM_4);
+        itemRepository.insert(TEST_ITEM_5);
+
+        itemRepository.update(TEST_ITEM_ID_4, TEST_ITEM_NAME_4, TEST_ITEM_CATEGORY_4, TEST_ITEM_DESCRIPTION_4,
+                TEST_ITEM_PRICE_4, Arrays.asList(TEST_IMAGE_IMAGE_ID_2, TEST_IMAGE_IMAGE_ID_1),
+                TEST_ITEM_MEETING_PLACE_4, TEST_ITEM_PHONE_NUMBER_FORMATTED_4);
+
+        Item afterChange = itemRepository.findById(TEST_ITEM_ID_4);
+        Assertions.assertEquals(2, afterChange.getImages().size());
+        Assertions.assertEquals(TEST_IMAGE_IMAGE_ID_2, afterChange.getImages().get(0));
+        Assertions.assertEquals(TEST_IMAGE_IMAGE_ID_1, afterChange.getImages().get(1));
+
+        itemRepository.update(TEST_ITEM_ID_4, TEST_ITEM_NAME_4, TEST_ITEM_CATEGORY_4, TEST_ITEM_DESCRIPTION_4,
+                TEST_ITEM_PRICE_4, Collections.singletonList(TEST_IMAGE_IMAGE_ID_2), TEST_ITEM_MEETING_PLACE_4,
+                TEST_ITEM_PHONE_NUMBER_FORMATTED_4);
+
+        afterChange = itemRepository.findById(TEST_ITEM_ID_4);
+        Assertions.assertEquals(1, afterChange.getImages().size());
+        Assertions.assertEquals(TEST_IMAGE_IMAGE_ID_2, afterChange.getImages().get(0));
+    }
+
+    @Test
+    void GIVEN_invalidInput_WHEN_update_THEN_throwException() {
+        itemRepository.insert(TEST_ITEM_4);
+        itemRepository.insert(TEST_ITEM_5);
+
+        Assertions.assertThrows(InvalidParameterException.class, () -> itemRepository.update("InvalidItemId",
+                "new name", TEST_ITEM_CATEGORY_4, TEST_ITEM_DESCRIPTION_4, TEST_ITEM_PRICE_4, TEST_ITEM_IMAGE_4,
+                TEST_ITEM_MEETING_PLACE_4, TEST_ITEM_PHONE_NUMBER_FORMATTED_4));
+
     }
 
 }

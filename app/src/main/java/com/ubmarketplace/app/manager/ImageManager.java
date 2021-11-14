@@ -21,6 +21,7 @@ import org.springframework.web.client.HttpClientErrorException;
 import org.springframework.web.client.RestTemplate;
 
 import java.security.InvalidParameterException;
+import java.util.List;
 
 import static com.ubmarketplace.app.Static.IMGBB_API_URL;
 import static com.ubmarketplace.app.Static.IMGBB_EXPIRATION_SECS;
@@ -64,6 +65,19 @@ public class ImageManager {
 
     public String getLargeUrl(@NonNull String imageId) {
         return getImage(imageId).getLarge();
+    }
+
+    public Boolean isValidImageId(@NonNull String imageId) {
+        return !(imageRepository.findById(imageId) == null);
+    }
+
+    public Boolean isValidImageIds(@NonNull List<String> imageIds) {
+        for(String imageId : imageIds){
+            if (!isValidImageId(imageId)){
+                return false;
+            }
+        }
+        return true;
     }
 
     public Image uploadAndInsertImage(@NonNull String imageInBase64, @NonNull String userId) {

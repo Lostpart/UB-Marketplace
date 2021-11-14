@@ -12,7 +12,9 @@ import org.springframework.data.mongodb.core.query.Query;
 import org.springframework.data.mongodb.core.query.Update;
 import org.springframework.stereotype.Repository;
 
+import java.security.InvalidParameterException;
 import java.util.List;
+import java.util.Objects;
 
 @Repository
 public class ItemRepository implements ItemDao {
@@ -47,18 +49,48 @@ public class ItemRepository implements ItemDao {
     public void update(@NonNull String itemId, @NonNull String name, @NonNull String category,
                        @NonNull String description, @NonNull Double price, @NonNull List<String> images,
                        String meetingPlace, @NonNull String contactPhoneNumber) {
+        Item item = findById(itemId);
+        if (item == null) {
+            throw new InvalidParameterException("Invalid itemId");
+        }
         Query query = new Query();
         query.addCriteria(Criteria.where("_id").is(itemId));
         Update update = new Update();
-        update.set("name", name);
-        update.set("category", category);
-        update.set("description", description);
-        update.set("price", price);
-        update.set("images", images);
-        update.set("meetingPlace", meetingPlace);
-        if (!"".equals(contactPhoneNumber)){
+        if(!name.equals(item.getName())){
+            update.set("name", name);
+        }
+        if(!category.equals(item.getCategory())){
+            update.set("category", category);
+        }
+        if(!description.equals(item.getDescription())){
+            update.set("description", description);
+        }
+        if(!price.equals(item.getPrice())){
+            update.set("price", price);
+        }
+        if(!meetingPlace.equals(item.getMeetingPlace())){
+            update.set("meetingPlace", meetingPlace);
+        }
+
+        // You should format contact phone number before use this method
+        if (!contactPhoneNumber.equals(item.getContactPhoneNumber())){
             update.set("contactPhoneNumber", contactPhoneNumber);
         }
+
+        // You should check if all imageId are valid before use this method
+        if(images.size() != item.getImages().size()){
+            update.set("images", images);
+        } else {
+            int i = 0;
+            for(String imageId : images){
+                if (!Objects.equals(imageId, item.getImages().get(i))){
+                    update.set("images", images);
+                    break;
+                }
+            }
+        }
+
+        update.set("images", images);
         mongoTemplate.updateFirst(query, update, Item.class);
     }
 
