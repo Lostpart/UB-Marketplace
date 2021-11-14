@@ -216,20 +216,22 @@ class Edit_Item extends React.Component {
                     method: 'POST',
                     headers: { 'Content-Type': 'application/json' },
                     body: JSON.stringify({ 
-                        name: this.state.name,
                         userId: email,
-                        category: this.state.category,
-                        description: this.state.description,
-                        price: parseFloat(this.state.price),
-                        images: this.state.imageIds.concat(imageIds),
-                        meetingPlace: this.state.location
+                        item: {
+                            itemId: this.state.id,
+                            name: this.state.name,
+                            category: this.state.category,
+                            description: this.state.description,
+                            price: parseFloat(this.state.price),
+                            images: this.state.imageIds.concat(imageIds),
+                            meetingPlace: this.state.location
+                        }
                      })
                 };
-                fetch('/api/newItem', requestOptions)
+                fetch('/api/editItem', requestOptions)
                     .then(response => {
-                        this.props.history.push(`/`);
-                    });
-            
+                        this.props.history.push(`/item/${this.state.id}`);
+                    });           
                 })
     }
     
