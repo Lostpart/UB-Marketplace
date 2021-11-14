@@ -22,7 +22,7 @@ function App() {
           <Route path="/sell" component={Sell} />
           <Route exact path="/item/:id" component={Item_Detail} />
           <Route path="/listing" component={Listing} />
-          <Route exact path="/item/:id/edit" component={Edit_Item} />
+          <Route exact path="/item/edit/:id" component={Edit_Item} />
         </Switch>
       </HashRouter>
   );
