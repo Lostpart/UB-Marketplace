@@ -240,7 +240,7 @@ class Edit_Item extends React.Component {
         let images = this.state.images.map((src, idx) => <img key={idx} alt={`${this.state.name}`} src={src}/>)
 
         return (
-            this.state.loaded ? this.state.isvalid ? <div className="sell">
+            this.state.loaded ? this.state.valid ? <div className="sell">
                 <Header />
                 <form onSubmit={this.handleSubmit}>
                     <label>
