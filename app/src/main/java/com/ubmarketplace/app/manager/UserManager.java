@@ -60,7 +60,7 @@ public class UserManager {
             throw new InvalidParameterException("Empty username or password or displayName");
         }
 
-        User user = User.builder().userId(username).role("User").password(password).displayName(displayName).build();
+        User user = User.builder().userId(username).role(User.UserRole.USER).password(password).displayName(displayName).build();
 
         log.info(String.format("Creating new account for %s", username));
 
@@ -73,7 +73,7 @@ public class UserManager {
         return user;
     }
 
-    public String getUserRole(@NonNull String userId){
+    public User.UserRole getUserRole(@NonNull String userId){
         if(userId.isEmpty()){
             throw new InvalidParameterException("Empty username");
         }
@@ -82,7 +82,7 @@ public class UserManager {
     }
 
     public Boolean isAdmin(@NonNull String userId){
-        return getUserRole(userId).equals("admin");
+        return getUserRole(userId).equals(User.UserRole.ADMIN);
     }
 
     public String getDisplayName(@NonNull String username){

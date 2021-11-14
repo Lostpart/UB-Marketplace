@@ -28,8 +28,8 @@ public class LoginControllerTest {
 
     @BeforeAll
     static void setup(@Autowired UserRepository userRepository) {
-        userRepository.insert(User.builder().userId(TEST_USER_ID_1).role("User").password(TEST_PASSWORD_1).displayName("displayName").build());
-        userRepository.insert(User.builder().userId(TEST_USER_ID_2).role("Admin").password(TEST_PASSWORD_2).displayName("displayName").build());
+        userRepository.insert(User.builder().userId(TEST_USER_ID_1).role(User.UserRole.USER).password(TEST_PASSWORD_1).displayName("displayName").build());
+        userRepository.insert(User.builder().userId(TEST_USER_ID_2).role(User.UserRole.ADMIN).password(TEST_PASSWORD_2).displayName("displayName").build());
     }
 
     @Test
