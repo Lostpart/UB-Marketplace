@@ -23,8 +23,11 @@ class Edit_Item extends React.Component {
             description: '',
             images: [],
             imageFiles: [],
+            imageIds: [],
             location: 'none',
-            loaded: false
+            owner: '',
+            loaded: false,
+            valid: true
         };
         this.changeName = this.changeName.bind(this);
         this.changePrice = this.changePrice.bind(this);
@@ -37,6 +40,63 @@ class Edit_Item extends React.Component {
         this.handleSubmit = this.handleSubmit.bind(this);
     }
     
+    componentDidMount() {
+        const id = this.props.match.params.id;
+        this.setState({
+            id: id
+        })
+        const requestOptions = {
+            method: "GET",
+            headers: {
+                "Content-Type": "application/json"
+            }
+
+        };
+
+        fetch(`/api/getItem/${id}`, requestOptions)
+            .then(res=>{
+                if (res.status !== 200) {
+                    handleAPIError(res);
+                    /*
+                    this.setState({
+                        name: `Item Name ${id}`,
+                        description: "Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry's standard dummy text ever since the 1500s, when an unknown printer took a galley of type and scrambled it to make a type specimen book. It has survived not only five centuries, but also the leap into electronic typesetting, remaining essentially unchanged. It was popularised in the 1960s with the release of Letraset sheets containing Lorem Ipsum passages, and more recently with desktop publishing software like Aldus PageMaker including versions of Lorem Ipsum.",
+                        price: 25.0,
+                        images: ["https://images.unsplash.com/photo-1626885228113-0ac4b52e6cea?ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&ixlib=rb-1.2.1&auto=format&fit=crop&w=2070&q=80", "https://images.unsplash.com/photo-1593642632559-0c6d3fc62b89?ixid=MnwxMjA3fDF8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&ixlib=rb-1.2.1&auto=format&fit=crop&w=2069&q=80"],
+                        location: "Student Union",
+                        category: "Electronics",
+                        loaded: true
+                    })
+                    */
+                  
+                } else {
+                    res.json().then(data => {
+                        const email = localStorage.getItem("email");
+                        const item = data.item;
+                        if (item.owner.userId !== email) {
+                            this.setState({ 
+                                loaded: true,
+                                valid: false
+                            })
+                        } else {
+                            this.setState({
+                                name: item.name,
+                                description: item.description,
+                                price: item.price,
+                                images: item.images,
+                                location: item.meetingPlace,
+                                category: item.category,
+                                loaded: true,
+                                imageIds: item.imagesId,
+                                owner: email
+                            })
+                        }
+                    })
+                }
+        })
+        console.log(this.state);
+    }
+
     changeName(event) {
         this.setState({name: event.target.value});
     }
@@ -145,8 +205,8 @@ class Edit_Item extends React.Component {
     async handleSubmit(event) {
         event.preventDefault();
         const email = localStorage.getItem("email");
-        if (!email) {
-            alert("You must log in to list an item!");
+        if (!email || email !== this.state.owner) {
+            alert("You do not have permission to edit this listing.");
             return;
         }
         
@@ -161,7 +221,7 @@ class Edit_Item extends React.Component {
                         category: this.state.category,
                         description: this.state.description,
                         price: parseFloat(this.state.price),
-                        images: imageIds,
+                        images: this.state.imageIds.concat(imageIds),
                         meetingPlace: this.state.location
                      })
                 };
@@ -178,7 +238,7 @@ class Edit_Item extends React.Component {
         let images = this.state.images.map((src, idx) => <img key={idx} alt={`${this.state.name}`} src={src}/>)
 
         return (
-            <div className="sell">
+            this.state.loaded ? this.state.isvalid ? <div className="sell">
                 <Header />
                 <form onSubmit={this.handleSubmit}>
                     <label>
@@ -228,7 +288,7 @@ class Edit_Item extends React.Component {
 
                     <input type="submit" value="Submit" />
                 </form>
-            </div>
+            </div> : <div>You do not have access to this item.</div> : <div>loading...</div>
         );
     }
 }
