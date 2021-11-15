@@ -266,7 +266,7 @@ class Edit_Item extends React.Component {
 
                     <label>
                         <div>Item Description</div>
-                        <textarea name="description" onChange={this.changeDescription} />
+                        <textarea name="description" value={this.state.description} onChange={this.changeDescription} />
                     </label>
 
                     <label htmlFor="image">
