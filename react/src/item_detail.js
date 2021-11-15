@@ -121,6 +121,9 @@ class Item_Detail extends Component{
                             <div className="itemDescription">
                                 {item.description}
                             </div>
+                            <div className="itemContact">
+                                {item.contactPhoneNumber ? `${item.owner.userId} || ${item.contactPhoneNumber}` : item.owner.userId }
+                            </div>
                         </div>
                     </div>
                 : 
