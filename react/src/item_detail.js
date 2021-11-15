@@ -45,13 +45,27 @@ class Item_Detail extends Component{
                 if (res.status !== 200) {
                     handleAPIError(res);
                 } else {
-                    res.json().then(data => { 
+                    res.json().then(data => {
                         const items = data.item;
-                        const tmp = items.filter(item => item.category === this.state.item.category);
-                        const otherItems = tmp.filter(item => item.itemId !== id);
+                        const tmp = items.filter(item => item.category == this.state.item.category);
+                        let tmp2 = tmp.filter(item => item.itemId !== id);
+                        let randoms = [];
+
+                        if(tmp2.length > 5){
+                            while(randoms.length < 5){
+                                let tmpItem = tmp2[Math.floor(Math.random() * tmp2.length)];
+                                if(!randoms.includes(tmpItem)){
+                                    randoms.push(tmpItem);
+                                }
+                            }
+                            tmp2 = randoms;
+                        }
+
+                        let otherItems = tmp2;
+
                         this.setState({
                             relatedItems: otherItems
-                        }) 
+                        })
                     });
                 }
             });
