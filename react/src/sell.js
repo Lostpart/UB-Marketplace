@@ -15,7 +15,8 @@ class Sell extends React.Component {
             description: '',
             images: [],
             imageFiles: [],
-            location: 'none'
+            location: 'none',
+            phone: ''
         };
         this.changeName = this.changeName.bind(this);
         this.changePrice = this.changePrice.bind(this);
@@ -23,6 +24,7 @@ class Sell extends React.Component {
         this.changeDescription = this.changeDescription.bind(this);
         this.uploadImage = this.uploadImage.bind(this);
         this.changeLocation = this.changeLocation.bind(this);
+        this.changePhone = this.changePhone.bind(this);
 
         this.getImages = this.getImages.bind(this);
         this.handleSubmit = this.handleSubmit.bind(this);
@@ -30,6 +32,10 @@ class Sell extends React.Component {
     
     changeName(event) {
         this.setState({name: event.target.value});
+    }
+
+    changePhone(event) {
+        this.setState({phone: event.target.value})
     }
 
     changePrice(event) {
@@ -153,7 +159,8 @@ class Sell extends React.Component {
                         description: this.state.description,
                         price: parseFloat(this.state.price),
                         images: imageIds,
-                        meetingPlace: this.state.location
+                        meetingPlace: this.state.location,
+                        contactPhoneNumber: this.state.phone.replace(/\s/g, '')
                      })
                 };
                 fetch('/api/newItem', requestOptions)
@@ -215,6 +222,11 @@ class Sell extends React.Component {
                             <option value='Capen'>Capen</option>
                             <option value='Norton'>Norton</option>
                         </select>
+                    </label>
+
+                    <label>
+                        <div>Phone Number</div>
+                        <input type="tel" pattern="[0-9]{3} [0-9]{3} [0-9]{4}" name="price" placeholder='123 456 7890' value={this.state.phone} onChange={this.changePhone} required />
                     </label>
 
                     <input type="submit" value="Submit" />

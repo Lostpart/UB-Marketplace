@@ -74,6 +74,8 @@ class Item_Detail extends Component{
     render() {
         let{item,relatedItems} = this.state;
 
+        let editLink = `/item/edit/${this.state.id}`;
+
         const related = relatedItems ? relatedItems.map(item=>(
             <div className="itemImg">
                 <a href={'#/item/'+item.itemId.toString()} target="_blank">
@@ -108,7 +110,7 @@ class Item_Detail extends Component{
                         </div>
                         <div className="itemRight">
                             <div className="itemName">
-                                <h2>{item.name}</h2>
+                                <h2>{item.name} {item.owner.userId === localStorage.getItem("email") ? (<Link to={editLink}>Edit Item</Link>) : ''}</h2>
                             </div>
                             <div className="itemPrice">
                                 <h3>Price: ${item.price}</h3>
@@ -120,6 +122,9 @@ class Item_Detail extends Component{
                             <h3 className="descriptionTitle">Item Description</h3>
                             <div className="itemDescription">
                                 {item.description}
+                            </div>
+                            <div className="itemContact">
+                                {item.contactPhoneNumber ? `${item.owner.userId} || ${item.contactPhoneNumber}` : item.owner.userId }
                             </div>
                         </div>
                     </div>

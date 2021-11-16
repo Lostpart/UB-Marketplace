@@ -5,13 +5,6 @@ import './home.css';
 import './sell.css';
 import { handleAPIError } from './errors';
 
-/*
-    THE NEEDED CHANGES HERE:
-        - Get/prepopulate form with current data
-        - Wait on whatever API call is needed.
-            - Careful around image API
-*/
-
 
 class Edit_Item extends React.Component {
     constructor(props) {
@@ -27,7 +20,8 @@ class Edit_Item extends React.Component {
             location: 'none',
             owner: '',
             loaded: false,
-            valid: true
+            valid: true,
+            phone: ''
         };
         this.changeName = this.changeName.bind(this);
         this.changePrice = this.changePrice.bind(this);
@@ -35,9 +29,14 @@ class Edit_Item extends React.Component {
         this.changeDescription = this.changeDescription.bind(this);
         this.uploadImage = this.uploadImage.bind(this);
         this.changeLocation = this.changeLocation.bind(this);
+        this.changePhone = this.changePhone.bind(this)
 
         this.getImages = this.getImages.bind(this);
         this.handleSubmit = this.handleSubmit.bind(this);
+    }
+
+    changePhone(event) {
+        this.setState({phone: event.target.value})
     }
     
     componentDidMount() {
@@ -88,7 +87,8 @@ class Edit_Item extends React.Component {
                                 category: item.category,
                                 loaded: true,
                                 imageIds: item.imagesId,
-                                owner: email
+                                owner: email,
+                                phone: item.contactPhoneNumber.replace(/[()]/g, '').replace(/-/g, ' ')
                             })
                         }
                     })
@@ -224,7 +224,8 @@ class Edit_Item extends React.Component {
                             description: this.state.description,
                             price: parseFloat(this.state.price),
                             images: this.state.imageIds.concat(imageIds),
-                            meetingPlace: this.state.location
+                            meetingPlace: this.state.location,
+                            contactPhoneNumber: this.state.phone.replace(/\s/g, '')
                         }
                      })
                 };
@@ -266,7 +267,7 @@ class Edit_Item extends React.Component {
 
                     <label>
                         <div>Item Description</div>
-                        <textarea name="description" onChange={this.changeDescription} />
+                        <textarea name="description" value={this.state.description} onChange={this.changeDescription} />
                     </label>
 
                     <label htmlFor="image">
@@ -286,6 +287,11 @@ class Edit_Item extends React.Component {
                             <option value='Capen'>Capen</option>
                             <option value='Norton'>Norton</option>
                         </select>
+                    </label>
+
+                    <label>
+                        <div>Phone Number</div>
+                        <input type="tel" pattern="[0-9]{3} [0-9]{3} [0-9]{4}" name="price" placeholder='123 456 7890' value={this.state.phone} onChange={this.changePhone} required />
                     </label>
 
                     <input type="submit" value="Submit" />

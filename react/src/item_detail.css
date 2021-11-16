@@ -110,3 +110,7 @@
 p {
     text-align: center;
 }
+
+.itemName a {
+    color: #005BBB;
+}
