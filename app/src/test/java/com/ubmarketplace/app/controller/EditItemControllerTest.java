@@ -56,7 +56,7 @@ public class EditItemControllerTest {
     }
 
     @Test
-    public void GIVEN_goodInput_WHEN_upload_THEN_returnCorrectUploadResponse() {
+    public void GIVEN_goodInput_WHEN_editItem_THEN_returnNothing() {
         Assertions.assertDoesNotThrow(() -> editItemController.editItem(EditItemRequest.builder()
                         .user(TEST_USER_ID_1)
                         .item(EditItemRequest.EditItemRequestItem.builder()
