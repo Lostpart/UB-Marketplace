@@ -40,7 +40,7 @@ public class EditItemController {
                 editItemRequest.getItem().getCategory(),
                 editItemRequest.getItem().getDescription(),
                 editItemRequest.getItem().getPrice(),
-                editItemRequest.getItem().getImagesId(),
+                editItemRequest.getItem().getImages(),
                 editItemRequest.getItem().getMeetingPlace(),
                 editItemRequest.getItem().getContactPhoneNumber(),
                 editItemRequest.getUser(),

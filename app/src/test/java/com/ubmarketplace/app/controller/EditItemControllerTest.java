@@ -65,7 +65,7 @@ public class EditItemControllerTest {
                                 .category(TEST_ITEM_CATEGORY_4)
                                 .description(TEST_ITEM_DESCRIPTION_4)
                                 .price(TEST_ITEM_PRICE_4)
-                                .imagesId(TEST_ITEM_IMAGE_4)
+                                .images(TEST_ITEM_IMAGE_4)
                                 .meetingPlace(TEST_ITEM_MEETING_PLACE_4)
                                 .contactPhoneNumber(TEST_ITEM_PHONE_NUMBER_FORMATTED_4)
                                 .build())
