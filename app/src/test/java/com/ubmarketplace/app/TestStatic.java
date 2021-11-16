@@ -1,6 +1,5 @@
 package com.ubmarketplace.app;
 
-import com.google.common.collect.Lists;
 import com.ubmarketplace.app.model.Image;
 import com.ubmarketplace.app.model.Item;
 
@@ -51,7 +50,7 @@ public class TestStatic {
     final static public String TEST_ITEM_CATEGORY_3 = TEST_ITEM_CATEGORY_ELECTRONIC;
     final static public String TEST_ITEM_DESCRIPTION_3 = "Laptop";
     final static public Double TEST_ITEM_PRICE_3 = 150.0;
-    final static public List<String> TEST_ITEM_IMAGE_3 = Lists.newArrayList("https://images.unsplash.com/photo-1496181133206-80ce9b88a853?ixid=MnwxMjA3fDB8MHxzZWFyY2h8Mnx8bGFwdG9wfGVufDB8fDB8fA%3D%3D&ixlib=rb-1.2.1&auto=format&fit=crop&w=600&q=60", "https://images.unsplash.com/photo-1554415707-6e8cfc93fe23?ixid=MnwxMjA3fDB8MHxzZWFyY2h8M3x8bGFwdG9wfGVufDB8fDB8fA%3D%3D&ixlib=rb-1.2.1&auto=format&fit=crop&w=600&q=60");
+    final static public List<String> TEST_ITEM_IMAGE_3 = Arrays.asList(TEST_IMAGE_IMAGE_ID_1, TEST_IMAGE_IMAGE_ID_2);
     final static public String TEST_ITEM_MEETING_PLACE_3 = TEST_ITEM_MEETING_PLACE_STUDENT_UNION;
     final static public String TEST_ITEM_PHONE_NUMBER_UNFORMATTED_3 = "7166451234";
     final static public String TEST_ITEM_PHONE_NUMBER_FORMATTED_3 = "(716) 645-1234";

@@ -71,7 +71,7 @@ public class ItemManagerTest {
 
     @Test
     public void GIVEN_goodInput_When_addNewItem_Then_returnTrue(@Autowired ItemRepository itemRepository, @Autowired ImageManager imageManager) {
-        Item item = itemManager.addNewItem(
+        Item item = itemManager.addItem(
                 TEST_ITEM_NAME_3,
                 TEST_USER_ID_3,
                 TEST_ITEM_CATEGORY_3,
@@ -148,7 +148,7 @@ public class ItemManagerTest {
 
     @Test
     public void GIVEN_validInputEditAllValue_WHEN_editItem_THEN_editGivenItem(@Autowired UserManager userManager,
-                                                                  @Autowired ImageManager imageManager) {
+                                                                              @Autowired ImageManager imageManager) {
         itemManager.editItem(TEST_ITEM_ID_4, "new name", "new category", "new description",
                 102.35, Arrays.asList(TEST_IMAGE_IMAGE_ID_2, TEST_IMAGE_IMAGE_ID_1),
                 "new meeting place", "(716) 365-9876",
@@ -206,7 +206,7 @@ public class ItemManagerTest {
 
     @Test
     public void GIVEN_InvalidImageId_WHEN_editItem_THEN_throwException(@Autowired UserManager userManager,
-                                                                    @Autowired ImageManager imageManager) {
+                                                                       @Autowired ImageManager imageManager) {
         Assertions.assertThrows(InvalidParameterException.class, () -> itemManager.editItem(TEST_ITEM_ID_4,
                 TEST_ITEM_NAME_4, TEST_ITEM_CATEGORY_4, TEST_ITEM_DESCRIPTION_4,
                 TEST_ITEM_PRICE_4, Arrays.asList(TEST_IMAGE_IMAGE_ID_2, "InvalidImageId"),

@@ -20,7 +20,7 @@ import java.util.List;
 @ToString
 @AllArgsConstructor
 public class EditItemRequest {
-    private String user;
+    private String userId;
     private EditItemRequestItem item;
 
     @Data
@@ -48,7 +48,7 @@ public class EditItemRequest {
 
         @NotNull(message = "Please attach at least one image")
         @Size(min = 1)
-        private List<String> imagesId;
+        private List<String> images;
 
         @NotNull(message = "Meeting place cannot be empty")
         private String meetingPlace;

@@ -58,14 +58,14 @@ public class EditItemControllerTest {
     @Test
     public void GIVEN_goodInput_WHEN_editItem_THEN_returnNothing() {
         Assertions.assertDoesNotThrow(() -> editItemController.editItem(EditItemRequest.builder()
-                        .user(TEST_USER_ID_1)
+                        .userId(TEST_USER_ID_1)
                         .item(EditItemRequest.EditItemRequestItem.builder()
                                 .itemId(TEST_ITEM_ID_1)
                                 .name(TEST_ITEM_NAME_4)
                                 .category(TEST_ITEM_CATEGORY_4)
                                 .description(TEST_ITEM_DESCRIPTION_4)
                                 .price(TEST_ITEM_PRICE_4)
-                                .imagesId(TEST_ITEM_IMAGE_4)
+                                .images(TEST_ITEM_IMAGE_4)
                                 .meetingPlace(TEST_ITEM_MEETING_PLACE_4)
                                 .contactPhoneNumber(TEST_ITEM_PHONE_NUMBER_FORMATTED_4)
                                 .build())

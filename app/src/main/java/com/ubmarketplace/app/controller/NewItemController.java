@@ -7,13 +7,13 @@ import com.ubmarketplace.app.manager.ItemManager;
 import com.ubmarketplace.app.model.Item;
 import lombok.extern.java.Log;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
+import org.springframework.web.bind.annotation.RestController;
 
 
-@Controller
+@RestController
 @Log
 public class NewItemController {
 
@@ -29,7 +29,7 @@ public class NewItemController {
     @RequestMapping(value = "/api/newItem", method = RequestMethod.POST)
     public NewItemResponse newItem(@RequestBody NewItemRequest newItemRequest) {
         log.info(String.format("newItem get call with %s", newItemRequest));
-        Item item = itemManager.addNewItem(
+        Item item = itemManager.addItem(
                 newItemRequest.getName(),
                 newItemRequest.getUserId(),
                 newItemRequest.getCategory(),
