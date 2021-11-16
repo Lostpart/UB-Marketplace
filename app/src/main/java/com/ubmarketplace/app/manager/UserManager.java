@@ -10,8 +10,10 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.dao.DuplicateKeyException;
 import org.springframework.stereotype.Component;
 
-import javax.validation.constraints.NotNull;
 import java.security.InvalidParameterException;
+
+import static com.ubmarketplace.app.Static.USER_ROLE_ADMIN;
+import static com.ubmarketplace.app.Static.USER_ROLE_USER;
 
 @Singleton
 @Component
@@ -61,7 +63,7 @@ public class UserManager {
             throw new InvalidParameterException("Empty username or password or displayName");
         }
 
-        User user = User.builder().userId(username).role("User").password(password).displayName(displayName).build();
+        User user = User.builder().userId(username).role(USER_ROLE_USER).password(password).displayName(displayName).build();
 
         log.info(String.format("Creating new account for %s", username));
 
@@ -76,10 +78,24 @@ public class UserManager {
 
     public String getUserRole(@NonNull String userId){
         if(userId.isEmpty()){
-            throw new InvalidParameterException("Empty username");
+            throw new InvalidParameterException("Empty userId");
         }
-        
-        return userRepository.findById(userId).getRole();
+
+        User user = userRepository.findById(userId);
+
+        if(user == null){
+            throw new InvalidParameterException("Invalid userId");
+        }
+
+        if(user.getRole() == null) {
+            return USER_ROLE_USER;
+        }
+
+        return user.getRole();
+    }
+
+    public Boolean isAdmin(@NonNull String userId){
+        return getUserRole(userId).equals(USER_ROLE_ADMIN);
     }
 
     public String getDisplayName(@NonNull String username){

@@ -2,6 +2,7 @@ package com.ubmarketplace.app.controller;
 
 import com.ubmarketplace.app.dto.NewItemRequest;
 import com.ubmarketplace.app.dto.NewItemResponse;
+import com.ubmarketplace.app.manager.ImageManager;
 import com.ubmarketplace.app.manager.ItemManager;
 import com.ubmarketplace.app.model.Item;
 import lombok.extern.java.Log;
@@ -17,10 +18,12 @@ import org.springframework.web.bind.annotation.RequestMethod;
 public class NewItemController {
 
     final ItemManager itemManager;
+    final ImageManager imageManager;
 
     @Autowired
-    public NewItemController(ItemManager itemManager) {
+    public NewItemController(ItemManager itemManager, ImageManager imageManager) {
         this.itemManager = itemManager;
+        this.imageManager = imageManager;
     }
 
     @RequestMapping(value = "/api/newItem", method = RequestMethod.POST)
@@ -34,9 +37,9 @@ public class NewItemController {
                 newItemRequest.getPrice(),
                 newItemRequest.getImages(),
                 newItemRequest.getMeetingPlace(),
-                (newItemRequest.getContactPhoneNumber() == null) ? "" : newItemRequest.getContactPhoneNumber()
+                (newItemRequest.getContactPhoneNumber() == null) ? "" : newItemRequest.getContactPhoneNumber(),
+                imageManager
         );
-
 
         return NewItemResponse.builder().item(item).build();
     }
