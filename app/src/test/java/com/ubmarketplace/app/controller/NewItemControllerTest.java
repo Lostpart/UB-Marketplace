@@ -4,6 +4,7 @@ import com.ubmarketplace.app.dto.NewItemRequest;
 import com.ubmarketplace.app.dto.NewItemResponse;
 import com.ubmarketplace.app.model.Item;
 import com.ubmarketplace.app.model.User;
+import com.ubmarketplace.app.repository.ImageRepository;
 import com.ubmarketplace.app.repository.ItemRepository;
 import com.ubmarketplace.app.repository.UserRepository;
 import org.junit.jupiter.api.Assertions;
@@ -13,6 +14,8 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.context.SpringBootTest;
 import org.springframework.test.annotation.DirtiesContext;
 
+import static com.ubmarketplace.app.TestStatic.TEST_IMAGE_1;
+import static com.ubmarketplace.app.TestStatic.TEST_IMAGE_2;
 import static com.ubmarketplace.app.TestStatic.TEST_ITEM_CATEGORY_3;
 import static com.ubmarketplace.app.TestStatic.TEST_ITEM_DESCRIPTION_3;
 import static com.ubmarketplace.app.TestStatic.TEST_ITEM_IMAGE_3;
@@ -33,12 +36,14 @@ public class NewItemControllerTest {
     NewItemController newItemController;
 
     @BeforeAll
-    static void setup(@Autowired UserRepository userRepository) {
+    static void setup(@Autowired UserRepository userRepository, @Autowired ImageRepository imageRepository) {
         userRepository.insert(User.builder().userId(TEST_USER_ID_3).password(TEST_PASSWORD_3).displayName(TEST_USER_DISPLAY_NAME_3).build());
+        imageRepository.insert(TEST_IMAGE_1);
+        imageRepository.insert(TEST_IMAGE_2);
     }
 
     @Test
-    public void GIVEN_goodInput_WHEN_add_new_item_THEN_returnCorrectNewItemResponse(@Autowired ItemRepository itemRepository) {
+    public void GIVEN_goodInput_WHEN_mewItem_THEN_returnCorrectNewItemResponse(@Autowired ItemRepository itemRepository) {
         Item item = Item.builder().
                 name(TEST_ITEM_NAME_3).
                 userId(TEST_USER_ID_3).

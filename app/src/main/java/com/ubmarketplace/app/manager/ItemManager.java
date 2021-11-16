@@ -27,16 +27,16 @@ public class ItemManager {
         this.itemRepository = itemRepository;
     }
 
-    public Item addNewItem(@NonNull String name,
-                           @NonNull String userId,
-                           @NonNull String category,
-                           @NonNull String description,
-                           @NonNull Double price,
-                           @NonNull List<String> imageIds,
-                           @NonNull String meetingPlace,
-                           @NonNull String contactPhoneNumber,
-                           @NonNull ImageManager imageManager) {
-        if (!imageManager.isValidImageIds(imageIds)){
+    public Item addItem(@NonNull String name,
+                        @NonNull String userId,
+                        @NonNull String category,
+                        @NonNull String description,
+                        @NonNull Double price,
+                        @NonNull List<String> imageIds,
+                        @NonNull String meetingPlace,
+                        @NonNull String contactPhoneNumber,
+                        @NonNull ImageManager imageManager) {
+        if (!imageManager.isValidImageIds(imageIds)) {
             throw new InvalidParameterException("Invalid ImageId");
         }
 
@@ -103,22 +103,22 @@ public class ItemManager {
                          @NonNull String description, @NonNull Double price, @NonNull List<String> images,
                          String meetingPlace, @NonNull String contactPhoneNumber, @NonNull String editByUserId,
                          @NonNull UserManager userManager, @NonNull ImageManager imageManager) {
-        if(itemId.isEmpty()) {
+        if (itemId.isEmpty()) {
             log.info("Empty itemId when editItem");
             throw new InvalidParameterException("Empty itemId");
         }
-        if(editByUserId.isEmpty()) {
+        if (editByUserId.isEmpty()) {
             log.info("Empty editByUserId when editItem");
             throw new InvalidParameterException("Empty editByUserId");
         }
 
-        if(!Objects.equals(getItemById(itemId).getUserId(), editByUserId) && !userManager.isAdmin(editByUserId)){
+        if (!Objects.equals(getItemById(itemId).getUserId(), editByUserId) && !userManager.isAdmin(editByUserId)) {
             log.warning(String.format("User %s is trying to edit itemId %s, but not an owner or admin",
                     editByUserId, itemId));
             throw new InvalidParameterException("No permission to edit user");
         }
 
-        if (!imageManager.isValidImageIds(images)){
+        if (!imageManager.isValidImageIds(images)) {
             throw new InvalidParameterException("Invalid ImageId");
         }
 

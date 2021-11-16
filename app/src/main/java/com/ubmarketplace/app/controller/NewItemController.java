@@ -29,7 +29,7 @@ public class NewItemController {
     @RequestMapping(value = "/api/newItem", method = RequestMethod.POST)
     public NewItemResponse newItem(@RequestBody NewItemRequest newItemRequest) {
         log.info(String.format("newItem get call with %s", newItemRequest));
-        Item item = itemManager.addNewItem(
+        Item item = itemManager.addItem(
                 newItemRequest.getName(),
                 newItemRequest.getUserId(),
                 newItemRequest.getCategory(),
