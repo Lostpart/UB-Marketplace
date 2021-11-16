@@ -86,7 +86,7 @@ class Edit_Item extends React.Component {
                                 location: item.meetingPlace,
                                 category: item.category,
                                 loaded: true,
-                                imageIds: item.imagesId,
+                                imageIds: item.imageIds ? item.imageIds : [],
                                 owner: email,
                                 phone: item.contactPhoneNumber ? item.contactPhoneNumber.replace(/[()]/g, '').replace(/-/g, ' ') : ''
                             })
