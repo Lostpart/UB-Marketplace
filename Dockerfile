@@ -13,7 +13,7 @@ ADD ./app ./app
 COPY --from=reactbuild /app/build /app/src/main/resources/static
 WORKDIR /app
 
-RUN mvn clean install -Dtest=!ImageManagerTest#GIVEN_ValidImage_WHEN_uploadAndInsertImage_THEN_returnImage+
+RUN mvn -T 2C clean install -Dtest=!ImageManagerTest#GIVEN_ValidImage_WHEN_uploadAndInsertImage_THEN_returnImage+
 
 FROM openjdk:11
 COPY --from=springBootBuild /app/target/UBMarketplace.jar ./UBMarketplace.jar
