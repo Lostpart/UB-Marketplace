@@ -24,6 +24,7 @@ public class EditItemRequest {
     private EditItemRequestItem item;
 
     @Data
+    @Builder
     public static class EditItemRequestItem {
 
         @NotNull(message = "Item id cannot be empty")
