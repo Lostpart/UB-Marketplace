@@ -43,7 +43,7 @@ public class EditItemController {
                 editItemRequest.getItem().getImages(),
                 editItemRequest.getItem().getMeetingPlace(),
                 editItemRequest.getItem().getContactPhoneNumber(),
-                editItemRequest.getUser(),
+                editItemRequest.getUserId(),
                 userManager,
                 imageManager);
     }

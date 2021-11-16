@@ -20,7 +20,7 @@ import java.util.List;
 @ToString
 @AllArgsConstructor
 public class EditItemRequest {
-    private String user;
+    private String userId;
     private EditItemRequestItem item;
 
     @Data
