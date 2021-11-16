@@ -36,7 +36,7 @@ public class ItemManager {
                            @NonNull String meetingPlace,
                            @NonNull String contactPhoneNumber,
                            @NonNull ImageManager imageManager) {
-        if (imageManager.isValidImageIds(imageIds)){
+        if (!imageManager.isValidImageIds(imageIds)){
             throw new InvalidParameterException("Invalid ImageId");
         }
 
