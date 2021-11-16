@@ -57,7 +57,7 @@ public class TestStatic {
     final static public String TEST_ITEM_PHONE_NUMBER_FORMATTED_3 = "(716) 645-1234";
 
     final static public String TEST_ITEM_ID_4 = "c173278d";
-    final static public String TEST_NAME_4 = "Test item 4";
+    final static public String TEST_ITEM_NAME_4 = "Test item 4";
     final static public String TEST_ITEM_USER_ID_4 = TEST_USER_ID_1;
     final static public String TEST_ITEM_CATEGORY_4 = TEST_ITEM_CATEGORY_ELECTRONIC;
     final static public String TEST_ITEM_DESCRIPTION_4 = "Test item 4 description";
@@ -68,7 +68,7 @@ public class TestStatic {
     final static public String TEST_ITEM_PHONE_NUMBER_FORMATTED_4 = "(716) 645-4444";
     final static public Item TEST_ITEM_4 = Item.builder()
             .itemId(TEST_ITEM_ID_4)
-            .name(TEST_NAME_4)
+            .name(TEST_ITEM_NAME_4)
             .userId(TEST_ITEM_USER_ID_4)
             .category(TEST_ITEM_CATEGORY_4)
             .description(TEST_ITEM_DESCRIPTION_4)
@@ -79,7 +79,7 @@ public class TestStatic {
             .build();
 
     final static public String TEST_ITEM_ID_5 = "a8cfdc34";
-    final static public String TEST_NAME_5 = "Test item 5";
+    final static public String TEST_ITEM_NAME_5 = "Test item 5";
     final static public String TEST_ITEM_USER_ID_5 = TEST_USER_ID_2;
     final static public String TEST_ITEM_CATEGORY_5 = TEST_ITEM_CATEGORY_ELECTRONIC;
     final static public String TEST_ITEM_DESCRIPTION_5 = "Test item 5 description";
@@ -90,7 +90,7 @@ public class TestStatic {
     final static public String TEST_ITEM_PHONE_NUMBER_FORMATTED_5 = "(716) 645-5555";
     final static public Item TEST_ITEM_5 = Item.builder()
             .itemId(TEST_ITEM_ID_5)
-            .name(TEST_NAME_5)
+            .name(TEST_ITEM_NAME_5)
             .userId(TEST_ITEM_USER_ID_5)
             .category(TEST_ITEM_CATEGORY_5)
             .description(TEST_ITEM_DESCRIPTION_5)
