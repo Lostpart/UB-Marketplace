@@ -226,7 +226,7 @@ class Sell extends React.Component {
 
                     <label>
                         <div>Phone Number</div>
-                        <input type="tel" pattern="[0-9]{3} [0-9]{3} [0-9]{4}" name="price" placeholder='123 456 7890' value={this.state.phone} onChange={this.changePhone} required />
+                        <input type="tel" pattern="[0-9]{3} [0-9]{3} [0-9]{4}" name="price" placeholder='123 456 7890' value={this.state.phone} onChange={this.changePhone} />
                     </label>
 
                     <input type="submit" value="Submit" />
