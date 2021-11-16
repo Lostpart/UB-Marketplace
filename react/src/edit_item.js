@@ -88,7 +88,7 @@ class Edit_Item extends React.Component {
                                 loaded: true,
                                 imageIds: item.imagesId,
                                 owner: email,
-                                phone: item.contactPhoneNumber.replace(/[()]/g, '').replace(/-/g, ' ')
+                                phone: item.contactPhoneNumber ? item.contactPhoneNumber.replace(/[()]/g, '').replace(/-/g, ' ') : ''
                             })
                         }
                     })
