@@ -8,6 +8,6 @@ import lombok.*;
 @Builder
 @AllArgsConstructor
 @NoArgsConstructor
-public class ItemDeleteResponse {
+public class DeleteItemResponse {
     private Boolean success;
 }

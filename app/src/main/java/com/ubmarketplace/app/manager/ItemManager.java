@@ -4,6 +4,7 @@ import com.google.inject.Singleton;
 import com.mongodb.client.result.DeleteResult;
 import com.ubmarketplace.app.model.Item;
 import com.ubmarketplace.app.repository.ItemRepository;
+import com.ubmarketplace.app.repository.UserRepository;
 import lombok.NonNull;
 import lombok.extern.java.Log;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -21,10 +22,12 @@ import static com.ubmarketplace.app.Utils.formatPhoneNumber;
 @Log
 public class ItemManager {
     final ItemRepository itemRepository;
+    final UserManager userManager;
 
     @Autowired
-    public ItemManager(ItemRepository itemRepository) {
+    public ItemManager(ItemRepository itemRepository, UserManager userManager) {
         this.itemRepository = itemRepository;
+        this.userManager = userManager;
     }
 
     public Item addItem(@NonNull String name,
@@ -71,16 +74,19 @@ public class ItemManager {
     }
 
 
-    public Boolean deleteItem(@NonNull String itemID) {
+    public Boolean deleteItem(@NonNull String itemID, @NonNull String userId) {
         Item find = itemRepository.findById(itemID);
 
         if (find == null) {
             throw new InvalidParameterException("No such item");
         }
 
-        DeleteResult result = itemRepository.remove(find);
-
-        return result.wasAcknowledged();
+        if (find.getUserId().equals(userId) || userManager.getUserRole(userId).equals("Admin")) {
+            return itemRepository.remove(find).wasAcknowledged();
+        }
+        else{
+            throw new InvalidParameterException("UserId role is not Admin or not the owner");
+        }
     }
 
     public Item getItemById(@NonNull String itemId) {
