@@ -22,12 +22,10 @@ import static com.ubmarketplace.app.Utils.formatPhoneNumber;
 @Log
 public class ItemManager {
     final ItemRepository itemRepository;
-    final UserManager userManager;
 
     @Autowired
-    public ItemManager(ItemRepository itemRepository, UserManager userManager) {
+    public ItemManager(ItemRepository itemRepository) {
         this.itemRepository = itemRepository;
-        this.userManager = userManager;
     }
 
     public Item addItem(@NonNull String name,
@@ -74,14 +72,14 @@ public class ItemManager {
     }
 
 
-    public Boolean deleteItem(@NonNull String itemID, @NonNull String userId) {
+    public Boolean deleteItem(@NonNull String itemID, @NonNull String userId, @NonNull UserManager userManager) {
         Item find = itemRepository.findById(itemID);
 
         if (find == null) {
             throw new InvalidParameterException("No such item");
         }
 
-        if (find.getUserId().equals(userId) || userManager.getUserRole(userId).equals("Admin")) {
+        if (find.getUserId().equals(userId) || userManager.isAdmin(userId)) {
             return itemRepository.remove(find).wasAcknowledged();
         }
         else{
