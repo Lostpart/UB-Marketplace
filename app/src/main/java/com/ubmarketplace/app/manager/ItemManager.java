@@ -13,6 +13,9 @@ import org.springframework.stereotype.Component;
 
 import java.security.InvalidParameterException;
 import java.util.List;
+import java.util.Objects;
+
+import static com.ubmarketplace.app.Utils.formatPhoneNumber;
 
 @Singleton
 @Component
@@ -27,14 +30,18 @@ public class ItemManager {
         this.userManager = userManager;
     }
 
-    public Item addNewItem(@NonNull String name,
-                           @NonNull String userId,
-                           @NonNull String category,
-                           @NonNull String description,
-                           @NonNull Double price,
-                           @NonNull List<String> imageIds,
-                           @NonNull String meetingPlace,
-                           @NonNull String contactPhoneNumber) {
+    public Item addItem(@NonNull String name,
+                        @NonNull String userId,
+                        @NonNull String category,
+                        @NonNull String description,
+                        @NonNull Double price,
+                        @NonNull List<String> imageIds,
+                        @NonNull String meetingPlace,
+                        @NonNull String contactPhoneNumber,
+                        @NonNull ImageManager imageManager) {
+        if (!imageManager.isValidImageIds(imageIds)) {
+            throw new InvalidParameterException("Invalid ImageId");
+        }
 
         Item item = Item.builder()
                 .name(name)
@@ -47,7 +54,7 @@ public class ItemManager {
                 .build();
 
         if (contactPhoneNumber.matches("^\\d{10}$")) {
-            contactPhoneNumber = contactPhoneNumber.replaceFirst("(\\d{3})(\\d{3})(\\d+)", "($1) $2-$3");
+            contactPhoneNumber = formatPhoneNumber(contactPhoneNumber);
         }
         item.setContactPhoneNumber(contactPhoneNumber);
 
@@ -96,6 +103,32 @@ public class ItemManager {
         }
 
         return item;
+    }
+
+    public void editItem(@NonNull String itemId, @NonNull String name, @NonNull String category,
+                         @NonNull String description, @NonNull Double price, @NonNull List<String> images,
+                         String meetingPlace, @NonNull String contactPhoneNumber, @NonNull String editByUserId,
+                         @NonNull UserManager userManager, @NonNull ImageManager imageManager) {
+        if (itemId.isEmpty()) {
+            log.info("Empty itemId when editItem");
+            throw new InvalidParameterException("Empty itemId");
+        }
+        if (editByUserId.isEmpty()) {
+            log.info("Empty editByUserId when editItem");
+            throw new InvalidParameterException("Empty editByUserId");
+        }
+
+        if (!Objects.equals(getItemById(itemId).getUserId(), editByUserId) && !userManager.isAdmin(editByUserId)) {
+            log.warning(String.format("User %s is trying to edit itemId %s, but not an owner or admin",
+                    editByUserId, itemId));
+            throw new InvalidParameterException("No permission to edit user");
+        }
+
+        if (!imageManager.isValidImageIds(images)) {
+            throw new InvalidParameterException("Invalid ImageId");
+        }
+
+        itemRepository.update(itemId, name, category, description, price, images, meetingPlace, contactPhoneNumber);
     }
 
     public List<Item> getCategoryItem(String category, String userId, String location, String pricing) {

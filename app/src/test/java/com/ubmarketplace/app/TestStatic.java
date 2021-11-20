@@ -1,6 +1,5 @@
 package com.ubmarketplace.app;
 
-import com.google.common.collect.Lists;
 import com.ubmarketplace.app.model.Image;
 import com.ubmarketplace.app.model.Item;
 
@@ -51,13 +50,13 @@ public class TestStatic {
     final static public String TEST_ITEM_CATEGORY_3 = TEST_ITEM_CATEGORY_ELECTRONIC;
     final static public String TEST_ITEM_DESCRIPTION_3 = "Laptop";
     final static public Double TEST_ITEM_PRICE_3 = 150.0;
-    final static public List<String> TEST_ITEM_IMAGE_3 = Lists.newArrayList("https://images.unsplash.com/photo-1496181133206-80ce9b88a853?ixid=MnwxMjA3fDB8MHxzZWFyY2h8Mnx8bGFwdG9wfGVufDB8fDB8fA%3D%3D&ixlib=rb-1.2.1&auto=format&fit=crop&w=600&q=60", "https://images.unsplash.com/photo-1554415707-6e8cfc93fe23?ixid=MnwxMjA3fDB8MHxzZWFyY2h8M3x8bGFwdG9wfGVufDB8fDB8fA%3D%3D&ixlib=rb-1.2.1&auto=format&fit=crop&w=600&q=60");
+    final static public List<String> TEST_ITEM_IMAGE_3 = Arrays.asList(TEST_IMAGE_IMAGE_ID_1, TEST_IMAGE_IMAGE_ID_2);
     final static public String TEST_ITEM_MEETING_PLACE_3 = TEST_ITEM_MEETING_PLACE_STUDENT_UNION;
     final static public String TEST_ITEM_PHONE_NUMBER_UNFORMATTED_3 = "7166451234";
     final static public String TEST_ITEM_PHONE_NUMBER_FORMATTED_3 = "(716) 645-1234";
 
     final static public String TEST_ITEM_ID_4 = "c173278d";
-    final static public String TEST_NAME_4 = "Test item 4";
+    final static public String TEST_ITEM_NAME_4 = "Test item 4";
     final static public String TEST_ITEM_USER_ID_4 = TEST_USER_ID_1;
     final static public String TEST_ITEM_CATEGORY_4 = TEST_ITEM_CATEGORY_ELECTRONIC;
     final static public String TEST_ITEM_DESCRIPTION_4 = "Test item 4 description";
@@ -68,7 +67,7 @@ public class TestStatic {
     final static public String TEST_ITEM_PHONE_NUMBER_FORMATTED_4 = "(716) 645-4444";
     final static public Item TEST_ITEM_4 = Item.builder()
             .itemId(TEST_ITEM_ID_4)
-            .name(TEST_NAME_4)
+            .name(TEST_ITEM_NAME_4)
             .userId(TEST_ITEM_USER_ID_4)
             .category(TEST_ITEM_CATEGORY_4)
             .description(TEST_ITEM_DESCRIPTION_4)
@@ -79,7 +78,7 @@ public class TestStatic {
             .build();
 
     final static public String TEST_ITEM_ID_5 = "a8cfdc34";
-    final static public String TEST_NAME_5 = "Test item 5";
+    final static public String TEST_ITEM_NAME_5 = "Test item 5";
     final static public String TEST_ITEM_USER_ID_5 = TEST_USER_ID_2;
     final static public String TEST_ITEM_CATEGORY_5 = TEST_ITEM_CATEGORY_ELECTRONIC;
     final static public String TEST_ITEM_DESCRIPTION_5 = "Test item 5 description";
@@ -90,7 +89,7 @@ public class TestStatic {
     final static public String TEST_ITEM_PHONE_NUMBER_FORMATTED_5 = "(716) 645-5555";
     final static public Item TEST_ITEM_5 = Item.builder()
             .itemId(TEST_ITEM_ID_5)
-            .name(TEST_NAME_5)
+            .name(TEST_ITEM_NAME_5)
             .userId(TEST_ITEM_USER_ID_5)
             .category(TEST_ITEM_CATEGORY_5)
             .description(TEST_ITEM_DESCRIPTION_5)

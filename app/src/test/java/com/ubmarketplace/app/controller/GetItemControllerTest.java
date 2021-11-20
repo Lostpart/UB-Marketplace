@@ -25,10 +25,10 @@ import static com.ubmarketplace.app.TestStatic.TEST_ITEM_DESCRIPTION_4;
 import static com.ubmarketplace.app.TestStatic.TEST_ITEM_ID_4;
 import static com.ubmarketplace.app.TestStatic.TEST_ITEM_ID_5;
 import static com.ubmarketplace.app.TestStatic.TEST_ITEM_MEETING_PLACE_4;
+import static com.ubmarketplace.app.TestStatic.TEST_ITEM_NAME_4;
 import static com.ubmarketplace.app.TestStatic.TEST_ITEM_PHONE_NUMBER_FORMATTED_4;
 import static com.ubmarketplace.app.TestStatic.TEST_ITEM_PRICE_4;
 import static com.ubmarketplace.app.TestStatic.TEST_ITEM_USER_ID_4;
-import static com.ubmarketplace.app.TestStatic.TEST_NAME_4;
 import static org.mockito.ArgumentMatchers.any;
 import static org.mockito.ArgumentMatchers.anyString;
 import static org.mockito.ArgumentMatchers.eq;
@@ -63,7 +63,7 @@ public class GetItemControllerTest {
 
         ResponseItem item = response.getItem();
         Assertions.assertEquals(TEST_ITEM_ID_4, item.getItemId());
-        Assertions.assertEquals(TEST_NAME_4, item.getName());
+        Assertions.assertEquals(TEST_ITEM_NAME_4, item.getName());
         Assertions.assertEquals(TEST_ITEM_USER_ID_4, item.getOwner().getUserId());
         Assertions.assertEquals(TEST_ITEM_CATEGORY_4, item.getCategory());
         Assertions.assertEquals(TEST_ITEM_DESCRIPTION_4, item.getDescription());

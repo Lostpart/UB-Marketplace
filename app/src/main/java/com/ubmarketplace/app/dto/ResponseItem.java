@@ -32,6 +32,7 @@ public class ResponseItem {
         this.category = item.getCategory();
         this.description = item.getDescription();
         this.price = item.getPrice();
+        this.imageIds = item.getImages();
         switch(imagetype) {
             case THUMB: {
                 this.images = item.getImages().parallelStream()
@@ -64,6 +65,7 @@ public class ResponseItem {
     private String description;
     private Double price;
     private List<String> images;
+    private List<String> imageIds;
     private String meetingPlace;
     private Long createdTime;
     private String contactPhoneNumber;

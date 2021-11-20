@@ -14,7 +14,7 @@ import java.security.InvalidParameterException;
 public class ExceptionControllerAdvice {
 
     @ExceptionHandler(InvalidParameterException.class)
-    public ErrorResponse InvalidParameterExceptionHandler(InvalidParameterException e, HttpServletResponse response) {
+    public ErrorResponse invalidParameterExceptionHandler(InvalidParameterException e, HttpServletResponse response) {
         response.setStatus(HttpStatus.BAD_REQUEST.value());
         return ErrorResponse.builder()
                 .message(e.getMessage())
@@ -23,11 +23,20 @@ public class ExceptionControllerAdvice {
     }
 
     @ExceptionHandler(MethodArgumentNotValidException.class)
-    public ErrorResponse MethodArgumentNotValidExceptionHandler(MethodArgumentNotValidException e, HttpServletResponse response) {
+    public ErrorResponse methodArgumentNotValidExceptionHandler(MethodArgumentNotValidException e, HttpServletResponse response) {
         ObjectError objectError = e.getBindingResult().getAllErrors().get(0);
         response.setStatus(HttpStatus.BAD_REQUEST.value());
         return ErrorResponse.builder()
                 .message(objectError.getDefaultMessage())
+                .type(e.getClass().getCanonicalName())
+                .build();
+    }
+
+    @ExceptionHandler(NullPointerException.class)
+    public ErrorResponse nullPointerExceptionHandler(NullPointerException e, HttpServletResponse response) {
+        response.setStatus(HttpStatus.BAD_REQUEST.value());
+        return ErrorResponse.builder()
+                .message(e.getMessage())
                 .type(e.getClass().getCanonicalName())
                 .build();
     }
