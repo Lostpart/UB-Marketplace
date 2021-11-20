@@ -27,7 +27,7 @@ public class DeleteItemController {
     @RequestMapping(value = "/api/deleteitem", method = RequestMethod.POST, produces="application/json;charset=UTF-8")
     public String delete(@RequestBody DeleteItemRequest deleteItemRequest){
 
-        if (itemManager.deleteItem(deleteItemRequest.getItemID(), deleteItemRequest.getUserId())){
+        if (itemManager.deleteItem(deleteItemRequest.getItemID(), deleteItemRequest.getUserId(), userManager)){
             return "success";
         }
         else{
