@@ -220,7 +220,7 @@ class Edit_Item extends React.Component {
                 "userId": this.state.owner
             })
         };
-        fetch('/api/deleteitem')
+        fetch('/api/deleteitem', requestOptions)
             .then(response => {
                 if (response.status !== 200) {
                     handleAPIError(response, false)
