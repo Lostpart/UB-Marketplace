@@ -1,10 +1,8 @@
 package com.ubmarketplace.app.manager;
 
 import com.google.inject.Singleton;
-import com.mongodb.client.result.DeleteResult;
 import com.ubmarketplace.app.model.Item;
 import com.ubmarketplace.app.repository.ItemRepository;
-import com.ubmarketplace.app.repository.UserRepository;
 import lombok.NonNull;
 import lombok.extern.java.Log;
 import org.springframework.beans.factory.annotation.Autowired;

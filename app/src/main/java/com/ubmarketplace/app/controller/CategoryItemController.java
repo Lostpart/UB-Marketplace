@@ -32,7 +32,7 @@ public class CategoryItemController {
         this.userManager = userManager;
     }
 
-    @RequestMapping(value = "/api/categoryitem", method = RequestMethod.POST,produces = "application/json;charset=UTF-8")
+    @RequestMapping(value = "/api/categoryitem", method = RequestMethod.POST, produces = "application/json;charset=UTF-8")
     public CategoryItemResponse categorizeItem(@RequestBody CategoryItemRequest request){
 
         // Get the queryResult
@@ -42,7 +42,6 @@ public class CategoryItemController {
         List<ResponseItem> response = queryResult.parallelStream()
                 .map(item -> new ResponseItem(item, THUMB, userManager, imageManager))
                 .collect(Collectors.toList());
-
 
         return CategoryItemResponse.builder().item(response).build();
     }
