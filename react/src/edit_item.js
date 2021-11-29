@@ -202,10 +202,40 @@ class Edit_Item extends React.Component {
         return Promise.all(imagePromises);
     }
 
+    async handleDelete(event) {
+        event.preventDefault();
+        const email = localStorage.getItem("email");
+        const role = localStorage.getItem("role");
+        if (!email || (email !== this.state.owner  && role !== "admin")) {
+            alert("You do not have permission to edit this listing.");
+            return;
+        }
+        
+        const requestOptions = {
+            method: 'POST',
+            headers: { 'Content-Type': 'application/json' },
+            body: JSON.stringify({
+                "itemID": this.state.id,
+                "userId": this.state.owner
+            })
+        };
+        fetch('/api/deleteitem')
+            .then(response => {
+                if (response.status !== 200) {
+                    handleAPIError(response, false)
+                } else {
+                    response.json().then(data => {
+                        this.props.history.push('/');
+                    });
+                }
+            });
+    }
+
     async handleSubmit(event) {
         event.preventDefault();
         const email = localStorage.getItem("email");
-        if (!email || email !== this.state.owner) {
+        const role = localStorage.getItem("role");
+        if (!email || (email !== this.state.owner  && role !== "admin")) {
             alert("You do not have permission to edit this listing.");
             return;
         }
