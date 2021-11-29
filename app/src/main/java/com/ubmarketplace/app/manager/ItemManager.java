@@ -1,7 +1,6 @@
 package com.ubmarketplace.app.manager;
 
 import com.google.inject.Singleton;
-import com.mongodb.client.result.DeleteResult;
 import com.ubmarketplace.app.model.Item;
 import com.ubmarketplace.app.repository.ItemRepository;
 import lombok.NonNull;
@@ -71,16 +70,19 @@ public class ItemManager {
     }
 
 
-    public Boolean deleteItem(@NonNull String itemID) {
+    public Boolean deleteItem(@NonNull String itemID, @NonNull String userId, @NonNull UserManager userManager) {
         Item find = itemRepository.findById(itemID);
 
         if (find == null) {
             throw new InvalidParameterException("No such item");
         }
 
-        DeleteResult result = itemRepository.remove(find);
-
-        return result.wasAcknowledged();
+        if (find.getUserId().equals(userId) || userManager.isAdmin(userId)) {
+            return itemRepository.remove(find).wasAcknowledged();
+        }
+        else{
+            throw new InvalidParameterException("UserId role is not Admin or not the owner");
+        }
     }
 
     public Item getItemById(@NonNull String itemId) {

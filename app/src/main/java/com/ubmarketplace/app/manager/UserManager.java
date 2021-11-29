@@ -45,20 +45,20 @@ public class UserManager {
     }
 
     public User getUserByUserId(@NonNull String userId) {
-        if(userId.isEmpty()){
+        if (userId.isEmpty()) {
             log.info("Empty userId when getUserByUserId");
             throw new InvalidParameterException("Empty username or password");
         }
         User user = userRepository.findById(userId);
-        if (user == null){
+        if (user == null) {
             log.warning(String.format("Error when get user information for user %s", userId));
             throw new InvalidParameterException("Error when get user information");
         }
         return user;
     }
 
-    public User addNewUser(@NonNull String username, @NonNull String password, @NonNull String displayName){
-        if(username.isEmpty() || password.isEmpty() || displayName.isEmpty()){
+    public User addNewUser(@NonNull String username, @NonNull String password, @NonNull String displayName) {
+        if (username.isEmpty() || password.isEmpty() || displayName.isEmpty()) {
             log.info(String.format("Empty username or password or display name when creating new account for %s", username));
             throw new InvalidParameterException("Empty username or password or displayName");
         }
@@ -76,37 +76,37 @@ public class UserManager {
         return user;
     }
 
-    public String getUserRole(@NonNull String userId){
-        if(userId.isEmpty()){
+    public String getUserRole(@NonNull String userId) {
+        if (userId.isEmpty()) {
             throw new InvalidParameterException("Empty userId");
         }
 
         User user = userRepository.findById(userId);
 
-        if(user == null){
+        if (user == null) {
             throw new InvalidParameterException("Invalid userId");
         }
 
-        if(user.getRole() == null) {
+        if (user.getRole() == null) {
             return USER_ROLE_USER;
         }
 
         return user.getRole();
     }
 
-    public Boolean isAdmin(@NonNull String userId){
+    public Boolean isAdmin(@NonNull String userId) {
         return getUserRole(userId).equals(USER_ROLE_ADMIN);
     }
 
-    public String getDisplayName(@NonNull String username){
-        if (username.isEmpty()){
+    public String getDisplayName(@NonNull String username) {
+        if (username.isEmpty()) {
             throw new InvalidParameterException("Empty username");
         }
         return userRepository.findById(username).getDisplayName();
     }
 
     public User updateUser(@NonNull String username, @NonNull String password, @NonNull String displayName) {
-        if(username.isEmpty()){
+        if (username.isEmpty()) {
             log.info("Empty username");
             throw new InvalidParameterException("Empty username");
         }
@@ -115,30 +115,26 @@ public class UserManager {
         User old_user = userRepository.findById(username);
 
         DeleteResult delete = userRepository.remove(old_user);
-        if (!delete.wasAcknowledged()){
+        if (!delete.wasAcknowledged()) {
             log.info(String.format("Fail to delete account for %s", old_user.getUserId()));
             throw new InvalidParameterException("Fail to delete");
         }
 
-        User updated_user;
+        User updatedUser;
 
-        if (password.isEmpty() && !displayName.isEmpty()){
-            updated_user = User.builder().userId(username).password(old_user.getPassword()).displayName(displayName).build();
+        if (password.isEmpty() && !displayName.isEmpty()) {
+            updatedUser = User.builder().userId(username).password(old_user.getPassword()).displayName(displayName).build();
+        } else if (displayName.isEmpty() && !password.isEmpty()) {
+            updatedUser = User.builder().userId(username).password(password).displayName(old_user.getDisplayName()).build();
+        } else if (displayName.isEmpty()) {
+            updatedUser = User.builder().userId(username).password(old_user.getPassword()).displayName(old_user.getDisplayName()).build();
+        } else {
+            updatedUser = User.builder().userId(username).password(password).displayName(displayName).build();
         }
-        else if (displayName.isEmpty() && !password.isEmpty()){
-            updated_user = User.builder().userId(username).password(password).displayName(old_user.getDisplayName()).build();
-        }
-        else if (displayName.isEmpty()){
-            updated_user = User.builder().userId(username).password(old_user.getPassword()).displayName(old_user.getDisplayName()).build();
-        }
-        else {
-            updated_user = User.builder().userId(username).password(password).displayName(displayName).build();
-        }
-
 
 
         try {
-            userRepository.insert(updated_user);
+            userRepository.insert(updatedUser);
         } catch (DuplicateKeyException e) {
             log.warning(String.format("Failed to create new account for %s, an account with same username already exist", username));
             throw new InvalidParameterException("Failed to update account, an account with same username already exist");

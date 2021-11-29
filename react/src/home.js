@@ -5,7 +5,7 @@ import './home.css';
 import Carousel from "./Carousel"
 import Header from "./header";
 import {handleAPIError} from "./errors";
-
+import {Button} from "react-bootstrap";
 
 class home extends Component{
 
@@ -43,10 +43,7 @@ class home extends Component{
                 }
             })
     }
-
-
     render() {
-
         var{isLoaded, items} = this.state;
         const email = localStorage.getItem("email");
         return (
@@ -70,41 +67,33 @@ class home extends Component{
                 <div className="categoryList">
                     <h2>Category List</h2>
                     <ul>
-                        <li>Electronics</li>
-                        <li>Textbooks</li>
-                        <li>Clothings</li>
-                        <li>Furnitures</li>
-                    </ul>
-                    <ul>
-                        <li>Electronics</li>
-                        <li>Textbooks</li>
-                        <li>Clothings</li>
-                        <li>Furnitures</li>
-                    </ul>
-                    <ul>
-                        <li>Electronics</li>
-                        <li>Textbooks</li>
-                        <li>Clothings</li>
-                        <li>Furnitures</li>
-                    </ul>
-                    <ul>
-                        <li>Electronics</li>
-                        <li>Textbooks</li>
-                        <li>Clothings</li>
-                        <li>Furnitures</li>
-                    </ul>
-                    <ul>
-                        <li><Link to="/listing">See All Items</Link></li>
-                        <li><Link to="/sell">Sell My Items</Link></li>
+                        <ul2>
+                            <Link to = "/electronics">
+                                <Button>Electronics</Button>
+                            </Link>
+                            <Link to = "/textbooks">
+                                <Button>Textbooks</Button>
+                            </Link>
+                            <Link to = "/clothings">
+                                <Button>Clothings</Button>
+                            </Link>
+                            <Link to = "/furnitures">
+                                <Button>Furnitures</Button>
+                            </Link>
+                        </ul2>
+                        <ul2>
+                            <Link to = "/listing">
+                                <li><button2>See All Items</button2></li>
+                            </Link>
+                            <Link to = "/sell">
+                                <li><button2>Sell My Items</button2></li>
+                            </Link>
+                        </ul2>
                     </ul>
                 </div>
             </div>
-
         );
-
-
     }
-
 }
 
 export default home;

@@ -61,8 +61,8 @@ public class ItemManagerTest {
         userRepository.insert(User.builder().userId(TEST_USER_ID_1).role(USER_ROLE_USER).build());
         userRepository.insert(User.builder().userId(TEST_USER_ID_2).role(USER_ROLE_ADMIN).build());
         userRepository.insert(User.builder().userId(TEST_USER_ID_3).password(TEST_PASSWORD_3).build());
-        itemRepository.insert(Item.builder().itemId(TEST_ITEM_ID_1).name(TEST_ITEM_NAME_1).build());
-        itemRepository.insert(Item.builder().itemId(TEST_ITEM_ID_2).name(TEST_ITEM_NAME_2).build());
+        itemRepository.insert(Item.builder().itemId(TEST_ITEM_ID_1).name(TEST_ITEM_NAME_1).userId(TEST_USER_ID_1).build());
+        itemRepository.insert(Item.builder().itemId(TEST_ITEM_ID_2).name(TEST_ITEM_NAME_2).userId(TEST_USER_ID_2).build());
         itemRepository.insert(TEST_ITEM_4);
         itemRepository.insert(TEST_ITEM_5);
         imageRepository.insert(TEST_IMAGE_1);
@@ -101,15 +101,23 @@ public class ItemManagerTest {
     }
 
     @Test
-    public void Remove_Item_THEN_returnTrue(@Autowired ItemRepository itemRepository) {
-        Assertions.assertTrue(itemManager.deleteItem(TEST_ITEM_ID_1));
+    public void Remove_Item_THEN_returnTrue(@Autowired ItemRepository itemRepository, @Autowired UserManager userManager) {
+        Assertions.assertTrue(itemManager.deleteItem(TEST_ITEM_ID_1, TEST_USER_ID_1, userManager));
+        itemRepository.insert(Item.builder().itemId(TEST_ITEM_ID_1).name(TEST_ITEM_NAME_1).userId(TEST_USER_ID_1).build());
     }
 
     @Test
-    public void Remove_ItemTwice_THEN_returnTrue(@Autowired ItemRepository itemRepository) {
-        Assertions.assertEquals(itemManager.deleteItem(TEST_ITEM_ID_1), true);
-        Assertions.assertThrows(InvalidParameterException.class, () -> itemManager.deleteItem(TEST_ITEM_ID_1));
+    public void Remove_ItemTwice_THEN_returnTrue(@Autowired ItemRepository itemRepository, @Autowired UserManager userManager) {
+        Assertions.assertTrue(itemManager.deleteItem(TEST_ITEM_ID_1, TEST_USER_ID_1, userManager));
+        Assertions.assertThrows(InvalidParameterException.class, () -> itemManager.deleteItem(TEST_ITEM_ID_1, TEST_USER_ID_1, userManager));
+        itemRepository.insert(Item.builder().itemId(TEST_ITEM_ID_1).name(TEST_ITEM_NAME_1).userId(TEST_USER_ID_1).build());
     }
+
+    @Test
+    public void Remove_ItemwithAdmin_THEN_returnTrue(@Autowired ItemRepository itemRepository, @Autowired UserManager userManager) {
+        Assertions.assertTrue(itemManager.deleteItem(TEST_ITEM_ID_1, TEST_USER_ID_2, userManager));
+    }
+
 
     @Test
     public void GIVEN_validItemId_WHEN_getItemById_THEN_returnItem() {

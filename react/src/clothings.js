@@ -5,7 +5,6 @@ import Header from "./header";
 import Posts from './posts'
 import Pagination from './Pagination'
 import {Button} from "react-bootstrap";
-import {Link} from "react-router-dom";
 
 const Listing = () =>{
     const[posts, setPosts] = useState([]);
@@ -16,7 +15,7 @@ const Listing = () =>{
     useEffect(()=> {
         const fetchPosts = async () => {
             setLoading(true);
-            const res = await axios.get('/api/allitem');
+            const res = await axios.post('/api/categoryitem', clothes);
             setPosts(res.data.item);
             setLoading(false);
         }
@@ -78,7 +77,7 @@ const Listing = () =>{
     const NSC = {
         "category":"",
         "userId":"",
-        "location":"Natural Science Complex",
+        "location":"NSC",
         "pricing":""
     }
     const Capen = {

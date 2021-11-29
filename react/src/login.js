@@ -36,8 +36,9 @@ class Login extends React.Component {
                 } else {
                     response.json()
                         .then(data => {
-                            localStorage.setItem("email", data.userId);
-                            localStorage.setItem("role", data.role);
+                            localStorage.setItem("email", this.state.userId);
+                            localStorage.setItem("role", data.user.role);
+                            localStorage.setItem("username", data.user.displayName)
                             this.props.history.push({ pathname:"/",state: {name: this.state.username} })
                         })
                 }
