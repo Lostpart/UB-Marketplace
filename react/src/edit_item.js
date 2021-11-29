@@ -225,9 +225,7 @@ class Edit_Item extends React.Component {
                 if (response.status !== 200) {
                     handleAPIError(response, false)
                 } else {
-                    response.json().then(data => {
-                        this.props.history.push('/');
-                    });
+                    this.props.history.push('/');
                 }
             });
     }
