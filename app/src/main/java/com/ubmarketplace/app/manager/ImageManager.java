@@ -72,8 +72,8 @@ public class ImageManager {
     }
 
     public Boolean isValidImageIds(@NonNull List<String> imageIds) {
-        for(String imageId : imageIds){
-            if (!isValidImageId(imageId)){
+        for (String imageId : imageIds) {
+            if (!isValidImageId(imageId)) {
                 return false;
             }
         }
