@@ -33,6 +33,7 @@ class Edit_Item extends React.Component {
 
         this.getImages = this.getImages.bind(this);
         this.handleSubmit = this.handleSubmit.bind(this);
+        this.handleDelete = this.handleDelete.bind(this);
     }
 
     changePhone(event) {
@@ -324,7 +325,11 @@ class Edit_Item extends React.Component {
                         <input type="tel" pattern="[0-9]{3} [0-9]{3} [0-9]{4}" name="price" placeholder='123 456 7890' value={this.state.phone} onChange={this.changePhone} />
                     </label>
 
-                    <input type="submit" value="Submit" />
+                    <div className="buttons">
+                        <input type="button" onClick={this.handleDelete} value="Delete" />
+
+                        <input type="submit" value="Submit" />
+                    </div>
                 </form>
             </div> : <div>You do not have access to this item.</div> : <div>loading...</div>
         );

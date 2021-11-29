@@ -94,6 +94,14 @@ body {
     border-radius: 5px;
 }
 
+.buttons {
+    align-self: flex-end;
+}
+
+.buttons input[type="submit"] {
+    margin-left: 1rem;
+}
+
 /* Responsive columns - one column layout (vertical) on small screens */
 @media screen and (max-width: 800px) {
     .column {
