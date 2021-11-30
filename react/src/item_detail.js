@@ -1,6 +1,7 @@
 import {Link} from "react-router-dom";
 import React, {Component} from 'react';
 import './item_detail.css';
+import Header from "./header";
 import { handleAPIError } from "./errors";
 
 
@@ -73,9 +74,9 @@ class Item_Detail extends Component{
 
     render() {
         let{item,relatedItems} = this.state;
-
         let editLink = `/item/edit/${this.state.id}`;
 
+        const email = localStorage.getItem("email");
         const related = relatedItems ? relatedItems.map(item=>(
             <div className="itemImg">
                 <a href={'#/item/'+item.itemId.toString()} target="_blank">
@@ -88,19 +89,7 @@ class Item_Detail extends Component{
 
         return (
             <div className="home">
-                <div className="header">
-                    <Link to="/">
-                        <p className="title">UB Marketplace</p>
-                    </Link>
-                    <div className="dropdown">
-                        <button className="dropbtn"></button>
-                        <div className="dropdown-content">
-                            <Link to="/login">Login/Register</Link>
-                            <Link to="/profile">View Profile</Link>
-                            <Link to="/">Logout</Link>
-                        </div>
-                    </div>
-                </div>
+                <Header email={email}/>
                 {item ?
                     <div className="itemInfo">
                         <div className="itemLeft">

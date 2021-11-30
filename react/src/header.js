@@ -20,7 +20,6 @@ const Header = ({email}) =>{
             <div className="dropdown">
                 <button className="dropbtn">{email}</button>
                 <div className="dropdown-content">
-                    <Link to="/login">Login/Register</Link>
                     <Link to="/profile">View Profile</Link>
                     <Link to="/" onClick={() => { localStorage.setItem("email", null); window.location.reload();}}>Logout</Link>
                 </div>
