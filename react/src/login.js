@@ -1,4 +1,4 @@
-import './App.css';
+
 import './account_page.css';
 import sha256 from 'js-sha256'
 import React from 'react';

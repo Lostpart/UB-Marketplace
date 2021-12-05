@@ -1,14 +1,11 @@
-body {
-    background-color: #005BBB;
-    font-family: Arial, Helvetica, sans-serif;
-}
-
 .panel {
     width: -moz-fit-content;
     width: fit-content;
     background-color: white;
     padding: 1rem 2rem 1rem 2rem;
     border-radius: 12px;
+    border-style: solid;
+    border-color: #005BBB;
     position: relative;
     margin: auto;
 }
@@ -86,7 +83,7 @@ body {
 
 h1 {
     font-size: 72px;
-    font-weight: normal;
-    color: white;
+    font-weight: bold;
+    color: black;
     text-align: center;
 }

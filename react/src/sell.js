@@ -174,10 +174,10 @@ class Sell extends React.Component {
     render() {
 
         let images = this.state.images.map((src, idx) => <img key={idx} alt={`${this.state.name}`} src={src}/>)
-
+        const email = localStorage.getItem("email");
         return (
             <div className="sell">
-                <Header />
+                <Header email={email}/>
                 <form onSubmit={this.handleSubmit}>
                     <label>
                         <div>Item Name</div>
