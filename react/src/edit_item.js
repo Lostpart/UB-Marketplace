@@ -72,8 +72,9 @@ class Edit_Item extends React.Component {
                 } else {
                     res.json().then(data => {
                         const email = localStorage.getItem("email");
+                        const role = localStorage.getItem("role")
                         const item = data.item;
-                        if (item.owner.userId !== email) {
+                        if (item.owner.userId !== email && role !== "Admin") {
                             this.setState({ 
                                 loaded: true,
                                 valid: false
@@ -234,7 +235,7 @@ class Edit_Item extends React.Component {
         event.preventDefault();
         const email = localStorage.getItem("email");
         const role = localStorage.getItem("role");
-        if (!email || (email !== this.state.owner  && role !== "Admin")) {
+        if (email !== this.state.owner  && role !== "Admin") {
             alert("You do not have permission to edit this listing.");
             return;
         }
