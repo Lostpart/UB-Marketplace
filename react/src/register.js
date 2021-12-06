@@ -1,6 +1,6 @@
 import './App.css';
 import './account_page.css';
-import { handleAPIError } from './errors';
+import {handleAPIError} from './errors';
 import sha256 from 'js-sha256'
 import React from 'react';
 
@@ -64,7 +64,7 @@ class Register extends React.Component {
                     <form onSubmit={this.handleSubmit}>
                         <label for="userId">Email</label>
                         <input type="text" name="userId" value={this.state.userId} onChange={this.changeUserId} />
-                        <label for="displayName">Username</label>
+                        <label for="displayName">Display Name</label>
                         <input type="text" name="displayName" value={this.state.displayName} onChange={this.changeDisplayName} />
                         <label for="password">Password</label>
                         <input type="password" name="password" value={this.state.password} onChange={this.changePassword} />
