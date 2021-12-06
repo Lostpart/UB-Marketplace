@@ -99,7 +99,7 @@ class Item_Detail extends Component{
                         </div>
                         <div className="itemRight">
                             <div className="itemName">
-                                <h2>{item.name} {item.owner.userId === localStorage.getItem("email") ? (<Link to={editLink}>Edit Item</Link>) : ''}</h2>
+                                <h2>{item.name} {item.owner.userId === localStorage.getItem("email") || localStorage.getItem("role") === "Admin" ? (<Link to={editLink}>Edit Item</Link>) : ''}</h2>
                             </div>
                             <div className="itemPrice">
                                 <h3>Price: ${item.price}</h3>
